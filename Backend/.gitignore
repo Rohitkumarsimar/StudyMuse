@@ -1,22 +1,2 @@
-# Node.js dependencies
-node_modules/
-
-# Logs
-logs/
-*.log
-npm-debug.log*
-
-# Environment variables
+node_modules
 .env
-
-# Runtime data
-pids/
-*.pid
-*.seed
-
-# Coverage directory used by tools like istanbul
-coverage/
-
-# Misc
-.DS_Store
-Thumbs.db
