@@ -1,35 +1,17 @@
-import app from './app.js';
-import sequelize from './config/database.js';
-import seedDatabase from './seeder.js';
-import dotenv from 'dotenv';
+import express from 'express'
+import dotenv from 'dotenv'
+import { logMethod } from './src/middleware/logger.middleware.js'
 
-dotenv.config();
+dotenv.config()
+const PORT = process.env.PORT
 
-const PORT = process.env.PORT || 5000;
+const app = express()
+app.use(logMethod)
 
-const startServer = async () => {
-  try {
-    // Test database connection
-    await sequelize.authenticate();
-    console.log('Database connected successfully');
+app.get('/health',(req, res)=>{
+  res.json({"status":"ok"})
+})
 
-    // Sync models
-    await sequelize.sync({ alter: false });
-    console.log('Database models synced');
-
-    // Seed database (if needed)
-    await seedDatabase();
-
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-      console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-      console.log(`API URL: http://localhost:${PORT}/api`);
-    });
-  } catch (error) {
-    console.error('Failed to start server:', error);
-    process.exit(1);
-  }
-};
-
-startServer();
-
+app.listen(PORT || 3000, ()=>{
+  console.log(`Server is connected to http://localhost:${PORT || 3000}`)
+} )   
