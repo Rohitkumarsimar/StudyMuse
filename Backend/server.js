@@ -1,7 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import { logMethod } from './src/middleware/logger.middleware.js'
-import {router} from './src/routes/auth.routes.js'
+import {authRouter} from './src/routes/auth.routes.js'
 
 dotenv.config()
 const PORT = process.env.PORT
@@ -10,7 +10,7 @@ const app = express()
 app.use(logMethod)
 
 app.use(express.json())
-app.use('/auth',router)
+app.use('/auth',authRouter)
 
 
 app.listen(PORT || 3000, ()=>{
