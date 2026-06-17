@@ -1,18 +1,23 @@
-import express from 'express'
-import dotenv from 'dotenv'
-import { logMethod } from './src/middleware/logger.middleware.js'
-import {authRouter} from './src/routes/auth.routes.js'
+import express from "express";
 
-dotenv.config()
-const PORT = process.env.PORT
+import dotenv from "dotenv";
+dotenv.config();
 
-const app = express()
-app.use(logMethod)
+import { logMethod } from "./src/middleware/logger.middleware.js";
+import { authRouter } from "./src/routes/auth.routes.js";
+import { testRouter } from "./src/routes/test.routes.js";
 
-app.use(express.json())
-app.use('/auth',authRouter)
+const app = express();
 
+const PORT = process.env.PORT;
 
-app.listen(PORT || 3000, ()=>{
-  console.log(`Server is connected to http://localhost:${PORT || 3000}`)
-} )    
+app.use(logMethod);
+
+app.use(express.json());
+
+app.use("/auth", authRouter);
+app.use("/test", testRouter);
+
+app.listen(PORT || 3000, () => {
+  console.log(`Server is connected to http://localhost:${PORT || 3000}`);
+});

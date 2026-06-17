@@ -1,9 +1,9 @@
-import express from 'express'
-import { register, login } from '../controllers/auth.controller.js'
+import express from "express";
+import { register, login } from "../controllers/auth.controller.js";
+import { validate } from "../middleware/validate.middleware.js";
+import { registerSchema, loginSchema } from "../schemas/auth.schema.js";
+export const authRouter = express.Router();
 
-export const authRouter = express.Router()
+authRouter.post("/register",validate(registerSchema), register);
 
-authRouter.post('/register', register)
-
-authRouter.post('/login',login)
-
+authRouter.post("/login",validate(loginSchema), login);
