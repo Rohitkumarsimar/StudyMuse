@@ -1,17 +1,14 @@
 import { registerUser, loginUser } from "../services/auth.service.js";
+import { response } from "../utils/apiResponse.js";
 
 export async function register(req, res, next) {
-    const { name, email, password } = req.body;
-    const result = await registerUser(name, email, password);
-    res.status(201).json(result);
-}  
+  const { name, email, password } = req.body;
+  const result = await registerUser(name, email, password);
+  response(res, 201, result, "User created successfully.");
+}
 
 export async function login(req, res, next) {
-  try {
-    const { email, password } = req.body;
-    const result = await loginUser(email, password);
-    res.status(200).json(result);
-  } catch (err) {
-    next(err);
-  }
+  const { email, password } = req.body;
+  const result = await loginUser(email, password);
+  response(res, 200, result, "Login successfully");
 }

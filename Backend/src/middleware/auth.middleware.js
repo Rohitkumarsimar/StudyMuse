@@ -1,20 +1,20 @@
 import jwt from "jsonwebtoken";
+import { ApiError } from "../utils/AppError.js";
 
 //auth middleware:
 export const authMiddleware = (req, res, next) => {
   const tokenStr = req.headers.authorization;
   if (!tokenStr) {
-    return res.status(401).json({ message: "Invalid headers!" });
+    throw new ApiError(401, "Unauthorized");
   }
   // separating Bearer and token
-  const splitToken = tokenStr.split(" ");
-  const token = splitToken[1];
+  const token = tokenStr.split(" ")[1];
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch (err) {
-    return res.status(401).json({ message: "Invalid Token!" });
+    throw new ApiError(401, "Unauthorized");
   }
 };
