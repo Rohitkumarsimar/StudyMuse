@@ -3,8 +3,16 @@ import { register, login } from "../controllers/auth.controller.js";
 import { validate } from "../middleware/validate.middleware.js";
 import { registerSchema, loginSchema } from "../schemas/auth.schema.js";
 import { asyncWrap } from "../utils/asyncWrapper.js";
+import rateLimit from "express-rate-limit";
+
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 8,
+    message: "Too many login attempts, please try again after 15 minutes."
+})
+
 export const authRouter = express.Router();
 
 authRouter.post("/register", validate(registerSchema), asyncWrap(register));
 
-authRouter.post("/login", validate(loginSchema), asyncWrap(login));
+authRouter.post("/login", authLimiter, validate(loginSchema), asyncWrap(login));
