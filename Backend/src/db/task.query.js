@@ -21,6 +21,18 @@ export async function fetchTasks(user_id){
 export async function updateTaskQuery(task_id, user_id, incomingData){
     const mappedData = incomingData.map(([key, value],index)=> `${key} = $${index+3}`)
     const mappedValues = incomingData.map(([,values])=>values)
+
+    const completedField = incomingData.find(([key,value])=> key === "is_completed")
+    if(completedField){
+        const value = completedField[1] // true or false
+        if(value==true){
+            mappedData.push("completed_at = NOW()")
+        }else{
+            mappedData.push("completed_at = NULL")
+        }
+        
+    }
+
     const result = await pool.query(`UPDATE tasks SET ${mappedData} WHERE id = $1 AND user_id = $2 RETURNING *`, [task_id, user_id, ...mappedValues])
     return result.rows[0]
 }
