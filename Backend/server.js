@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 
+import cors from 'cors'
 import helmet from "helmet";
 import morgan from "morgan";
 import { logMethod } from "./src/middleware/logger.middleware.js";
@@ -15,6 +16,10 @@ const app = express();
 app.use(helmet())
 app.use(morgan('dev'))
 const PORT = process.env.PORT;
+
+app.use(cors({
+  origin: 'http://localhost:5173/'
+}))
 
 app.use(logMethod);
 
