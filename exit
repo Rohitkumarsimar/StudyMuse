@@ -1,0 +1,39 @@
+[1mdiff --git a/Backend/src/controllers/task.controller.js b/Backend/src/controllers/task.controller.js[m
+[1mindex 01840c2..687a88e 100644[m
+[1m--- a/Backend/src/controllers/task.controller.js[m
+[1m+++ b/Backend/src/controllers/task.controller.js[m
+[36m@@ -1,8 +1,32 @@[m
+ import { response } from "../utils/apiResponse.js"[m
+[31m-import { createNewTask } from "../services/task.service.js"[m
+[32m+[m[32mimport { createNewTask, readAllTask, updateTaskService, deleteTaskService} from "../services/task.service.js"[m
+ export async function createTask(req,res,next){[m
+     const {title, subject, due_date}= req.body[m
+     const user_id = req.user.id[m
+     const result = await createNewTask(user_id, title, subject, due_date)[m
+     return response(res,201,result,"Created a new task.")[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport async function readTask(req, res, next){[m
+[32m+[m[32m    const user_id = req.user.id[m
+[32m+[m[32m    const result = await readAllTask(user_id)[m
+[32m+[m[32m    return response(res,200,result,"Tasks fetched successfully.")[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport async function updateTask(req,res,next){[m
+[32m+[m[32m    const {title, subject, due_date, is_completed} = req.body[m
+[32m+[m[32m    const allowedFields = {title, subject, due_date, is_completed}[m
+[32m+[m[32m    const task_id = req.params.id[m
+[32m+[m[32m    const user_id = req.user.id[m
+[32m+[m[32m    const result = await updateTaskService(task_id, user_id, allowedFields)[m
+[32m+[m
+[32m+[m[32m    return response(res, 200, result, "Task updated successfully")[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport async function deleteTask(req, res, next){[m
+[32m+[m[32m    const task_id = req.params.id[m
+[32m+[m[32m    const user_id = req.user.id[m
+[32m+[m[32m     await deleteTaskService(task_id, user_id)[m
+[32m+[m[41m     [m
+[32m+[m[32m    return response(res,200,null,"Deleted successfully.")[m
+ }[m
+\ No newline at end of file[m
