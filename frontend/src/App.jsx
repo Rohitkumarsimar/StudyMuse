@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard.jsx";
 import Tasks from "./pages/Tasks.jsx";
+import Profile from "./pages/Profile.jsx";
 
 function ProtectedLayout() {
   return (
@@ -24,9 +25,6 @@ function ProtectedLayout() {
   );
 }
 
-function Profile() {
-  return <div>profile</div>;
-}
 
 export default function App() {
   return (
