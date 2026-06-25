@@ -21,7 +21,7 @@ export default function Login() {
     try {
       const result = await api.post("/auth/login", formData);
       if (result) {
-        login(result.data.data.token, result.data.data.user);
+        login(result.data.data, null);
         navigate("/dashboard");
       }
     } catch (err) {
