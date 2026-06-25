@@ -1,4 +1,4 @@
-import { registerUser, loginUser } from "../services/auth.service.js";
+import { registerUser, loginUser, profileService } from "../services/auth.service.js";
 import { response } from "../utils/apiResponse.js";
 
 export async function register(req, res, next) {
@@ -11,4 +11,10 @@ export async function login(req, res, next) {
   const { email, password } = req.body;
   const result = await loginUser(email, password);
   response(res, 200, result, "Login successfully");
+}
+
+export async function profileController(req, res, next){
+  const user_id = req.user.id 
+  const result = await profileService(user_id)
+  response(res, 200,result,"Profile fetched")
 }

@@ -13,8 +13,17 @@ export async function insertUser(name, email, password) {
 
 // finding email
 export async function findByEmail(email) {
-  const result = await pool.query(`SELECT * FROM users WHERE email = $1`, [
-    email,
-  ]);
+  const result = await pool.query(`SELECT * FROM users WHERE email = $1`, 
+    [email],
+  );
+  return result.rows[0];
+}
+
+// fetch profile
+export async function profileQuery(user_id) {
+  const result = await pool.query(
+    `SELECT name, email FROM users WHERE id = $1`,
+    [user_id],
+  );
   return result.rows[0];
 }

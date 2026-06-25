@@ -1,9 +1,10 @@
 import express from "express";
-import { register, login } from "../controllers/auth.controller.js";
+import { register, login, profileController} from "../controllers/auth.controller.js";
 import { validate } from "../middleware/validate.middleware.js";
 import { registerSchema, loginSchema } from "../schemas/auth.schema.js";
 import { asyncWrap } from "../utils/asyncWrapper.js";
 import rateLimit from "express-rate-limit";
+import { authMiddleware } from "../middleware/auth.middleware.js";
 
 const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -16,3 +17,5 @@ export const authRouter = express.Router();
 authRouter.post("/register", validate(registerSchema), asyncWrap(register));
 
 authRouter.post("/login", authLimiter, validate(loginSchema), asyncWrap(login));
+
+authRouter.get("/profile",authMiddleware, asyncWrap(profileController))

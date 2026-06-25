@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { insertUser, findByEmail } from "../db/user.query.js";
+import { insertUser, findByEmail, profileQuery} from "../db/user.query.js";
 import { generateToken } from "../utils/generateToken.js";
 import { ApiError } from "../utils/AppError.js";
 
@@ -24,4 +24,12 @@ export async function loginUser(email, password) {
     throw new ApiError(401, "Invalid Password");
   }
   return generateToken(user);
+}
+
+export async function profileService(user_id){
+  const result = await profileQuery(user_id)
+  if(!result){
+    throw new ApiError(404, "Profile not found!")
+  }
+  return result
 }
