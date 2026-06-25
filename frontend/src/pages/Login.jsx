@@ -30,23 +30,28 @@ export default function Login() {
       setIsLoading(false);
     }
   }
-  return <form onSubmit={handleSubmit}>
-    <Input
-    type="email"
-    label = "Enter Email"
-    value = {formData.email}
-    onChange = {(e)=> setFormData({...formData, email: e.target.value}) }/>
+  return (
+  <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 w-full max-w-md">
+      
+      <h1 className="text-2xl font-bold text-gray-900 mb-1">Welcome back</h1>
+      <p className="text-sm text-gray-500 mb-6">Log in to your StudyMuse account</p>
 
-    <Input
-    type = "password"
-    label = "Enter Password"
-    value = {formData.password}
-    onChange = {(e)=>setFormData({...formData, password: e.target.value})}
-    error = {error}
-    />
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <Input type="email" label="Email" value={formData.email}
+          onChange={(e) => setFormData({...formData, email: e.target.value})} />
+        <Input type="password" label="Password" value={formData.password}
+          onChange={(e) => setFormData({...formData, password: e.target.value})}
+          error={error} />
+        <Button variant="primary" isLoading={isLoading}>Login</Button>
+      </form>
 
-    <Button variant={'primary'} isLoading={isLoading}>
-        Login
-    </Button>
-  </form>;
+      <p className="text-sm text-center text-gray-500 mt-6">
+        Don't have an account?{' '}
+        <a href="/register" className="text-indigo-600 font-medium hover:underline">Register</a>
+      </p>
+
+    </div>
+  </div>
+)
 }

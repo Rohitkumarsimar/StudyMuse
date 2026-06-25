@@ -23,7 +23,7 @@ export default function Profile(){
     if(!profile) return <div>Profile not found!</div>
 
     return(
-        <div className="flex p-3 border border-gray-300 rounded-lg">
+        <div className="flex items-center justify-center p-3 border border-gray-300 rounded-lg">
             <p className="text-sm text-gray-900 m-1">Username: {profile.name}</p>
             <p className="text-sm text-gray-900 m-1">email: {profile.email}</p>
         </div>

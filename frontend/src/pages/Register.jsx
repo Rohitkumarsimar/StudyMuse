@@ -31,32 +31,32 @@ export default function Register() {
     }
   }
   return (
+<div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 w-full max-w-md">
+      
+      <h1 className="text-2xl font-bold text-gray-900 mb-1">Welcome to StudyMuse</h1>
+      <p className="text-sm text-gray-500 mb-6">Create your StudyMuse account</p>
+
     <form onSubmit={handleSubmit}>
-      <Input
-        type="text"
-        label="Enter your name:"
-        value={formData.name}
-        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-      />
+      <Input type="email" label="Name" value={formData.name} className="flex flex-col gap-4"
+                onChange={(e) => setFormData({...formData, name: e.target.value})} />
 
-      <Input
-        type="email"
-        label="Enter Email"
-        value={formData.email}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-      />
+      <Input type="email" label="Email" value={formData.email}
+                onChange={(e) => setFormData({...formData, email: e.target.value})} />
 
-      <Input
-        type="password"
-        label="Enter Password"
-        value={formData.password}
-        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-        error={error}
-      />
+      <Input type="password" label="Password" value={formData.password}
+                onChange={(e) => setFormData({...formData, password: e.target.value})}
+                error={error} />
 
-      <Button variant={"primary"} isLoading={isLoading}>
-        Register
-      </Button>
-    </form>
+     <Button variant="primary" isLoading={isLoading}>Register</Button>
+           </form>
+
+    <p className="text-sm text-center text-gray-500 mt-6">
+        Already have an account?{' '}
+        <a href="/login" className="text-indigo-600 font-medium hover:underline">Login</a>
+      </p>
+
+    </div>
+  </div>
   );
 }
