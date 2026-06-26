@@ -38,7 +38,7 @@ export default function Register() {
       <p className="text-sm text-gray-500 mb-6">Create your StudyMuse account</p>
 
     <form onSubmit={handleSubmit}>
-      <Input type="email" label="Name" value={formData.name} className="flex flex-col gap-4"
+      <Input type="text" label="Name" value={formData.name} className="flex flex-col gap-4"
                 onChange={(e) => setFormData({...formData, name: e.target.value})} />
 
       <Input type="email" label="Email" value={formData.email}

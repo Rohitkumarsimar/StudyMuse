@@ -17,10 +17,13 @@ import Profile from "./pages/Profile.jsx";
 function ProtectedLayout() {
   return (
     <ProtectedRoutes>
-      <Navbar />
-      <main className="p-4">
-        <Outlet />
-      </main>
+      <div className="min-h-screen bg-gradient-to-b from-gray-200 via-white to-gray-200">
+        <Navbar />
+
+        <main className="max-w-7xl mx-auto px-6 py-8">
+          <Outlet />
+        </main>
+      </div>
     </ProtectedRoutes>
   );
 }
