@@ -17,7 +17,7 @@ import Profile from "./pages/Profile.jsx";
 function ProtectedLayout() {
   return (
     <ProtectedRoutes>
-      <div className="min-h-screen bg-gradient-to-b from-gray-200 via-white to-gray-200">
+      <div className="min-h-screen bg-linear-to-b from-gray-200 via-white to-gray-200">
         <Navbar />
 
         <main className="max-w-7xl mx-auto px-6 py-8">

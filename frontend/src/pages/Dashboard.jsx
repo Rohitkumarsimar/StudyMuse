@@ -87,7 +87,7 @@ export default function Dashboard() {
 
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-indigo-700 border border-indigo-500/10">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-linear-to-r from-indigo-500/10 to-purple-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-indigo-700 border border-indigo-500/10">
               <span className="inline-block animate-pulse">✨</span> StudyMuse
             </span>
 
@@ -97,7 +97,7 @@ export default function Dashboard() {
 
             <p className="mt-2 max-w-xl text-sm font-medium leading-relaxed text-gray-500">
               Track your study progress and stay consistent{" "}
-              <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text font-bold text-transparent">
+              <span className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text font-bold text-transparent">
                 every single day.
               </span>
             </p>
@@ -116,7 +116,7 @@ export default function Dashboard() {
       </header>
 
       <section className="mb-8">
-        <div className="rounded-2xl bg-gradient-to-r from-indigo-400 via-indigo-500 to-violet-500 p-8 text-white shadow-lg">
+        <div className="rounded-2xl bg-linear-to-r from-indigo-400 via-indigo-500 to-violet-500 p-8 text-white shadow-lg">
           <p className="text-sm font-semibold uppercase tracking-wider text-indigo-100">
             Current Streak
           </p>
