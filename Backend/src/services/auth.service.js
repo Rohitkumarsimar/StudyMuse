@@ -1,13 +1,18 @@
 import bcrypt from "bcrypt";
-import { insertUser, findByEmail, profileQuery, editProfileQuery} from "../db/user.query.js";
+import {
+  insertUser,
+  findByEmail,
+  profileQuery,
+  editProfileQuery,
+} from "../db/user.query.js";
 import { generateToken } from "../utils/generateToken.js";
 import { ApiError } from "../utils/AppError.js";
 
 // registering a new user
 export async function registerUser(name, email, password) {
-  const result = await findByEmail(email)
-  if(result){
-    throw new ApiError(409, "Email already exists")
+  const result = await findByEmail(email);
+  if (result) {
+    throw new ApiError(409, "Email already exists");
   }
   const hashPassword = await bcrypt.hash(password, 10);
   return await insertUser(name, email, hashPassword);
@@ -17,7 +22,7 @@ export async function registerUser(name, email, password) {
 export async function loginUser(email, password) {
   const user = await findByEmail(email);
   if (!user) {
-    throw new ApiError(401,"Invalid credential!");
+    throw new ApiError(401, "Invalid credential!");
   }
   const passwordMatched = await bcrypt.compare(password, user.password);
   if (!passwordMatched) {
@@ -26,25 +31,31 @@ export async function loginUser(email, password) {
   return generateToken(user);
 }
 
-export async function profileService(user_id){
-  const result = await profileQuery(user_id)
-  if(!result){
-    throw new ApiError(404, "Profile not found!")
+export async function profileService(user_id) {
+  const result = await profileQuery(user_id);
+  if (!result) {
+    throw new ApiError(404, "Profile not found!");
   }
-  return result
+  return result;
 }
 
-export async function editProfileService(user_id, editFields){
-  const incomingProfile = Object.entries(editFields).filter(([_,val])=>
-    val !== undefined
-  )
-  console.log(incomingProfile)
-  if(incomingProfile.length == 0){
-    throw new ApiError(400, "Invalid data!")
+export async function profileUpdateService(user_id, editFields) {
+  const result = await profileQuery(user_id);
+
+  if (result.name === editFields.name && result.email === editFields.email) {
+    throw new ApiError(400, "Name or Email can't be same as old!");
   }
-  const result = await editProfileQuery(user_id, incomingProfile)
-  if(!result){
-    throw new ApiError(404, "Profile data not found!")
-  }
-  return result
+
+    const incomingProfile = Object.entries(editFields).filter(
+      ([_, val]) => val !== undefined,
+    );
+    console.log(incomingProfile);
+    if (incomingProfile.length == 0) {
+      throw new ApiError(400, "Invalid data!");
+    }
+    const updateResult = await editProfileQuery(user_id, incomingProfile);
+    if (!updateResult) {
+      throw new ApiError(404, "Profile data not found!");
+    }
+    return updateResult;
 }

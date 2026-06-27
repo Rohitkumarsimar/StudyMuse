@@ -13,9 +13,9 @@ export async function insertUser(name, email, password) {
 
 // finding email
 export async function findByEmail(email) {
-  const result = await pool.query(`SELECT * FROM users WHERE email = $1`, 
-    [email],
-  );
+  const result = await pool.query(`SELECT * FROM users WHERE email = $1`, [
+    email,
+  ]);
   return result.rows[0];
 }
 
@@ -28,12 +28,24 @@ export async function profileQuery(user_id) {
   return result.rows[0];
 }
 
+
+// edit profile duplicate value check
+// export async function duplicateProfileQuery(user_id){
+//   const result = await pool.query(`
+//     SELECT name, email FROM users WHERE id = $1
+//     `,[user_id])
+// }
+
+
 //edit profile
-export async function editProfileQuery(user_id, incomingProfile){
-  const mappedEditProfileData = incomingProfile.map(([key, val], index)=> `${key} = $${index + 2}`)
-  const mappedEditProfileValue = incomingProfile.map(([key, val])=> val)
+export async function editProfileQuery(user_id, incomingProfile) {
+  const mappedEditProfileData = incomingProfile.map(
+    ([key, val], index) => `${key} = $${index + 2}`,
+  );
+  const mappedEditProfileValue = incomingProfile.map(([key, val]) => val);
   const result = await pool.query(
-    `UPDATE users SET ${mappedEditProfileData} WHERE id = $1 RETURNING name, email`, [user_id, ...mappedEditProfileValue]
-  )
-  return result.rows[0]
+    `UPDATE users u SET ${mappedEditProfileData} WHERE id = $1 RETURNING name, email`,
+    [user_id, ...mappedEditProfileValue],
+  );
+  return result.rows[0];
 }
