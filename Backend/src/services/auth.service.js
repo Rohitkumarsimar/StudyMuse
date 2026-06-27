@@ -40,9 +40,11 @@ export async function profileService(user_id) {
 }
 
 export async function profileUpdateService(user_id, editFields) {
+  
+  try{
   const result = await profileQuery(user_id);
-
   if (result.name === editFields.name && result.email === editFields.email) {
+   
     throw new ApiError(400, "Name or Email can't be same as old!");
   }
 
@@ -54,8 +56,13 @@ export async function profileUpdateService(user_id, editFields) {
       throw new ApiError(400, "Invalid data!");
     }
     const updateResult = await editProfileQuery(user_id, incomingProfile);
-    if (!updateResult) {
-      throw new ApiError(404, "Profile data not found!");
-    }
+    
     return updateResult;
+  } 
+  catch(error){
+    if(error.code === "23505"){
+      throw new ApiError(400, "Email already exists!")
+    }
+    throw error 
+  }
 }
