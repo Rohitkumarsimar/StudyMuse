@@ -1,4 +1,4 @@
-import { registerUser, loginUser, profileService } from "../services/auth.service.js";
+import { registerUser, loginUser, profileService, editProfileService } from "../services/auth.service.js";
 import { response } from "../utils/apiResponse.js";
 
 export async function register(req, res, next) {
@@ -17,4 +17,13 @@ export async function profileController(req, res, next){
   const user_id = req.user.id 
   const result = await profileService(user_id)
   response(res, 200,result,"Profile fetched")
+}
+
+export async function editProfileController(req, res, next){
+  const user_id = req.user.id
+  const {name, email} = req.body
+  const editFields = {name, email}
+  const result = await editProfileService(user_id, editFields)
+
+  response ( res, 200, result, "Profile edited successfully")
 }

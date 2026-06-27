@@ -27,3 +27,13 @@ export async function profileQuery(user_id) {
   );
   return result.rows[0];
 }
+
+//edit profile
+export async function editProfileQuery(user_id, incomingProfile){
+  const mappedEditProfileData = incomingProfile.map(([key, val], index)=> `${key} = $${index + 2}`)
+  const mappedEditProfileValue = incomingProfile.map(([key, val])=> val)
+  const result = await pool.query(
+    `UPDATE users SET ${mappedEditProfileData} WHERE id = $1 RETURNING name, email`, [user_id, ...mappedEditProfileValue]
+  )
+  return result.rows[0]
+}
