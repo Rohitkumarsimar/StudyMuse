@@ -6,9 +6,16 @@ import { useState } from "react";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+ 
+
+  function closeMenu(){
+    setIsMenuOpen(false)
+  }
+
   const navigate = useNavigate();
   const { logout } = useAuth();
   function handleLogout() {
+    setIsMenuOpen(false);
     logout();
     navigate("/login");
   }
@@ -92,6 +99,7 @@ export default function Navbar() {
             <NavLink
               to="/dashboard"
               className="rounded-xl px-4 py-3 hover:bg-gray-100"
+              onClick={closeMenu}
             >
               Dashboard
             </NavLink>
@@ -99,6 +107,7 @@ export default function Navbar() {
             <NavLink
               to="/tasks"
               className="rounded-xl px-4 py-3 hover:bg-gray-100"
+              onClick={closeMenu}
             >
               Tasks
             </NavLink>
@@ -106,6 +115,7 @@ export default function Navbar() {
             <NavLink
               to="/profile"
               className="rounded-xl px-4 py-3 hover:bg-gray-100"
+              onClick={isMenuOpen}
             >
               Profile
             </NavLink>
