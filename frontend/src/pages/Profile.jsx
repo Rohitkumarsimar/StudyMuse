@@ -4,6 +4,7 @@ import Input from "../components/ui/Input.jsx";
 import { CircleUserRound } from "lucide-react";
 import Spinner from "../components/ui/Spinner.jsx";
 import Button from "../components/ui/Button.jsx";
+
 export default function Profile() {
   const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -46,6 +47,7 @@ export default function Profile() {
     try {
       if (!editProfileData.name.trim() && !editProfileData.email.trim()) {
         setFormError("Please enter a new name or email.");
+
         return;
       }
 
@@ -58,12 +60,14 @@ export default function Profile() {
         payload.email = editProfileData.email;
       }
       const result = await api.patch(`/auth/edit-profile`, payload);
+      setProfile(result.data.data)
       setEditProfileData({ name: "", email: "" });
     } catch (err) {
       console.log(err);
       setFormError(err.response?.data?.message || "Something went wrong!");
     } finally {
       setIsEditLoading(false);
+        
     }
   }
 
