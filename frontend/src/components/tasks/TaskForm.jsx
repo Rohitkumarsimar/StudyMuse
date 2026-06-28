@@ -25,30 +25,61 @@ export function TaskForm({ onSubmit }) {
     setIsLoading(false);
   }
 
-  return (
-    <form onSubmit={handleSubmit}>
+return (
+  <div className="w-full rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
+    <div className="mb-8 text-center">
+      <h1 className="text-2xl font-bold text-gray-900">
+        Create New Task
+      </h1>
+
+      <p className="mt-2 text-sm text-gray-500">
+        Stay organized by adding your next study task.
+      </p>
+    </div>
+
+    <form onSubmit={handleSubmit} className="space-y-5">
       <Input
         type="text"
-        label="Enter title:"
+        label="Task Title"
         value={formData.title}
-        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-      ></Input>
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            title: e.target.value,
+          })
+        }
+      />
+
       <Input
         type="text"
-        label="Enter subject:"
+        label="Subject"
         value={formData.subject}
-        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-      ></Input>
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            subject: e.target.value,
+          })
+        }
+      />
+
       <Input
         type="date"
-        label="Enter due date:"
+        label="Due Date"
         value={formData.due_date}
-        onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
-      ></Input>
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            due_date: e.target.value,
+          })
+        }
+      />
 
-      <Button variant={"primary"} isLoading={isLoading}>
-        Create Task
-      </Button>
+      <div className="pt-2">
+        <Button variant="primary" isLoading={isLoading}>
+          Create Task
+        </Button>
+      </div>
     </form>
-  );
+  </div>
+);
 }

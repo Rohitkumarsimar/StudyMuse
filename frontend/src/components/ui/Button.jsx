@@ -11,7 +11,7 @@ export default function Button({ children, variant, isLoading, ...props }) {
     <button
       {...props}
       disabled={isLoading}
-      className={`${base} ${variants[variant]}`}
+      className={`${base} ${variants[variant]} cursor-pointer`}
     >
       {isLoading ?<Spinner className="h-5 w-5"/>:(
         children
