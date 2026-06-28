@@ -43,7 +43,7 @@ export async function profileUpdateService(user_id, editFields) {
   
   try{
   const result = await profileQuery(user_id);
-  if (result.name === editFields.name && result.email === editFields.email) {
+  if (result.name === editFields.name || result.email === editFields.email) {
    
     throw new ApiError(400, "Name or Email can't be same as old!");
   }

@@ -3,6 +3,7 @@ import { useTasks } from "../hooks/useTasks";
 import { TaskFilters } from "../components/tasks/TaskFilters.jsx";
 import TaskCard from "../components/tasks/TaskCard.jsx";
 import { TaskForm } from "../components/tasks/TaskForm.jsx";
+import Spinner from "../components/ui/Spinner.jsx";
 
 export default function Tasks() {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -27,7 +28,7 @@ export default function Tasks() {
     <TaskFilters activeFilter={activeFilter} onFilterChange={setActiveFilter} />
     
     {isLoading 
-      ? <div>Loading...</div>
+      ? <Spinner className="h-15 w-15" />
       : tasks.length === 0
         ? <div>No tasks yet. Create your first task above.</div>
         : filteredTasks.map((task) => (

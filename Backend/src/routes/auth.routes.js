@@ -20,4 +20,4 @@ authRouter.post("/login", authLimiter, validate(loginSchema), asyncWrap(login));
 
 authRouter.get("/profile",authMiddleware, asyncWrap(profileController))
 
-authRouter.patch("/:id", validate(profileEditSchema), authMiddleware ,asyncWrap(editProfileController))
+authRouter.patch("/edit-profile", validate(profileEditSchema), authMiddleware ,asyncWrap(editProfileController))
