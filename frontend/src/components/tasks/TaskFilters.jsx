@@ -1,9 +1,9 @@
 export function TaskFilters({activeFilter, onFilterChange}){
     return (
-  <div className="mb-6 flex gap-6 border-b border-gray-200">
+  <div className="my-1 flex gap-6 border-b border-gray-200">
     <button
       onClick={() => onFilterChange("all")}
-      className={`pb-3 text-sm font-medium transition-colors ${
+      className={` text-sm font-medium transition-colors ${
         activeFilter === "all"
           ? "border-b-2 border-indigo-600 text-indigo-600"
           : "text-gray-500 hover:text-indigo-600"
@@ -14,7 +14,7 @@ export function TaskFilters({activeFilter, onFilterChange}){
 
     <button
       onClick={() => onFilterChange("completed")}
-      className={`pb-3 text-sm font-medium transition-colors ${
+      className={`text-sm font-medium transition-colors ${
         activeFilter === "completed"
           ? "border-b-2 border-indigo-600 text-indigo-600"
           : "text-gray-500 hover:text-indigo-600"
@@ -25,7 +25,7 @@ export function TaskFilters({activeFilter, onFilterChange}){
 
     <button
       onClick={() => onFilterChange("pending")}
-      className={`pb-3 text-sm font-medium transition-colors ${
+      className={` text-sm font-medium transition-colors ${
         activeFilter === "pending"
           ? "border-b-2 border-indigo-600 text-indigo-600"
           : "text-gray-500 hover:text-indigo-600"

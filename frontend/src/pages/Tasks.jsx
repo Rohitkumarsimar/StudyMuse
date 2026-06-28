@@ -22,16 +22,24 @@ export default function Tasks() {
     if (activeFilter === "pending") return task.is_completed === false;
   });
 
- return (
-  <div className="mx-auto flex h-[calc(100vh-80px)] max-w-7xl gap-8 px-6 py-8">
-    {/* Left Section */}
-    <div className="flex flex-1 flex-col overflow-hidden">
-      <TaskFilters
-        activeFilter={activeFilter}
-        onFilterChange={setActiveFilter}
-      />
+  return (
+  <div className="mx-auto max-w-full px-6 py-8 lg:flex lg:h-[calc(100vh-80px)] lg:gap-8">
+   
+    <aside className="mb-6 w-full sticky lg:top-8 lg:mb-0 lg:w-96 lg:self-start">
+      <TaskForm onSubmit={createTask} />
+    </aside>
 
-      <div className="mt-6 flex-1 overflow-y-auto space-y-4 pr-2">
+    
+    <div className="flex flex-1 flex-col">
+   
+      <div className="sticky top-0 z-10  bg-gray-100 backdrop-blur-lg p-1">
+        <TaskFilters 
+          activeFilter={activeFilter}
+          onFilterChange={setActiveFilter}
+        />
+      </div>
+
+      <div className="mt-4 space-y-4 lg:mt-6 lg:flex-1 lg:overflow-y-auto lg:pr-2">
         {isLoading ? (
           <div className="flex justify-center py-12">
             <Spinner size="h-12 w-12" />
@@ -52,11 +60,6 @@ export default function Tasks() {
         )}
       </div>
     </div>
-
-    {/* Right Section */}
-    <aside className="sticky top-8 w-95 self-start">
-      <TaskForm onSubmit={createTask} />
-    </aside>
   </div>
 );
 }

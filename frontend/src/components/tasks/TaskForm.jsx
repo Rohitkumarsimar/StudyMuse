@@ -26,18 +26,18 @@ export function TaskForm({ onSubmit }) {
   }
 
 return (
-  <div className="w-full rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
-    <div className="mb-8 text-center">
-      <h1 className="text-2xl font-bold text-gray-900">
-        Create New Task
-      </h1>
+  <div className="w-full rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5 lg:p-6">
+    <div className="mb-5">
+      <h2 className="text-lg font-bold text-gray-900 sm:text-xl">
+        Create Task
+      </h2>
 
-      <p className="mt-2 text-sm text-gray-500">
-        Stay organized by adding your next study task.
+      <p className="mt-1 text-xs text-gray-500 sm:text-sm">
+        Add a new study task.
       </p>
     </div>
 
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
       <Input
         type="text"
         label="Task Title"
@@ -74,8 +74,12 @@ return (
         }
       />
 
-      <div className="pt-2">
-        <Button variant="primary" isLoading={isLoading}>
+      <div className="pt-1">
+        <Button
+          type="submit"
+          variant="primary"
+          isLoading={isLoading}
+        >
           Create Task
         </Button>
       </div>
