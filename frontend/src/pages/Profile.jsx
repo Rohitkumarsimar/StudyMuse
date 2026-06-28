@@ -61,7 +61,7 @@ export default function Profile() {
       setEditProfileData({ name: "", email: "" });
     } catch (err) {
       console.log(err);
-      setFormError(err.response?.data?.message || "Something went wrong!")
+      setFormError(err.response?.data?.message || "Something went wrong!");
     } finally {
       setIsEditLoading(false);
     }
