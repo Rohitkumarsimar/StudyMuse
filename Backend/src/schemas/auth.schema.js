@@ -15,4 +15,6 @@ export const loginSchema = z.object({
 export const profileEditSchema = z.object({
   name: z.string().min(3).optional(),
   email: z.string().email().optional()
-}).strict();
+}).strict().refine((data)=>{
+ return data.name !== undefined || data.email !== undefined
+})

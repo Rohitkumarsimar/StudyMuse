@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "StudyMuse Backend API",
   "dependencies": {
+    "@prisma/client": "^6.19.3",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
@@ -21,6 +22,7 @@
     "jsonwebtoken": "^9.0.3",
     "morgan": "^1.11.0",
     "pg": "^8.21.0",
+    "prisma": "^6.19.3",
     "zod": "^4.4.3"
   },
   "type": "module"

@@ -40,29 +40,20 @@ export async function profileService(user_id) {
 }
 
 export async function profileUpdateService(user_id, editFields) {
-  
-  try{
-  const result = await profileQuery(user_id);
-  if (result.name === editFields.name || result.email === editFields.email) {
-   
-    throw new ApiError(400, "Name or Email can't be same as old!");
-  }
-
-    const incomingProfile = Object.entries(editFields).filter(
-      ([_, val]) => val !== undefined,
-    );
-    console.log(incomingProfile);
-    if (incomingProfile.length == 0) {
-      throw new ApiError(400, "Invalid data!");
+  try {
+    const findDuplicate = await profileQuery(user_id);
+    if (
+      findDuplicate.name === editFields.name ||
+      findDuplicate.email === editFields.email
+    ) {
+      throw new ApiError(400, "Name or Email can't be same as old!");
     }
-    const updateResult = await editProfileQuery(user_id, incomingProfile);
     
-    return updateResult;
+    const result = await editProfileQuery(user_id, editFields);
+    return result;
   } 
-  catch(error){
-    if(error.code === "23505"){
-      throw new ApiError(400, "Email already exists!")
-    }
-    throw error 
+  catch (err) {
+    if (err.code === "P2002") throw new ApiError(400, "Email already exists!");
+    throw err;
   }
 }
