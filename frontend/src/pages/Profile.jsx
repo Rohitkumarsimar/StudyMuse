@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { api } from "../api/axios";
-import Input from "../components/ui/Input.jsx";
+import {Input} from "../components/ui/Input";
 import { CircleUserRound } from "lucide-react";
 import Spinner from "../components/ui/Spinner.jsx";
-import Button from "../components/ui/Button.jsx";
+import { Button } from "@/components/ui/button";
 
 export default function Profile() {
   const [profile, setProfile] = useState(null);
@@ -60,14 +60,13 @@ export default function Profile() {
         payload.email = editProfileData.email;
       }
       const result = await api.patch(`/auth/edit-profile`, payload);
-      setProfile(result.data.data)
+      setProfile(result.data.data);
       setEditProfileData({ name: "", email: "" });
     } catch (err) {
       console.log(err);
       setFormError(err.response?.data?.message || "Something went wrong!");
     } finally {
       setIsEditLoading(false);
-        
     }
   }
 
@@ -110,7 +109,8 @@ export default function Profile() {
           </div>
 
           <Button
-            variant={isEdit ? "ghost" : "primary"}
+            variant={isEdit ? "ghost" : "default"}
+            size="lg"
             onClick={() => {
               setIsEdit(!isEdit);
             }}
@@ -152,6 +152,7 @@ export default function Profile() {
               <div className="flex gap-3">
                 <Button
                   variant="ghost"
+                  size="lg"
                   type="button"
                   onClick={() => {
                     setIsEdit(false);
@@ -165,7 +166,8 @@ export default function Profile() {
                 </Button>
 
                 <Button
-                  variant="primary"
+                  variant="default"
+                  size="lg"
                   isLoading={isEditLoading}
                   type="submit"
                 >
