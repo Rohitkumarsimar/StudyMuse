@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {Input} from "../ui/Input";
+import {Input} from "../ui/input";
 import { Button } from "@/components/ui/button.jsx";
 
 export function TaskForm({ onSubmit }) {
