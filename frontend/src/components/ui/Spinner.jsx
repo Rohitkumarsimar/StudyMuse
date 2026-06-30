@@ -1,7 +1,18 @@
-export default function Spinner({ size = "h-5 w-5", className = "" }) {
+import { cn } from "@/lib/utils"
+import { Loader2Icon } from "lucide-react"
+
+function Spinner({
+  className,
+  ...props
+}) {
   return (
-    <div className="flex items-center justify-center">
-      <div className = {` ${size} animate-spin rounded-full border-2 border-gray-300 border-t-indigo-600 ${className} `}></div>
-    </div>
+    <Loader2Icon
+      data-slot="spinner"
+      role="status"
+      aria-label="Loading"
+      className={cn("size-4 animate-spin", className)}
+      {...props} />
   );
 }
+
+export { Spinner }

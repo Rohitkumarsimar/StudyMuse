@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { api } from "../api/axios";
 import {Input} from "../components/ui/input";
 import { CircleUserRound } from "lucide-react";
-import Spinner from "../components/ui/Spinner.jsx";
+import {Spinner} from "../components/ui/spinner";
 import { Button } from "@/components/ui/button";
 
 export default function Profile() {
@@ -35,7 +35,7 @@ export default function Profile() {
 
   if (isLoading)
     return (
-      <div>
+      <div className="flex justify-center">
         <Spinner className="h-15 w-15" />
       </div>
     );

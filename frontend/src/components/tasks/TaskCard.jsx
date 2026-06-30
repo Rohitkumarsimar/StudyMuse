@@ -28,6 +28,7 @@ export default function TaskCard({ task, onDelete, onToggle }) {
       </div>
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-end">
+        
         <Button
           variant="default"
           size="lg"
