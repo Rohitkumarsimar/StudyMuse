@@ -6,7 +6,7 @@ import {
 import { asyncWrap } from "../utils/asyncWrapper.js";
 
 import { authMiddleware } from "../middleware/auth.middleware.js";
-
+import rateLimit from "express-rate-limit";
 const authLimiter = rateLimit({
   windowMs: 1 * 60 * 1000,
   max: 15,
