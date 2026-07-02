@@ -48,13 +48,13 @@ model conversations {
 model chats {
   id            String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   conv_id       String         @db.Uuid
-  role          Role           @default(USER)
+  role          Role           @default(user)
   content       String         @db.Text
   created_at    DateTime       @default(now()) @db.Timestamp(6)
   conversations conversations @relation(fields: [conv_id], references: [id], onDelete: Cascade)
 }
 
 enum Role {
-  USER
-  ASSISTANT
+  user
+  assistant
 }

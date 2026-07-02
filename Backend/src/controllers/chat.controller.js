@@ -1,0 +1,44 @@
+import {
+  startConversationService,
+  createCovnersationService,
+  saveAssistantMessage,
+} from "../services/chat.service.js";
+import { response } from "../utils/apiResponse.js";
+import { ApiError } from "../utils/AppError.js";
+
+//create a new conversation
+export async function createConversationController(req, res, next) {
+  const user_id = req.user.id;
+  const result = await createCovnersationService(user_id);
+  return response(res, 200, result, "Created a conversation successfully.");
+}
+
+export async function startConversationController(req, res, next) {
+  const user_id = req.user.id;
+  const conv_id = req.params.conv_id;
+  const content = req.body.content;
+  const stream = await startConversationService(user_id, conv_id, content);
+
+  res.setHeader("Content-Type", "text/plain");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
+
+
+  let finishedResult = "";
+
+  try {
+    for await (const chunk of stream) {
+      const text = chunk.choices[0]?.delta?.content || "";
+      if (text) {
+        res.write(text);
+        finishedResult += text;
+      }
+
+    }
+    await saveAssistantMessage(conv_id, "assistant", finishedResult);
+  } catch (err) {
+    res.write("\n[Error: response was interrupted, please try again]");
+  } finally {
+    res.end();
+  }
+}
