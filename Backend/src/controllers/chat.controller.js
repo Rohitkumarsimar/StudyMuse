@@ -1,10 +1,27 @@
 import {
+    getConversationsService,
+    getMessagesService,
   startConversationService,
   createCovnersationService,
   saveAssistantMessage,
 } from "../services/chat.service.js";
 import { response } from "../utils/apiResponse.js";
 import { ApiError } from "../utils/AppError.js";
+
+//get all conversation
+export async function getAllConversationController(req, res, next){
+    const user_id = req.user.id
+    const result = await getConversationsService(user_id)
+    return response(res, 200, result, "Fetched all conversations successfully")
+}
+
+//get messages for the current chat
+export async function getMessageController(req, res, next){
+    const user_id = req.user.id
+    const conv_id = req.params.conv_id
+    const result = await getMessagesService(user_id, conv_id)
+    return response(res, 200, result, "Fetched all messages")
+}
 
 //create a new conversation
 export async function createConversationController(req, res, next) {

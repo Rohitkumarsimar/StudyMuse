@@ -2,6 +2,8 @@ import express from "express";
 import {
   startConversationController,
   createConversationController,
+  getAllConversationController,
+  getMessageController
 } from "../controllers/chat.controller.js";
 import { asyncWrap } from "../utils/asyncWrapper.js";
 
@@ -18,6 +20,14 @@ const authLimiter = rateLimit({
 
 export const chatRouter = express.Router();
 
+//get all conversation
+chatRouter.get('/', authMiddleware, asyncWrap(getAllConversationController))
+
+
+//get all messages
+chatRouter.get('/:conv_id', authMiddleware, asyncWrap(getMessageController))
+
+//create conversation
 chatRouter.post(
   "/conversations",
   authMiddleware,

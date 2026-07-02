@@ -21,7 +21,7 @@ export async function getAllConversations(user_id) {
       updated_at: "desc",
     },
   });
-  return result
+  return result;
 }
 
 //updating the conversation
@@ -61,15 +61,13 @@ export async function createChatMessage(conv_id, role, content) {
 
 //get messages:
 export async function getMessages(user_id, conv_id) {
-  const check = await prisma.conversations.findUnique({
+  const check = await prisma.conversations.findFirst({
     where: {
       id: conv_id,
+      user_id: user_id,
     },
   });
   if (!check) {
-    return null;
-  }
-  if (check.user_id !== user_id) {
     return null;
   }
 
@@ -86,15 +84,13 @@ export async function getMessages(user_id, conv_id) {
 
 //delete conversation:
 export async function deleteConversation(user_id, conv_id) {
-  const check = await prisma.conversations.findUnique({
+  const check = await prisma.conversations.findFirst({
     where: {
       id: conv_id,
+      user_id: user_id,
     },
   });
   if (!check) {
-    return null;
-  }
-  if (check.user_id !== user_id) {
     return null;
   }
 
