@@ -1,8 +1,9 @@
 import { useState } from "react";
-import {Input} from "../components/ui/input";
+import FormInput from "#components/login-signup/FormInput.jsx";
 import { Button } from "@/components/ui/button.jsx";
 import { useNavigate } from "react-router-dom";
 import { api } from "../api/axios.js";
+import { Spinner } from "#components/ui/spinner.jsx";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -41,15 +42,14 @@ export default function Register() {
         </p>
 
         <form onSubmit={handleSubmit}>
-          <Input
+          <FormInput
             type="text"
             label="Name"
             value={formData.name}
-            className="flex flex-col gap-4"
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
 
-          <Input
+          <FormInput
             type="email"
             label="Email"
             value={formData.email}
@@ -58,7 +58,7 @@ export default function Register() {
             }
           />
 
-          <Input
+          <FormInput
             type="password"
             label="Password"
             value={formData.password}
@@ -68,8 +68,15 @@ export default function Register() {
             error={error}
           />
 
-          <Button variant="default" size="lg" isLoading={isLoading}>
-            Register
+          <Button
+            type="submit"
+            variant="default"
+            size="lg"
+            className="w-full mt-4"
+            disabled={isLoading}
+          >
+            {isLoading && <Spinner className="mr-2 text-white" />}
+            {isLoading ? "Registering..." : "Register"}
           </Button>
         </form>
 

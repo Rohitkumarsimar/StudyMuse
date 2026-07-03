@@ -1,9 +1,10 @@
 import { useState } from "react";
-import {Input} from "../components/ui/input";
-import { Button } from "@/components/ui/button.jsx"
+import FormInput from "#components/login-signup/FormInput.jsx";
+import { Button } from "@/components/ui/button.jsx";
 import { useNavigate } from "react-router-dom";
 import { api } from "../api/axios.js";
 import { useAuth } from "../hooks/useAuth.js";
+import { Spinner } from "#components/ui/spinner.jsx";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ export default function Login() {
         </p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <Input
+          <FormInput
             type="email"
             label="Email"
             value={formData.email}
@@ -46,7 +47,7 @@ export default function Login() {
               setFormData({ ...formData, email: e.target.value })
             }
           />
-          <Input
+          <FormInput
             type="password"
             label="Password"
             value={formData.password}
@@ -55,8 +56,9 @@ export default function Login() {
             }
             error={error}
           />
-          <Button variant="default" size="lg" isLoading={isLoading}>
-            Login
+          <Button variant="default" size="lg" disabled={isLoading}>
+            {isLoading && <Spinner className="mr-2 text-white" />}
+            {isLoading ? "Logging in..." : "Login"}
           </Button>
         </form>
 
