@@ -1,7 +1,7 @@
 import {
     getConversationsService,
     getMessagesService,
-  startConversationService,
+  sendMessageService,
   createCovnersationService,
   saveAssistantMessage,
 } from "../services/chat.service.js";
@@ -30,11 +30,11 @@ export async function createConversationController(req, res, next) {
   return response(res, 200, result, "Created a conversation successfully.");
 }
 
-export async function startConversationController(req, res, next) {
+export async function sendMessageController(req, res, next) {
   const user_id = req.user.id;
   const conv_id = req.params.conv_id;
   const content = req.body.content;
-  const stream = await startConversationService(user_id, conv_id, content);
+  const stream = await sendMessageService(user_id, conv_id, content);
 
   res.setHeader("Content-Type", "text/plain");
   res.setHeader("Cache-Control", "no-cache");

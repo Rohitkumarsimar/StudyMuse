@@ -34,7 +34,7 @@ export async function saveAssistantMessage(conv_id, role, content) {
 }
 
 // conversation service
-export async function startConversationService(user_id, conv_id, content) {
+export async function sendMessageService(user_id, conv_id, content) {
   if (!content || !content.trim()) {
     throw new ApiError(400, "Enter a valid message!");
   }

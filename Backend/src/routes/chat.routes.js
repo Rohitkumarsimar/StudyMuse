@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  startConversationController,
+  sendMessageController,
   createConversationController,
   getAllConversationController,
   getMessageController
@@ -38,5 +38,5 @@ chatRouter.post(
   "/:conv_id",
   authMiddleware,
   authLimiter,
-  asyncWrap(startConversationController),
+  asyncWrap(sendMessageController),
 );
