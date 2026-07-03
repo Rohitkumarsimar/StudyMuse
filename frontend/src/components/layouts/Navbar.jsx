@@ -20,7 +20,7 @@ export default function Navbar() {
     navigate("/login");
   }
   return (
-    <nav className="top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-xl p-3 relative">
+    <nav className="top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-xl p-3">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <div className="flex items-center gap-3">
           <GraduationCap className="h-9 w-9 text-indigo-600" />
@@ -73,6 +73,19 @@ export default function Navbar() {
           >
             Profile
           </NavLink>
+
+          <NavLink
+            to="/chat"
+            className={({ isActive }) =>
+              `rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                isActive
+                  ? "bg-indigo-600 text-white shadow-sm"
+                  : "text-gray-600 hover:bg-white hover:text-gray-900"
+              }`
+            }
+          >
+            Chat AI
+          </NavLink>
         </div>
 
         <button
@@ -118,6 +131,13 @@ export default function Navbar() {
               onClick={isMenuOpen}
             >
               Profile
+            </NavLink>
+            <NavLink
+              to="/chat"
+              className="rounded-xl px-4 py-3 hover:bg-gray-100"
+              onClick={isMenuOpen}
+            >
+              Chat AI
             </NavLink>
 
             <button

@@ -5,13 +5,9 @@ import { cn } from "@/lib/utils"
 function Input({
   className,
   type,
-  label,
-  error,
   ...props
 }) {
   return (
-    <div>
-      <label className="text-sm font-medium text-gray-900">{label}</label>
     <input
       type={type}
       data-slot="input"
@@ -20,11 +16,7 @@ function Input({
         className
       )}
       {...props} />
-
-      <p className="text-red-500 text-sm">{error}</p>
-
-      </div>
   );
 }
 
-export  { Input }
+export { Input }
