@@ -137,7 +137,7 @@ function DialogDescription({
   );
 }
 
-export  {
+export {
   Dialog,
   DialogClose,
   DialogContent,

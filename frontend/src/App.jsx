@@ -13,21 +13,23 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard.jsx";
 import Tasks from "./pages/Tasks.jsx";
 import Profile from "./pages/Profile.jsx";
+import Chat from "#pages/Chat.jsx";
 
 function ProtectedLayout() {
   return (
     <ProtectedRoutes>
-      <div className="min-h-screen bg-gray-100">
-        <Navbar />
+      <div className="h-screen bg-gray-100 flex flex-col">
+        <header className="sticky top-0 z-50 border-b border-indigo-100 bg-white/80 backdrop-blur-xl">
+          <Navbar />
+        </header>
 
-        <main className="max-w-full mx-auto px-6 py-8">
+        <main className="flex-1 overflow-hidden">
           <Outlet />
         </main>
       </div>
     </ProtectedRoutes>
   );
 }
-
 
 export default function App() {
   return (
@@ -41,6 +43,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/chat" element={<Chat />} />
         </Route>
       </Routes>
     </BrowserRouter>

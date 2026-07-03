@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useTasks } from "../hooks/useTasks";
 import { TaskFilters } from "../components/tasks/TaskFilters.jsx";
 import TaskCard from "../components/tasks/TaskCard.jsx";
-import { TaskForm } from "../components/tasks/TaskForm";
-import {Spinner} from "../components/ui/spinner";
+import { TaskForm } from "../components/tasks/TaskForm.jsx";
+import {Spinner} from "../components/ui/Spinner.jsx";
 
 export default function Tasks() {
   const [activeFilter, setActiveFilter] = useState("all");
