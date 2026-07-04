@@ -2,6 +2,7 @@ import { Message, MessageContent } from "../ui/message";
 import { Bubble, BubbleContent } from "../ui/bubble";
 import { Skeleton } from "#components/ui/skeleton.jsx";
 import MarkdownRenderer from "./MarkdownRenderer";
+import TypingIndicator from "./TypingIndicator";
 
 import {
   MessageScrollerProvider,
@@ -64,7 +65,11 @@ export default function ChatWindow({
                               }
                             >
                               {msg.role === "assistant" ? (
-                                <MarkdownRenderer content={msg.content} />
+                                msg.content ? (
+                                  <MarkdownRenderer content={msg.content} />
+                                ) : (
+                                  <TypingIndicator />
+                                )
                               ) : (
                                 <p className="whitespace-pre-wrap text-sm leading-6">
                                   {msg.content}
@@ -85,13 +90,11 @@ export default function ChatWindow({
         )}
       </div>
 
-      
-        <div className="mx-auto w-full max-w-4xl px-6 pb-5 md:pb-18 pt-4">
-          <PromptInput
-            sendMessage={sendMessage}
-            activeConversationId={activeConversationId}
-          />
-        
+      <div className="mx-auto w-full max-w-4xl px-6 pb-5 md:pb-18 pt-4">
+        <PromptInput
+          sendMessage={sendMessage}
+          activeConversationId={activeConversationId}
+        />
       </div>
     </div>
   );
