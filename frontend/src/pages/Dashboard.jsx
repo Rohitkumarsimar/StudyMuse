@@ -9,6 +9,7 @@ import {
   ClockFading,
   Percent,
   Plus,
+  PenSquare
 } from "lucide-react";
 
 export default function Dashboard() {
@@ -104,6 +105,15 @@ export default function Dashboard() {
           </div>
 
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
+            <button
+              onClick={() => navigate("/chat")}
+              className="flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-indigo-700 hover:shadow-lg"
+            >
+              <PenSquare className="w-5 h-5" />
+              Chat Muse AI
+            </button>
+
             <button
               onClick={() => navigate("/tasks")}
               className="flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-indigo-700 hover:shadow-lg"

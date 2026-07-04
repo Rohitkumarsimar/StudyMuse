@@ -1,15 +1,16 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { GraduationCap, LogOut, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Sheet, SheetContent, SheetTrigger } from "#components/ui/sheet";
 
-export default function Navbar() {
+import NavLinks from "./NavLinks";
+
+export default function Navbar({ compact = false }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
- 
-
-  function closeMenu(){
-    setIsMenuOpen(false)
+  function closeMenu() {
+    setIsMenuOpen(false);
   }
 
   const navigate = useNavigate();
@@ -20,74 +21,31 @@ export default function Navbar() {
     navigate("/login");
   }
   return (
-    <nav className="top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-xl p-3">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+    <nav
+      className={`sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-xl p-2`}
+    >
+      <div
+        className={`mx-auto flex max-w-7xl items-center justify-between px-4 lg:px-6 h-12`}
+      >
         <div className="flex items-center gap-3">
-          <GraduationCap className="h-9 w-9 text-indigo-600" />
+          <GraduationCap className={`h-7 w-7 text-indigo-600`} />
 
           <div>
             <h1 className="text-xl font-bold tracking-tight text-gray-900">
               StudyMuse
             </h1>
 
-            <p className="text-xs text-gray-500">Learn. Track. Improve.</p>
+            <p className="hidden text-xs text-gray-500 md:block">
+              Learn. Track. Improve.
+            </p>
           </div>
         </div>
 
-        <div className="hidden md:flex items-center gap-1 rounded-2xl border border-gray-200 bg-gray-50 p-1">
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              `rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                isActive
-                  ? "bg-indigo-600 text-white shadow-sm"
-                  : "text-gray-600 hover:bg-white hover:text-gray-900"
-              }`
-            }
-          >
-            Dashboard
-          </NavLink>
-
-          <NavLink
-            to="/tasks"
-            className={({ isActive }) =>
-              `rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                isActive
-                  ? "bg-indigo-600 text-white shadow-sm"
-                  : "text-gray-600 hover:bg-white hover:text-gray-900"
-              }`
-            }
-          >
-            Tasks
-          </NavLink>
-
-          <NavLink
-            to="/profile"
-            className={({ isActive }) =>
-              `rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                isActive
-                  ? "bg-indigo-600 text-white shadow-sm"
-                  : "text-gray-600 hover:bg-white hover:text-gray-900"
-              }`
-            }
-          >
-            Profile
-          </NavLink>
-
-          <NavLink
-            to="/chat"
-            className={({ isActive }) =>
-              `rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                isActive
-                  ? "bg-indigo-600 text-white shadow-sm"
-                  : "text-gray-600 hover:bg-white hover:text-gray-900"
-              }`
-            }
-          >
-            Chat AI
-          </NavLink>
+        <div className="hidden items-center gap-1 rounded-2xl border border-gray-200 bg-gray-50 p-1 md:flex">
+          <NavLinks />
         </div>
 
+        {/* mobile navbar */}
         <button
           onClick={handleLogout}
           className="hidden md:flex items-center justify-center rounded-xl p-2 text-gray-500 transition-colors duration-200 hover:bg-red-50 hover:text-red-600"
@@ -106,49 +64,22 @@ export default function Navbar() {
           )}
         </button>
       </div>
-      {isMenuOpen && (
-        <div className="absolute left-0 right-0 top-full border-t border-gray-200 bg-white shadow-xl md:hidden">
-          <div className="flex flex-col p-4">
-            <NavLink
-              to="/dashboard"
-              className="rounded-xl px-4 py-3 hover:bg-gray-100"
-              onClick={closeMenu}
-            >
-              Dashboard
-            </NavLink>
 
-            <NavLink
-              to="/tasks"
-              className="rounded-xl px-4 py-3 hover:bg-gray-100"
-              onClick={closeMenu}
-            >
-              Tasks
-            </NavLink>
+      <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
 
-            <NavLink
-              to="/profile"
-              className="rounded-xl px-4 py-3 hover:bg-gray-100"
-              onClick={isMenuOpen}
-            >
-              Profile
-            </NavLink>
-            <NavLink
-              to="/chat"
-              className="rounded-xl px-4 py-3 hover:bg-gray-100"
-              onClick={isMenuOpen}
-            >
-              Chat AI
-            </NavLink>
+        <SheetContent side="right" className="w-72">
+          <div className="mt-8 flex flex-col gap-2">
+            <NavLinks onNavigate={() => setIsMenuOpen(false)} />
 
             <button
               onClick={handleLogout}
-              className="mt-3 rounded-xl px-4 py-3 text-left text-red-600 hover:bg-red-50"
+              className="mt-4 rounded-xl px-4 py-3 text-left text-red-600 hover:bg-red-50"
             >
               Logout
             </button>
           </div>
-        </div>
-      )}
+        </SheetContent>
+      </Sheet>
     </nav>
   );
 }

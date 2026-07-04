@@ -28,7 +28,7 @@ export function useChat() {
 
   async function fetchMessages(conv_id) {
     try {
-        setIsLoadingMessages(true);
+      setIsLoadingMessages(true);
       setActiveConversationId(conv_id);
       const result = await api.get(`/chat/${conv_id}`);
       setMessages(result.data.data);
@@ -43,8 +43,11 @@ export function useChat() {
   async function createConversation() {
     try {
       const result = await api.post("/chat/conversations");
+      const newConversation = result.data.data;
       setConversation([result.data.data, ...conversation]);
       setActiveConversationId(result.data.data.id);
+      setMessages([]);
+      return newConversation;
     } catch (err) {
       console.log(err);
     }
@@ -58,31 +61,53 @@ export function useChat() {
         { role: "user", content },
         { role: "assistant", content: "" },
       ]);
-      const result = await fetch(`${import.meta.env.VITE_API_URL}/chat/${conv_id}`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          Accept: "text/event-stream",
-          Authorization: `bearer ${localStorage.getItem("token")}`,
+      const result = await fetch(
+        `${import.meta.env.VITE_API_URL}/chat/${conv_id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            Accept: "text/event-stream",
+            Authorization: `bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({ content }),
         },
-        body: JSON.stringify({ content }),
-      });
+      );
       const reader = result.body.getReader();
       const decoder = new TextDecoder();
+
+      let buffer = "";
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        const chunk = decoder.decode(value, { stream: true });
-        setMessages((prev) => {
-          const updated = [...prev];
-          const lastMessage = updated[updated.length - 1];
-          updated[updated.length - 1] = {
-            ...lastMessage,
-            content: lastMessage.content + chunk,
-          };
-          return updated;
-        });
+
+        buffer += decoder.decode(value, { stream: true });
+
+        const events = buffer.split("\n\n");
+        buffer = events.pop() || "";
+
+        for (const event of events) {
+          if (!event.startsWith("data: ")) continue;
+
+          try {
+            const { text } = JSON.parse(event.slice(6));
+
+            setMessages((prev) => {
+              const updated = [...prev];
+              const lastMessage = updated[updated.length - 1];
+
+              updated[updated.length - 1] = {
+                ...lastMessage,
+                content: lastMessage.content + text,
+              };
+
+              return updated;
+            });
+          } catch (err) {
+            console.error("Invalid SSE event:", event);
+          }
+        }
       }
     } catch (err) {
       console.log(err);

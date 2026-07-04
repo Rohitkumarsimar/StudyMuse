@@ -42,12 +42,14 @@ export async function sendMessageService(user_id, conv_id, content) {
     throw new ApiError(400, "Prompt length is exceeding the limit!");
   }
 
-  const history = await getMessages(user_id, conv_id);
+  const history = await getMessages(user_id, conv_id)
 
   const messageHistory = history.map((element) => {
     const { role, content } = element;
     return { role, content };
-  });
+  }).slice(-2);
+
+  console.log(messageHistory)
 
   const isFirstMessage = history.length === 0;
   let title = "";

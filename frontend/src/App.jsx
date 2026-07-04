@@ -14,13 +14,19 @@ import Dashboard from "./pages/Dashboard.jsx";
 import Tasks from "./pages/Tasks.jsx";
 import Profile from "./pages/Profile.jsx";
 import Chat from "#pages/Chat.jsx";
+import { useLocation } from "react-router-dom";
 
 function ProtectedLayout() {
+  const location = useLocation();
+
+  const isChatPage = location.pathname === "/chat";
   return (
     <ProtectedRoutes>
       <div className="h-screen bg-gray-100 flex flex-col">
         <header className="sticky top-0 z-50 border-b border-indigo-100 bg-white/80 backdrop-blur-xl">
-          <Navbar />
+          <div className={isChatPage ? "hidden lg:block" : ""}>
+            <Navbar />
+          </div>
         </header>
 
         <main className="flex-1 overflow-hidden">

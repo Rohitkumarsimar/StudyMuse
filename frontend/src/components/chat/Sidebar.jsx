@@ -1,7 +1,8 @@
-import { PenSquare, MessageSquare } from "lucide-react";
+import { PenSquare, MessageSquare, X } from "lucide-react";
 import { Skeleton } from "#components/ui/skeleton.jsx";
 
 export default function Sidebar({
+  closeSidebar,
   conversation,
   isLoading,
   activeConversationId,
@@ -10,21 +11,37 @@ export default function Sidebar({
 }) {
   return (
     <aside className="flex h-full flex-col bg-white">
-
-      {/* Header */}
       <div className="border-b border-indigo-100 p-4">
+        <div className="mb-4 flex items-center justify-between lg:hidden">
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900">
+              StudyMuse AI
+            </h2>
+            <p className="text-xs text-gray-500">Learn. Think. Improve.</p>
+          </div>
+
+          <button
+            onClick={closeSidebar}
+            className="rounded-lg p-2 hover:bg-indigo-50"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
         <button
-          onClick={createConversation}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-3 text-sm font-medium text-white shadow-sm transition-all duration-200 hover:bg-indigo-700 hover:shadow-md active:scale-[0.98]"
+          onClick={() => {
+            createConversation();
+            closeSidebar?.();
+          }}
+          className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-700"
         >
           <PenSquare className="h-4 w-4" />
           New Chat
         </button>
       </div>
 
-      {/* Conversation List */}
+     {/* conversation list:  */}
       <div className="flex-1 overflow-y-auto p-3">
-
         {isLoading ? (
           <div className="space-y-3">
             {Array.from({ length: 7 }).map((_, index) => (
@@ -49,10 +66,13 @@ export default function Sidebar({
             {conversation.map((conv) => (
               <button
                 key={conv.id}
-                onClick={() => fetchMessages(conv.id)}
+                onClick={() => {
+                  fetchMessages(conv.id);
+                  closeSidebar?.();
+                }}
                 className={`group flex w-full items-center rounded-xl px-3 py-3 text-left transition-all duration-200 ${
                   conv.id === activeConversationId
-                    ? "bg-indigo-600 text-white shadow-sm"
+                    ? "border border-indigo-200 bg-indigo-100 text-indigo-700 shadow-sm"
                     : "text-gray-700 hover:bg-indigo-50"
                 }`}
               >

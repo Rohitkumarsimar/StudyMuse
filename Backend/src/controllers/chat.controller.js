@@ -36,7 +36,7 @@ export async function sendMessageController(req, res, next) {
   const content = req.body.content;
   const stream = await sendMessageService(user_id, conv_id, content);
 
-  res.setHeader("Content-Type", "text/plain");
+  res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
 
@@ -45,9 +45,10 @@ export async function sendMessageController(req, res, next) {
 
   try {
     for await (const chunk of stream) {
-      const text = chunk.choices[0]?.delta?.content || "";
+      const text = chunk.choices?.[0]?.delta?.content || "";
       if (text) {
-        res.write(text);
+       res.write(`data: ${JSON.stringify({ text })}\n\n`);
+       if (res.flush) res.flush(); 
         finishedResult += text;
       }
 
@@ -59,3 +60,5 @@ export async function sendMessageController(req, res, next) {
     res.end();
   }
 }
+
+
