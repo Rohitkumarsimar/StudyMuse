@@ -22,7 +22,7 @@ function ProtectedLayout() {
   const isChatPage = location.pathname === "/chat";
   return (
     <ProtectedRoutes>
-      <div className="h-screen bg-gray-100 flex flex-col">
+      <div className={isChatPage?"h-dvh":"h-screen bg-gray-100 flex flex-col"}>
         <header className="sticky top-0 z-50 border-b border-indigo-100 bg-white/80 backdrop-blur-xl">
           <div className={isChatPage ? "hidden lg:block" : ""}>
             <Navbar />

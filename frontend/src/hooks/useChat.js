@@ -91,7 +91,13 @@ export function useChat() {
           if (!event.startsWith("data: ")) continue;
 
           try {
-            const { text } = JSON.parse(event.slice(6));
+            const data = JSON.parse(event.slice(6));
+            if (data.error) {
+              console.error(data.message);
+              return;
+            }
+
+            const { text } = data;
 
             setMessages((prev) => {
               const updated = [...prev];

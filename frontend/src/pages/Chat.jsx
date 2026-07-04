@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X, EllipsisVertical } from "lucide-react";
+import { Menu, X, EllipsisVertical, GraduationCap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "#hooks/useAuth.js";
 import { useChat } from "#hooks/useChat.js";
@@ -39,7 +39,7 @@ export default function Chat() {
   }
 
   return (
-    <div className="relative flex h-full overflow-hidden bg-linear-to-br from-indigo-50 via-white to-white">
+    <div className="relative flex h-dvh overflow-hidden bg-linear-to-br from-indigo-50 via-white to-white">
       {sidebarOpen && (
         <div
           className="fixed inset-0 z-30 bg-black/30 lg:hidden"
@@ -82,10 +82,8 @@ export default function Chat() {
             <Menu className="h-5 w-5 text-indigo-600" />
           </button>
 
-          {/* Title */}
           <h2 className="text-lg font-semibold text-gray-900">StudyMuse AI</h2>
 
-          {/* App Navigation */}
           <Sheet open={navOpen} onOpenChange={setNavOpen}>
             <SheetTrigger asChild>
               <button className="rounded-lg p-2 transition hover:bg-indigo-50">
@@ -94,7 +92,15 @@ export default function Chat() {
             </SheetTrigger>
 
             <SheetContent side="right" className="w-72">
-              <div className="mt-8 flex flex-col gap-2">
+              <div className="flex gap-2 mt-4 ml-5">
+                <GraduationCap className={`h-7 w-7 text-indigo-600`} />
+
+                <h1 className="text-xl  font-bold tracking-tight text-gray-900">
+                  StudyMuse
+                </h1>
+              </div>
+              <div className="border border-gray-200"></div>
+              <div className="mt-1 flex flex-col gap-2">
                 <NavLinks onNavigate={() => setNavOpen(false)} />
 
                 <button

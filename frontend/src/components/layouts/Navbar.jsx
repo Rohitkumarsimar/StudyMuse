@@ -66,9 +66,16 @@ export default function Navbar({ compact = false }) {
       </div>
 
       <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-
         <SheetContent side="right" className="w-72">
-          <div className="mt-8 flex flex-col gap-2">
+          <div className="flex gap-2 mt-4 ml-5">
+            <GraduationCap className={`h-7 w-7 text-indigo-600`} />
+
+            <h1 className="text-xl  font-bold tracking-tight text-gray-900">
+              StudyMuse
+            </h1>
+          </div>
+          <div className="border border-gray-200"></div>
+          <div className="mt-1 flex flex-col gap-2">
             <NavLinks onNavigate={() => setIsMenuOpen(false)} />
 
             <button

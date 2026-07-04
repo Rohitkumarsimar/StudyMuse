@@ -16,9 +16,9 @@ export default function NavLinks({ onNavigate }) {
           to={link.to}
           onClick={onNavigate}
           className={({ isActive }) =>
-            `rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200 ${
+            `md:rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200 ${
               isActive
-                ? "bg-indigo-600 text-white shadow-sm"
+                ? "bg-indigo-500 text-white shadow-sm"
                 : "text-gray-600 hover:bg-white hover:text-gray-900"
             }`
           }

@@ -49,8 +49,6 @@ export async function sendMessageService(user_id, conv_id, content) {
     return { role, content };
   }).slice(-2);
 
-  console.log(messageHistory)
-
   const isFirstMessage = history.length === 0;
   let title = "";
   if (isFirstMessage) {

@@ -42,7 +42,7 @@ export async function generateTitle(content) {
   const message = [
      {
       role: "system",
-      content: "generate a 5 words title for the user's message.",
+      content: process.env.TITLE_SYSTEM_PROMPT,
     },
     {
       role: "user",

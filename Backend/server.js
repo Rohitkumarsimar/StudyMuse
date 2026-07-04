@@ -19,7 +19,7 @@ app.use(morgan('dev'))
 const PORT = process.env.PORT;
 
 app.use(cors({
-  origin: ['http://localhost:5173','https://studymuseai.netlify.app']
+  origin: ['http://localhost:5173','https://studymuseai.netlify.app', 'http://10.159.251.206:5173']
 }))
 
 app.use(logMethod);
@@ -32,6 +32,6 @@ app.use("/tasks",taskRouter);
 app.use("/chat", chatRouter);
 app.use(errorMiddleware);
 
-app.listen(PORT || 3000, () => {
+app.listen(PORT || 3000, '0.0.0.0', () => {
   console.log(`Server is connected to http://localhost:${PORT || 3000}`);
 });

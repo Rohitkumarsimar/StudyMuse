@@ -47,7 +47,7 @@ export default function PromptInput({ sendMessage, activeConversationId }) {
       </button>
     </div>
 
-    <p className="mt-2 text-center text-xs text-gray-400">
+    <p className="mt-2 text-center text-[10px] md:text-xs text-gray-400">
       StudyMuse AI can make mistakes. Verify important information.
     </p>
   </form>

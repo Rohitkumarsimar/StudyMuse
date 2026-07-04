@@ -86,7 +86,7 @@ export default function ChatWindow({
       </div>
 
       
-        <div className="mx-auto w-full max-w-4xl px-6 pb-8 pt-4">
+        <div className="mx-auto w-full max-w-4xl px-6 pb-5 md:pb-18 pt-4">
           <PromptInput
             sendMessage={sendMessage}
             activeConversationId={activeConversationId}
