@@ -49,7 +49,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/chat" element={<Chat />} />
+          <Route path="/chat/:conv_id?" element={<Chat />} />
         </Route>
       </Routes>
     </BrowserRouter>

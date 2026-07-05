@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { api } from "#api/axios.js";
+import { useNavigate } from "react-router-dom";
 
 export function useChat() {
   const [conversation, setConversation] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+const navigate = useNavigate()
 
   async function fetchConversation() {
     try {
@@ -56,6 +59,14 @@ export function useChat() {
   // send message
   async function sendMessage(conv_id, content) {
     try {
+      if (conv_id === null || undefined) {
+        const result = await createConversation();
+        console.log(result)
+        conv_id = result.id;
+        setActiveConversationId(conv_id)
+        navigate(`/chat/${conv_id}`,{replace:true})
+      }
+
       setMessages((prev) => [
         ...prev,
         { role: "user", content },
