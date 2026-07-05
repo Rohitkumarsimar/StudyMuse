@@ -4,11 +4,11 @@ import {
   updateConversation,
   createChatMessage,
   getMessages,
-  deleteConversation,
+  deleteConversation, 
 } from "../db/chat.query.js";
 import { ApiError } from "../utils/AppError.js";
 
-import { generateResponse, generateTitle } from "../providers/groq.provider.js";
+import {provider} from "../providers/index.js";
 
 //get all conversations on clicking at chat page
 export async function getConversationsService(user_id) {
@@ -42,28 +42,31 @@ export async function sendMessageService(user_id, conv_id, content) {
     throw new ApiError(400, "Prompt length is exceeding the limit!");
   }
 
-  const history = await getMessages(user_id, conv_id)
+  const history = await getMessages(user_id, conv_id);
 
-  const messageHistory = history.map((element) => {
-    const { role, content } = element;
-    return { role, content };
-  }).slice(-2);
+  const messageHistory = history
+    .map((element) => {
+      const { role, content } = element;
+      return { role, content };
+    })
+    .slice(-2);
+
+    console.log(messageHistory)
 
   const isFirstMessage = history.length === 0;
   let title = "";
   if (isFirstMessage) {
     try {
-      title = await generateTitle(content);
+      title = await provider.generateTitle(content);
     } catch (err) {
       console.error("Title generation failed:", err.message);
       title = "New Conversation";
     }
   }
 
-  const stream = await generateResponse(messageHistory, content);
+  const stream = await provider.generateResponse(messageHistory, content);
 
-    await createChatMessage(conv_id, "user", content);
-  
+  await createChatMessage(conv_id, "user", content);
 
   await updateConversation(conv_id, isFirstMessage ? title : undefined);
 

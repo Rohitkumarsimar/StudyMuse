@@ -39,22 +39,28 @@ export async function sendMessageController(req, res, next) {
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
+  if (res.flush) res.flush();
 
   let finishedResult = "";
 
   try {
     for await (const chunk of stream) {
-      const text = chunk.choices?.[0]?.delta?.content || "";
+      let text = ""
+      if (process.env.AI_PROVIDER === "ollama") {
+        text = chunk.message?.content || "";
+      }else{
+      text = chunk.choices?.[0]?.delta?.content || "";
+      }
       if (text) {
         res.write(`data: ${JSON.stringify({ text })}\n\n`);
-        if (res.flush) res.flush();
+        console.log("TEXT:", text);
         finishedResult += text;
       }
     }
     await saveAssistantMessage(conv_id, "assistant", finishedResult);
   } catch (err) {
-console.error("========== STREAM ERROR ==========");
-  console.error("Message:", err.message);
+    console.error("========== STREAM ERROR ==========");
+    console.error("Message:", err.message);
 
     res.write(`event: error\n`);
     res.write(
