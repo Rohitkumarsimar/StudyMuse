@@ -25,12 +25,23 @@ model users {
   id            String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name          String          @db.VarChar(100)
   email         String          @unique @db.VarChar(255)
-  password      String          @db.VarChar(255)
+  password      String?          @db.VarChar(255)
+  googleId      String?         @unique @db.VarChar(255)
+  isVerified    Boolean         @default(false)
+  otp           String?         @db.VarChar(255)
+  otpType       OtpType?        
+  otpExpiresAt  DateTime?       
   created_at    DateTime?       @default(now()) @db.Timestamp(6)
+  updated_at    DateTime?        @updatedAt() @db.Timestamp()
   tasks         tasks[]
   conversations conversations[]
 
   @@index([email], map: "idx_users_email")
+}
+
+enum OtpType {
+  VERIFY_EMAIL
+  PASSWORD_RESET
 }
 
 model conversations {
