@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import { ApiError } from "./AppError";
+import { ApiError } from "./AppError.js";
 
 
 const transporter = nodemailer.createTransport({

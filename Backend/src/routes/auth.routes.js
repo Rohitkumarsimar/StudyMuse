@@ -1,23 +1,76 @@
 import express from "express";
-import { register, login, profileController, editProfileController} from "../controllers/auth.controller.js";
+import {
+  register,
+  login,
+  profileController,
+  editProfileController,
+  verifyOtpController,
+  passwordResetOtpController,
+  passwordResetController,
+  resendOtpController,
+  googleAuthController,
+} from "../controllers/auth.controller.js";
 import { validate } from "../middleware/validate.middleware.js";
-import { registerSchema, loginSchema, profileEditSchema } from "../schemas/auth.schema.js";
+import {
+  registerSchema,
+  loginSchema,
+  profileEditSchema,
+  verifyOtpSchema,
+  passwordResetSchema,
+  resendOtpSchema,
+} from "../schemas/auth.schema.js";
 import { asyncWrap } from "../utils/asyncWrapper.js";
 import rateLimit from "express-rate-limit";
 import { authMiddleware } from "../middleware/auth.middleware.js";
 
 const authLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 8,
-    message: "Too many login attempts, please try again after 15 minutes."
-})
+  windowMs: 15 * 60 * 1000,
+  max: 8,
+  message: "Too many login attempts, please try again after 15 minutes.",
+});
 
 export const authRouter = express.Router();
 
-authRouter.post("/register",authLimiter, validate(registerSchema), asyncWrap(register));
+authRouter.post(
+  "/register",
+  authLimiter,
+  validate(registerSchema),
+  asyncWrap(register),
+);
 
 authRouter.post("/login", authLimiter, validate(loginSchema), asyncWrap(login));
 
-authRouter.get("/profile",authMiddleware, asyncWrap(profileController))
+authRouter.get("/profile", authMiddleware, asyncWrap(profileController));
 
-authRouter.patch("/edit-profile", validate(profileEditSchema), authMiddleware ,asyncWrap(editProfileController))
+authRouter.patch(
+  "/edit-profile",
+  validate(profileEditSchema),
+  authMiddleware,
+  asyncWrap(editProfileController),
+);
+
+authRouter.post(
+  "/password-reset-otp",
+  validate(passwordResetSchema),
+  asyncWrap(passwordResetOtpController),
+);
+
+authRouter.post(
+  "/password-reset",
+  validate(passwordResetSchema),
+  asyncWrap(passwordResetController),
+);
+
+authRouter.post(
+  "/verify-otp",
+  validate(verifyOtpSchema),
+  asyncWrap(verifyOtpController),
+);
+
+authRouter.post(
+  "/resend-otp",
+  validate(resendOtpSchema),
+  asyncWrap(resendOtpController),
+);
+
+authRouter.post("/googleAuth", asyncWrap(googleAuthController));
