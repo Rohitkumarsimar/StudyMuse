@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../api/axios.js";
 import { useAuth } from "../hooks/useAuth.js";
 import { Spinner } from "#components/ui/spinner.jsx";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ export default function Login() {
       setIsLoading(false);
     }
   }
+
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 w-full max-w-md">
@@ -60,7 +62,30 @@ export default function Login() {
             {isLoading && <Spinner className="mr-2 text-white" />}
             {isLoading ? "Logging in..." : "Login"}
           </Button>
+
+          <GoogleLogin
+            onSuccess={async (credentialResponse) => {
+              const result = await api.post("/auth/googleAuth", {
+                idToken: credentialResponse.credential,
+              })
+              login(result.data.data, null)
+              navigate('/dashboard')
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          />
+
+          
         </form>
+        <p className="text-sm text-center text-gray-500 mt-6">
+          <a
+            href="/forgot-password"
+            className="text-indigo-600 font-medium hover:underline"
+          >
+            Forgot password?
+          </a>
+          </p>
 
         <p className="text-sm text-center text-gray-500 mt-6">
           Don't have an account?{" "}
