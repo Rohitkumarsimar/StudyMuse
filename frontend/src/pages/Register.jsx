@@ -85,6 +85,7 @@ export default function Register() {
             {isLoading && <Spinner className="mr-2 text-white" />}
             {isLoading ? "Registering..." : "Register"}
           </Button>
+          
           <GoogleLogin
             onSuccess={async (credentialResponse) => {
               const result = await api.post("/auth/googleAuth", {
@@ -97,6 +98,7 @@ export default function Register() {
               console.log("Login Failed");
             }}
             text="signup_with"
+            width="100%"
           />
         </form>
 
