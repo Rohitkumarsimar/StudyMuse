@@ -4,9 +4,12 @@ import { Button } from "@/components/ui/button.jsx";
 import { useNavigate } from "react-router-dom";
 import { api } from "../api/axios.js";
 import { Spinner } from "#components/ui/spinner.jsx";
+import { GoogleLogin } from "@react-oauth/google";
+import { useAuth } from "#hooks/useAuth.js";
 
 export default function Register() {
   const navigate = useNavigate();
+  const {login} = useAuth()
 
   const [formData, setFormData] = useState({
     name: "",
@@ -22,8 +25,12 @@ export default function Register() {
     setError(null);
     try {
       const result = await api.post("/auth/register", formData);
-      if (result) {
-        navigate("/login");
+      if (result.data.data.isVerified === false) {
+        navigate("/verify-email",{
+          state:{
+            email: formData.email
+          }
+        });
       }
     } catch (err) {
       setError(err.response.data.message);
@@ -72,12 +79,25 @@ export default function Register() {
             type="submit"
             variant="default"
             size="lg"
-            className="w-full mt-4"
+            className="w-full my-4"
             disabled={isLoading}
           >
             {isLoading && <Spinner className="mr-2 text-white" />}
             {isLoading ? "Registering..." : "Register"}
           </Button>
+          <GoogleLogin
+            onSuccess={async (credentialResponse) => {
+              const result = await api.post("/auth/googleAuth", {
+                idToken: credentialResponse.credential,
+              })
+              login(result.data.data, null)
+              navigate('/dashboard')
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+            text="signup_with"
+          />
         </form>
 
         <p className="text-sm text-center text-gray-500 mt-6">

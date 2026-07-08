@@ -18,3 +18,18 @@ export const profileEditSchema = z.object({
 }).strict().refine((data)=>{
  return data.name !== undefined || data.email !== undefined
 })
+
+export const verifyOtpSchema = z.object({
+  email: z.string().email(),
+  otp : z.string().min(6)
+}).strict()
+
+export const passwordResetSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8).optional()
+}).strict()
+
+export const resendOtpSchema = z.object({
+  email: z.string().email(),
+  type: z.enum(["VERIFY_EMAIL", "PASSWORD_RESET"])
+}).strict()

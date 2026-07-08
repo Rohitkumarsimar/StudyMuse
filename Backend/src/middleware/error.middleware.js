@@ -5,7 +5,7 @@ export function errorMiddleware(err, req, res, next) {
   if (err instanceof ApiError) {
     return res
       .status(err.statusCode)
-      .json({ success: false, message: err.message });
+      .json({ success: false, message: err.message, code: err.code });
   }
   return res
     .status(500)
