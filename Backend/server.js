@@ -14,6 +14,7 @@ import { taskRouter } from "./src/routes/task.routes.js";
 import { chatRouter } from "./src/routes/chat.routes.js";
 
 const app = express();
+app.set("trust proxy", 1);
 app.use(helmet())
 app.use(morgan('dev'))
 const PORT = process.env.PORT;
