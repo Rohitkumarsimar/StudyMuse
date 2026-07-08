@@ -83,8 +83,13 @@ export async function resendOtpController(req, res, next) {
 
 //google auth controller
 export async function googleAuthController(req, res, next){
-  const idToken = req.body.idToken
- const result = await googleAuthService(idToken)
 
+  const idToken = req.body.idToken
+  try{
+ const result = await googleAuthService(idToken)
  response(res, 200, result, "Google login successful")
+  }catch(err){
+    console.log(err)
+    next(err)
+  }
 }
