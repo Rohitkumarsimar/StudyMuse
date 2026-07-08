@@ -98,7 +98,7 @@ export default function Login() {
               {isLoading ? "Logging in..." : "Login"}
             </Button>
           )}
-
+          <div className="w-full justify-center">
           <GoogleLogin
             onSuccess={async (credentialResponse) => {
               const result = await api.post("/auth/googleAuth", {
@@ -112,6 +112,7 @@ export default function Login() {
             }}
             width="100%"
           />
+          </div>
         </form>
         <p className="text-sm text-center text-gray-500 mt-6">
           <a

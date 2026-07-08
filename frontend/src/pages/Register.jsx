@@ -86,20 +86,21 @@ export default function Register() {
             {isLoading ? "Registering..." : "Register"}
           </Button>
           
+           <div className="w-full justify-center">
           <GoogleLogin
             onSuccess={async (credentialResponse) => {
               const result = await api.post("/auth/googleAuth", {
                 idToken: credentialResponse.credential,
-              })
-              login(result.data.data, null)
-              navigate('/dashboard')
+              });
+              login(result.data.data, null);
+              navigate("/dashboard");
             }}
             onError={() => {
               console.log("Login Failed");
             }}
-            text="signup_with"
             width="100%"
           />
+          </div>
         </form>
 
         <p className="text-sm text-center text-gray-500 mt-6">
