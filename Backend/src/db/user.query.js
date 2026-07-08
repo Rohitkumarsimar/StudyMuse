@@ -1,7 +1,7 @@
 import {prisma} from "../config/prisma.js";
 
 // registering user
-export async function insertUser(name, email, password, otp, otpExpiresAt, otpType) {
+export async function insertUser({name, email, password, otp, otpExpiresAt, otpType}) {
   const result = await prisma.users.create({
     data: { 
       name: name, 
