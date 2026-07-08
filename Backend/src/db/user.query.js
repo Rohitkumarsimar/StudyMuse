@@ -14,7 +14,8 @@ export async function insertUser(name, email, password, otp, otpExpiresAt, otpTy
       select: {
         name: true,
         email: true,
-        otp: true
+        otp: false,
+        isVerified:true
       }
   });
   return result;
@@ -48,6 +49,7 @@ export async function editProfileQuery(user_id, editFields,) {
     where: { id: user_id },
     data: editFields,
     select: {
+      id: true,
       name: true,
       email: true
     }

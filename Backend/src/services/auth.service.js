@@ -47,22 +47,25 @@ const subject = "StudyMuse - Verify Your Email"
 //login: finding email and comparing hash password with plain password
 export async function loginUser(email, password) {
   const user = await findByEmail(email);
+  console.log(user)
   if (!user) {
     throw new ApiError(401, "Invalid credential!");
   }
   if(user.isVerified === false){
-    throw new ApiError(400, "Please verify your email addresss!")
+    throw new ApiError(403, "Please verify your email address!", "EMAIL_NOT_VERIFIED")
   }
   const passwordMatched = await bcrypt.compare(password, user.password);
   if (!passwordMatched) {
     throw new ApiError(401, "Invalid Password");
   }
-  return generateToken(user);
+  return {token: generateToken(user), isVerified: user.isVerified};
 }
 
 //fetch profile
 export async function profileService(user_id) {
+  console.log(user_id)
   const result = await profileQuery(user_id);
+  console.log(result)
   if (!result) {
     throw new ApiError(404, "Profile not found!");
   }
@@ -81,7 +84,7 @@ export async function profileUpdateService(user_id, editFields) {
     }
 
     const result = await editProfileQuery(user_id, editFields);
-    return result;
+    return {name: result.name, email: result.email};
   } catch (err) {
     if (err.code === "P2002") throw new ApiError(400, "Email already exists!");
     throw err;
@@ -106,15 +109,14 @@ export async function passwrodResetOtpService(email) {
     <p>This OTP is valid for 5 minutes.</p>
 `
 const subject = "StudyMuse - Password reset"
-  const result = await editProfileQuery(user_id, {
+  await editProfileQuery(user_id, {
     otp: hashedOtp,
     otpType: otpType,
     otpExpiresAt: otpExpiresAt,
   });
 
   await sendEmail(email,subject,html)
-  return result;
-  console.log(result)
+  return
 }
 
 //reset password
@@ -128,10 +130,11 @@ export async function passwrodResetService(email, password) {
     throw new ApiError(400, "OTP is not verified!");
   }
   const hashedPassword = await bcrypt.hash(password, 10);
-  return await editProfileQuery(user_id, {
+  await editProfileQuery(user_id, {
     password: hashedPassword,
     canResetPassword: false,
   });
+  return
 }
 
 // verify email otp service
@@ -197,7 +200,7 @@ const subject = "StudyMuse - new OTP"
 if(user.isVerified === true && type === "VERIFY_EMAIL"){
   throw new ApiError(409, "User already verified")
 }
-  const result = await editProfileQuery(user_id, {
+  const updateOtpDb = await editProfileQuery(user_id, {
     otp: hashedOtp,
     otpType: type,
     otpExpiresAt: otpExpiresAt,
@@ -208,28 +211,19 @@ if(user.isVerified === true && type === "VERIFY_EMAIL"){
 
 // Google Auth
 export async function googleAuthService(idToken){
-  console.log("1")
   const payload = await verifyGoogleToken(idToken)
-  console.log("2")
   const googleUser = await findByGoogleId(payload.sub)
-  console.log("3")
   
   if(googleUser){
     return generateToken(googleUser)
-    console.log("4")
   }
-  
-  console.log("5")
   const user = await findByEmail(payload.email)
   if(user){
-    console.log("6")
     const updateUser = await editProfileQuery(user.id, {googleId: payload.sub, isVerified: true})
     return generateToken(updateUser)
-    console.log("7")
   }
   
   if(!user){
-    console.log("8")
     const register = await insertUser({
       name: payload.name,
       email: payload.email,
@@ -237,9 +231,6 @@ export async function googleAuthService(idToken){
       googleId: payload.sub,
       isVerified: true
     })
-    
-    console.log("9")
     return generateToken(register)
-    console.log("10")
   }
 }

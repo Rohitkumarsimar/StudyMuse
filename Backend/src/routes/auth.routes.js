@@ -20,14 +20,10 @@ import {
   resendOtpSchema,
 } from "../schemas/auth.schema.js";
 import { asyncWrap } from "../utils/asyncWrapper.js";
-import rateLimit from "express-rate-limit";
 import { authMiddleware } from "../middleware/auth.middleware.js";
+import { authLimiter, otpLimitter } from "../utils/rateLimitter.js";
 
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 8,
-  message: "Too many login attempts, please try again after 15 minutes.",
-});
+
 
 export const authRouter = express.Router();
 
@@ -38,7 +34,7 @@ authRouter.post(
   asyncWrap(register),
 );
 
-authRouter.post("/login", authLimiter, validate(loginSchema), asyncWrap(login));
+authRouter.post("/login",authLimiter, validate(loginSchema), asyncWrap(login));
 
 authRouter.get("/profile", authMiddleware, asyncWrap(profileController));
 
@@ -69,6 +65,7 @@ authRouter.post(
 
 authRouter.post(
   "/resend-otp",
+  otpLimitter,
   validate(resendOtpSchema),
   asyncWrap(resendOtpController),
 );
