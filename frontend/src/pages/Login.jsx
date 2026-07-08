@@ -15,18 +15,41 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const [needVerification, setIsNeedVerification] = useState(false)
+
   async function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
     try {
       const result = await api.post("/auth/login", formData);
-      if (result) {
-        login(result.data.data, null);
+      console.log(result.data)
+      if (result.data.data.isVerified === true) {
+        login(result.data.data.token, null);
         navigate("/dashboard");
       }
     } catch (err) {
       setError(err.response.data.message);
+      if(err.response.data.code === "EMAIL_NOT_VERIFIED"){
+        setIsNeedVerification(true)
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function handleVerifyEmail(e) {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      await api.post('/auth/resend-otp',{email: formData.email, type: "VERIFY_EMAIL"})
+      navigate("/verify-email", {
+        state: {
+          email: formData.email,
+        },
+      });
+    } catch (err) {
+      console.log(err);
     } finally {
       setIsLoading(false);
     }
@@ -58,25 +81,36 @@ export default function Login() {
             }
             error={error}
           />
-          <Button variant="default" size="lg" disabled={isLoading}>
-            {isLoading && <Spinner className="mr-2 text-white" />}
-            {isLoading ? "Logging in..." : "Login"}
-          </Button>
+
+          {needVerification? (
+            <Button
+              onClick={handleVerifyEmail}
+              variant="default"
+              size="lg"
+              disabled={isLoading}
+            >
+              {isLoading && <Spinner className="mr-2 text-white" />}
+              {isLoading ? "Sending OTP..." : "Verify Email"}
+            </Button>
+          ) : (
+            <Button variant="default" size="lg" disabled={isLoading}>
+              {isLoading && <Spinner className="mr-2 text-white" />}
+              {isLoading ? "Logging in..." : "Login"}
+            </Button>
+          )}
 
           <GoogleLogin
             onSuccess={async (credentialResponse) => {
               const result = await api.post("/auth/googleAuth", {
                 idToken: credentialResponse.credential,
-              })
-              login(result.data.data, null)
-              navigate('/dashboard')
+              });
+              login(result.data.data, null);
+              navigate("/dashboard");
             }}
             onError={() => {
               console.log("Login Failed");
             }}
           />
-
-          
         </form>
         <p className="text-sm text-center text-gray-500 mt-6">
           <a
@@ -85,7 +119,7 @@ export default function Login() {
           >
             Forgot password?
           </a>
-          </p>
+        </p>
 
         <p className="text-sm text-center text-gray-500 mt-6">
           Don't have an account?{" "}

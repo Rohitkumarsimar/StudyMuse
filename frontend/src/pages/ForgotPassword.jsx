@@ -1,5 +1,5 @@
 import { api } from "#api/axios.js";
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "#components/login-signup/FormInput.jsx";
 import { Button } from "#components/ui/button.jsx";
@@ -12,6 +12,17 @@ export default function ForgotPassword() {
   const [error, setError] = useState(null);
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
+  const [timeLeft, setTimeLeft] = useState(60);
+
+  useEffect(() => {
+    if (timeLeft === 0) {
+      return;
+    }
+    const interval = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
+    return () => clearInterval(interval);
+  }, [timeLeft]);
+
+  const canResend = timeLeft === 0;
 
   const navigate = useNavigate();
 
@@ -49,6 +60,26 @@ export default function ForgotPassword() {
       setError(err.response.data.message);
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  async function handleResendOtp(e) {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+    try {
+      const result = await api.post("/auth/resend-otp", {
+        email,
+        type: "PASSWORD_RESET",
+      });
+      if (result) {
+        setOtpSent(true);
+      }
+    } catch (err) {
+      setError(err.response.data.message);
+    } finally {
+      setIsLoading(false);
+      setTimeLeft(60);
     }
   }
 
@@ -111,6 +142,20 @@ export default function ForgotPassword() {
                 {isLoading && <Spinner className="mr-2 text-white" />}
                 {isLoading ? "Verifying OTP..." : "Verify OTP"}
               </Button>
+              <div className="flex justify-center">
+                {canResend === false ? (
+                  <p className="text-sm text-gray-500 my-4">
+                    Resend OTP in: {timeLeft}
+                  </p>
+                ) : (
+                  <button
+                    onClick={handleResendOtp}
+                    className="text-sm text-indigo-600 my-4 cursor-pointer hover:underline"
+                  >
+                    Resend OTP
+                  </button>
+                )}
+              </div>
             </form>
           </div>
         )}

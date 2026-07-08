@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 const links = [
   { to: "/dashboard", label: "Dashboard" },
   { to: "/tasks", label: "Tasks" },
-  { to: "/profile", label: "Profile" },
   { to: "/chat", label: "Chat AI" },
+  { to: "/profile", label: "Profile" },
 ];
 
 export default function NavLinks({ onNavigate }) {

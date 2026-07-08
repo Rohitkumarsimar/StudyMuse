@@ -17,6 +17,7 @@ import Chat from "#pages/Chat.jsx";
 import ForgotPassword from "#pages/ForgotPassword.jsx";
 import ResetPassword from "#pages/ResetPassword.jsx";
 import { useLocation } from "react-router-dom";
+import VerifyEmail from "#pages/VerifyEmail.jsx";
 
 function ProtectedLayout() {
   const location = useLocation();
@@ -31,7 +32,7 @@ function ProtectedLayout() {
           </div>
         </header>
 
-        <main className="flex-1 overflow-hidden">
+        <main className="flex-1 overflow-y-auto">
           <Outlet />
         </main>
       </div>
@@ -48,6 +49,7 @@ export default function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/verify-email" element={<VerifyEmail />}></Route>
 
         <Route element={<ProtectedLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />

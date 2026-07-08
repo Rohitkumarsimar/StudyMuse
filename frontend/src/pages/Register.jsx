@@ -25,8 +25,12 @@ export default function Register() {
     setError(null);
     try {
       const result = await api.post("/auth/register", formData);
-      if (result) {
-        navigate("/login");
+      if (result.data.data.isVerified === false) {
+        navigate("/verify-email",{
+          state:{
+            email: formData.email
+          }
+        });
       }
     } catch (err) {
       setError(err.response.data.message);
