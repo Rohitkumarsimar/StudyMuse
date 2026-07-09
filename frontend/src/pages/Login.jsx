@@ -7,6 +7,7 @@ import { useAuth } from "../hooks/useAuth.js";
 import { Spinner } from "#components/ui/spinner.jsx";
 import { GoogleLogin } from "@react-oauth/google";
 import MyLogo from "../assets/StudyMuseLogo.png";
+import bgImg from "../assets/StudyMuseBgauth.png"
 import { Target, Brain, Flame } from "lucide-react";
 
 export default function Login() {
@@ -62,73 +63,98 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-linear-to-b lg:bg-linear-to-r from-indigo-950 via-indigo-700 to-violet-600 lg:to-purple-600 flex items-center justify-between">
-      <div className="hidden h-dvh lg:flex flex-col items-start pt-2 pl-10 w-svh">
-        <div className="flex gap-4 mt-16 items-center">
-          <img src={MyLogo} className="h-20" />
-          <h1 className="font-bold text-5xl leading-tight text-gray-100">
-            StudyMuse
-          </h1>
-        </div>
-        <div className="flex ml-5 gap-4 mt-10 items-center">
-          <h1 className="font-bold text-4xl leading-tight text-gray-200">
-            Your AI Study
-          </h1>
-          <h1 className="font-bold text-4xl leading-tight text-violet-500">
-            Companion
-          </h1>
-        </div>
-        <div className="flex ml-5 flex-col gap-4 items-start mt-4">
-          <p className="text-sm text-violet-200">
-            Turn your study sessions into consistent progress.
-          </p>
-          <div>
+      <div className="hidden h-dvh lg:flex items-center pt-2 pl-5 w-[60%]">
+        <div className="h-full flex flex-col items-start w-full">
+          <div className="flex gap-4 mt-16 items-start">
+            <img src={MyLogo} className="h-20" />
+            <h1 className="font-bold text-5xl leading-tight text-gray-100">
+              StudyMuse
+            </h1>
+          </div>
+          <div className="flex ml-5 gap-4 mt-5 items-center">
+            <h1 className="font-bold text-4xl leading-tight text-gray-200">
+              Your AI Study
+            </h1>
+            <h1 className="font-bold text-4xl leading-tight text-violet-500">
+              Companion
+            </h1>
+          </div>
+          <div className="flex ml-5 flex-col gap-4 items-start mt-4">
             <p className="text-sm text-violet-200">
-            Plan smarter. Stay focused
-          </p>
-          <p className="text-sm text-violet-200">
-            Track your growth. Learn with AI
-          </p>
-          <p className="text-sm text-violet-200">
-            that understands how students work.
-          </p>
-          </div>
+              Turn your study sessions into consistent progress.
+            </p>
+            <div>
+              <p className="text-sm text-violet-200">
+                Plan smarter. Stay focused
+              </p>
+              <p className="text-sm text-violet-200">
+                Track your growth. Learn with AI
+              </p>
+              <p className="text-sm text-violet-200">
+                that understands how students work.
+              </p>
+            </div>
 
-        <div className="flex ml-5  flex-col gap-5 items-start mt-6">
-          <div className=" flex  gap-5 items-center">
-              <Target size={50} className="text-violet-400"/>
-              <div>
-              <p className="text-1xl text-violet-200 font-semibold">Smart Planning</p>
-              <p className="text-sm text-gray-200">Organize tasks and study schedules</p>
-              <p className="text-sm text-gray-200">that actuall works.</p>
+            <div className="flex ml-5  flex-col gap-5 items-start mt-6">
+              <div className=" flex  gap-5 items-center">
+                <Target size={50} className="text-violet-400" />
+                <div>
+                  <p className="text-1xl text-violet-200 font-semibold">
+                    Smart Planning
+                  </p>
+                  <p className="text-sm text-gray-200">
+                    Organize tasks and study schedules
+                  </p>
+                  <p className="text-sm text-gray-200">that actuall works.</p>
+                </div>
               </div>
-          </div>
-          <div className="flex gap-5 items-center">
-              <Brain size={50} className="text-violet-400"/>
-              <div>
-              <p className="text-1xl text-violet-200 font-semibold">AI Companion</p>
-              <p className="text-sm text-gray-200">Get personalized suggestions</p>
-              <p className="text-sm text-gray-200">to improve your focus and productivity.</p>
+              <div className="flex gap-5 items-center">
+                <Brain size={50} className="text-violet-400" />
+                <div>
+                  <p className="text-1xl text-violet-200 font-semibold">
+                    AI Companion
+                  </p>
+                  <p className="text-sm text-gray-200">
+                    Get personalized suggestions
+                  </p>
+                  <p className="text-sm text-gray-200">
+                    to improve your focus and productivity.
+                  </p>
+                </div>
               </div>
-          </div>
-          <div className="flex gap-5 items-center">
-              <Flame size={50} className="text-violet-400"/>
-              <div>
-              <p className="text-1xl text-violet-200 font-semibold">Stay Consistent</p>
-              <p className="text-sm text-gray-200">Track your streaks and build</p>
-              <p className="text-sm text-gray-200">stong habits over time.</p>
+              <div className="flex gap-5 items-center">
+                <Flame size={50} className="text-violet-400" />
+                <div>
+                  <p className="text-1xl text-violet-200 font-semibold">
+                    Stay Consistent
+                  </p>
+                  <p className="text-sm text-gray-200">
+                    Track your streaks and build
+                  </p>
+                  <p className="text-sm text-gray-200">
+                    stong habits over time.
+                  </p>
+                </div>
               </div>
-          </div>
-          <div className="flex h-12 gap-5 items-start mt-2">
+              <div className="flex h-12 gap-5 items-start mt-2">
                 <div className="h-full border-2 border-violet-700 rounded-2xl"></div>
                 <div>
-                <p className="text-sm text-violet-200">Discipline today, success tomorrow. </p>
-                <p className="text-sm text-violet-200">Let's build the future together.</p>
+                  <p className="text-sm text-violet-200">
+                    Discipline today, success tomorrow.{" "}
+                  </p>
+                  <p className="text-sm text-violet-200">
+                    Let's build the future together.
+                  </p>
                 </div>
+              </div>
+            </div>
           </div>
         </div>
-        </div>
+         <div className=" flex w-[70%] mr-2 items-end justify-end h-full">
+              <img  src={bgImg} className="w-full"/>
+          </div>
       </div>
-      <div className="lg:h-dvh lg:flex lg:items-center lg:justify-center lg:bg-indigo-700/30   lg:shadow-sm lg:p-8 lg:w-svh">
+      <div className="lg:h-dvh lg:flex lg:items-center lg:justify-center lg:bg-indigo-700/30   lg:shadow-sm lg:p-8 lg:w-[50%]">
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 w-full max-w-md">
           <h1 className="text-2xl font-bold text-gray-900 mb-1">
             Welcome back
