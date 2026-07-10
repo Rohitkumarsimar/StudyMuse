@@ -38,7 +38,7 @@ async function handleSubmit(e){
     try{
         const result = await api.post('/auth/password-reset', {email, password})
         if(result){
-            navigate('/login')
+            navigate('/auth-page')
             return result.data.data
         }
     }catch(err){
