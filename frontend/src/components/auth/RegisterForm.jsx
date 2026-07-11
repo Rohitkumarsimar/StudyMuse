@@ -109,7 +109,7 @@ export default function RegisterForm({ setIsReg }) {
                 type="submit"
                 variant="default"
                 size="lg"
-                className="w-full my-4"
+                className="w-full my-4 cursor-pointer"
                 disabled={isLoading}
               >
                 {isLoading && <Spinner className="mr-2 text-white" />}

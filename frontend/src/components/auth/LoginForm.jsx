@@ -123,7 +123,7 @@ export default function LoginForm({ setIsReg }) {
                          {isLoading ? "Sending OTP..." : "Verify Email"}
                        </Button>
                      ) : (
-                       <Button variant="default" size="lg" disabled={isLoading}>
+                       <Button variant="default" size="lg" className="cursor-pointer" disabled={isLoading}>
                          {isLoading && <Spinner className="mr-2 text-white" />}
                          {isLoading ? "Logging in..." : "Login"}
                        </Button>

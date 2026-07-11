@@ -1,157 +1,351 @@
 # StudyMuse
 
-A full-stack study task management application built from scratch with Node.js, Express, PostgreSQL, React, and Tailwind CSS.
+An AI-powered study productivity platform built from scratch using Node.js, Express, PostgreSQL, React, and Tailwind CSS. StudyMuse helps students plan their studies, manage tasks, interact with an AI study companion, and build consistent learning habits.
 
-🔗 **Live Demo:** [studymuseai.netlify.app](https://studymuseai.netlify.app)  
-🔗 **API Base URL:** [studymuse.onrender.com](https://studymuse.onrender.com)
-
----
-
-## Overview
-
-StudyMuse helps students manage their study tasks, track completion, and maintain a daily study streak. Users can register, log in, create and manage tasks, and view their progress on a personal dashboard — all secured with JWT authentication.
-
-Built as a portfolio project targeting backend developer roles, with a focus on clean MVC architecture, raw SQL, and security best practices.
+🔗 **Live Demo:** https://studymuseai.netlify.app  
+🔗 **API Base URL:** https://studymuse.onrender.com
 
 ---
 
-## Tech Stack
+# Overview
+
+StudyMuse is more than a task manager. It is a productivity platform designed specifically for students.
+
+The application combines secure authentication, intelligent task management, study analytics, and an AI-powered chatbot into one workspace. Students can organize their studies, track their progress, maintain study streaks, and receive AI assistance without leaving the application.
+
+The project follows a layered MVC architecture with a strong emphasis on backend engineering, security, scalability, and clean code.
+
+---
+
+# Tech Stack
 
 | Layer | Technology |
 |---|---|
 | Backend | Node.js, Express 5 |
-| Database | PostgreSQL (Neon.tech) |
-| Auth | JWT, bcrypt |
+| Database | PostgreSQL (Neon) + Prisma ORM |
+| Authentication | JWT, bcrypt, Google OAuth 2.0 |
 | Validation | Zod |
-| Frontend | React (Vite), Tailwind CSS v4 |
+| AI | Groq API (Streaming Responses) |
+| Frontend | React (Vite) |
+| Styling | Tailwind CSS v4 |
+| UI Components | shadcn/ui |
 | Routing | React Router v6 |
 | HTTP Client | Axios |
-| Deployment | Render (API), Netlify (Frontend) |
+| Deployment | Render (Backend), Netlify (Frontend) |
 
 ---
 
-## Features
+# Features
 
-- **JWT Authentication** — register, login, protected routes with auth middleware
-- **Password Security** — bcrypt hashing, never stored in plain text
-- **Task Management** — full CRUD with ownership enforcement (users only access their own tasks)
-- **Dashboard Stats** — total tasks, completed, pending, completion rate, study streak
-- **Study Streak** — calculated server-side using PostgreSQL CTEs and window functions
-- **Input Validation** — Zod schemas on all endpoints, consistent error responses
-- **Global Error Handling** — custom `ApiError` class, centralized error middleware
-- **Protected Frontend Routes** — `ProtectedRoute` component mirrors backend auth middleware
-- **Persistent Auth** — JWT stored in localStorage, Axios interceptor attaches token automatically
+## Authentication
+
+- Secure JWT Authentication
+- Email & Password Login
+- Google OAuth Login
+- Email Verification using OTP
+- Password Reset using OTP
+- Resend OTP
+- Password Hashing with bcrypt
+- Protected API Routes
+- Persistent Authentication
+- Route Protection on Frontend
+- Axios JWT Interceptor
 
 ---
 
-## Project Structure
+## Task Management
 
-```
-StudyMuse/
-├── backend/
-│   └── src/
-│       ├── config/         ← database connection
-│       ├── routes/         ← URL to controller mapping
-│       ├── controllers/    ← request/response handling
-│       ├── services/       ← business logic
-│       ├── db/             ← raw SQL queries
-│       ├── middleware/     ← auth, validation, error handling
-│       ├── schemas/        ← Zod validation schemas
-│       └── utils/          ← helpers (JWT, bcrypt, apiResponse)
+- Create Tasks
+- Edit Tasks
+- Delete Tasks
+- Mark Complete / Pending
+- Ownership Enforcement
+- Due Dates
+- Task Filtering
+- Dashboard Statistics
+
+---
+
+## AI Chat Assistant
+
+- AI-powered Study Companion
+- Streaming Responses (Server-Sent Events)
+- Multiple Conversations
+- Automatic Conversation Creation
+- Conversation History
+- Auto-generated Chat Titles
+- Personalized Study Assistance
+- Rate Limiting
+- Context-aware Responses
+
+---
+
+## Dashboard
+
+- Current Study Streak
+- Total Tasks
+- Completed Tasks
+- Pending Tasks
+- Completion Rate
+- Recent Tasks
+- AI Quick Access
+
+---
+
+## Security
+
+- JWT Authentication
+- Password Hashing
+- OTP Verification
+- Protected Routes
+- Zod Validation
+- Global Error Handling
+- Rate Limiting
+- Ownership Validation
+- Secure Password Reset Flow
+
+---
+
+# Project Structure
+
+```text
+StudyMuse
 │
-└── frontend/
-    └── src/
-        ├── api/            ← Axios instance with interceptor
-        ├── context/        ← AuthContext (global auth state)
-        ├── hooks/          ← useAuth, useTasks (custom hooks)
-        ├── components/     ← reusable UI and layout components
-        └── pages/          ← Login, Register, Dashboard, Tasks, Profile
+├── backend
+│   └── src
+│       ├── config
+│       ├── controllers
+│       ├── services
+│       ├── middleware
+│       ├── routes
+│       ├── prisma
+│       ├── schemas
+│       ├── utils
+│       ├── prompts
+│       └── lib
+│
+└── frontend
+    └── src
+        ├── api
+        ├── components
+        ├── context
+        ├── hooks
+        ├── pages
+        ├── layouts
+        └── providers
 ```
 
 ---
 
-## API Endpoints
+# Authentication Flow
 
-### Auth
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| POST | `/auth/register` | ❌ | Create new user |
-| POST | `/auth/login` | ❌ | Login, returns JWT |
-| GET | `/auth/profile` | ✅ | Get logged-in user details |
+### Register
 
-### Tasks
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| GET | `/tasks` | ✅ | Get all tasks for current user |
-| POST | `/tasks` | ✅ | Create a new task |
-| PATCH | `/tasks/:id` | ✅ | Update a task |
-| DELETE | `/tasks/:id` | ✅ | Delete a task |
+- Create Account
+- Generate OTP
+- Hash OTP
+- Send Verification Email
+- Verify Email
+- Activate Account
 
-### Dashboard
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| GET | `/dashboard` | ✅ | Get stats — total, completed, pending, rate, streak |
+### Login
 
----
+- Validate Credentials
+- Generate JWT
+- Store Token
+- Protected Session
 
-## Database Schema
+### Password Reset
 
-```sql
-CREATE TABLE users (
-  id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  name        VARCHAR(100) NOT NULL,
-  email       VARCHAR(255) UNIQUE NOT NULL,
-  password    VARCHAR(255) NOT NULL,
-  created_at  TIMESTAMPTZ DEFAULT NOW()
-);
+- Request Reset OTP
+- Verify OTP
+- Allow Password Reset
+- Update Password
+- Revoke Reset Permission
 
-CREATE TABLE tasks (
-  id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id      UUID REFERENCES users(id) ON DELETE CASCADE,
-  title        VARCHAR(255) NOT NULL,
-  subject      VARCHAR(100),
-  due_date     TIMESTAMPTZ,
-  is_completed BOOLEAN DEFAULT FALSE,
-  completed_at TIMESTAMPTZ,
-  created_at   TIMESTAMPTZ DEFAULT NOW()
-);
-```
+### Google Login
+
+- Verify Google ID Token
+- Create Account (if new)
+- Login Existing User
+- Generate JWT
 
 ---
 
-## Local Setup
+# AI Chat System
 
-### Prerequisites
-- Node.js v18+
-- PostgreSQL database (or Neon.tech free tier)
+The chatbot is built using a streaming architecture.
 
-### Backend
+### Features
+
+- Server-Sent Events (SSE)
+- Token Streaming
+- Conversation Storage
+- Chat History
+- Automatic Conversation Titles
+- Personalized System Prompt
+- Study-focused Responses
+- Context Preservation
+
+---
+
+# API Endpoints
+
+## Authentication
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/auth/register` | Register user |
+| POST | `/auth/login` | Login |
+| POST | `/auth/googleAuth` | Google Authentication |
+| POST | `/auth/verify-email` | Verify Email OTP |
+| POST | `/auth/resend-otp` | Resend OTP |
+| POST | `/auth/forgot-password` | Send Password Reset OTP |
+| POST | `/auth/reset-password` | Reset Password |
+| GET | `/auth/profile` | Current User |
+
+---
+
+## Tasks
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/tasks` | Get Tasks |
+| POST | `/tasks` | Create Task |
+| PATCH | `/tasks/:id` | Update Task |
+| DELETE | `/tasks/:id` | Delete Task |
+
+---
+
+## Dashboard
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/dashboard` | Dashboard Statistics |
+
+---
+
+## AI Chat
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/chat/:conversationId` | Stream AI Response |
+| GET | `/chat` | All Conversations |
+| GET | `/chat/:conversationId` | Conversation Messages |
+| DELETE | `/chat/:conversationId` | Delete Conversation |
+
+---
+
+# Database Models
+
+## User
+
+- id
+- name
+- email
+- password
+- googleId
+- isVerified
+- otp
+- otpType
+- otpExpiresAt
+- canResetPassword
+- created_at
+- updated_at
+
+---
+
+## Task
+
+- id
+- title
+- description
+- completed
+- dueDate
+- created_at
+- updated_at
+- userId
+
+---
+
+## Conversation
+
+- id
+- title
+- userId
+- created_at
+- updated_at
+
+---
+
+## ChatMessage
+
+- id
+- role
+- content
+- conversationId
+- created_at
+
+---
+
+# Local Setup
+
+## Prerequisites
+
+- Node.js 18+
+- PostgreSQL Database (Neon recommended)
+
+---
+
+## Backend
+
 ```bash
 cd backend
 npm install
 ```
 
-Create `.env`:
-```
-DATABASE_URL=your_neon_connection_string
-JWT_SECRET=your_jwt_secret
+Create `.env`
+
+```env
+DATABASE_URL=your_database_url
+
+JWT_SECRET=your_secret
+
+GROQ_API_KEY=your_groq_key
+
+GOOGLE_CLIENT_ID=your_google_client_id
+
+EMAIL_USER=your_email
+
+EMAIL_PASS=your_email_password
+
 PORT=3000
 ```
+
+Run
 
 ```bash
 npm run dev
 ```
 
-### Frontend
+---
+
+## Frontend
+
 ```bash
 cd frontend
 npm install
 ```
 
-Create `.env`:
-```
+Create `.env`
+
+```env
 VITE_API_URL=http://localhost:3000
+
+VITE_GOOGLE_CLIENT_ID=your_google_client_id
 ```
+
+Run
 
 ```bash
 npm run dev
@@ -159,43 +353,90 @@ npm run dev
 
 ---
 
-## Key Design Decisions
+# Key Design Decisions
 
-**Raw SQL over ORM** — deliberately chose raw PostgreSQL queries over Prisma/Sequelize to understand SQL deeply before abstracting it away.
+### Prisma + PostgreSQL
 
-**Ownership in a single query** — task queries use `AND user_id = $2` to enforce ownership at the database level, avoiding a separate ownership check round-trip.
-
-**Single error middleware** — all errors flow through one `error.middleware.js` using `next(err)`, keeping controllers clean with `asyncWrapper`.
-
-**Three auth layers** — `localStorage` for persistence, `AuthContext` for React state, Axios interceptor for automatic token attachment. Each serves a distinct purpose.
+Prisma provides type-safe database access while PostgreSQL powers complex queries and scalable relational data.
 
 ---
 
-## Roadmap — Future Features
+### Layered Architecture
 
-- [ ] **AI Study Planner** — generate personalized study plans using Claude API based on subject, exam date, and available hours
-- [ ] **Notes** — rich text notes linked to tasks and subjects
-- [ ] **Configurable Streak System** — users set their own streak goal duration
-- [ ] **PDF Workspace** — upload and annotate study materials
-- [ ] **Analytics Dashboard** — weekly/monthly completion trends with charts
-- [ ] **Email Reminders** — due date notifications via nodemailer
-- [ ] **UI Upgrade** — migrate to shadcn/ui component library
+Business logic is isolated inside services while controllers only manage HTTP requests and responses.
 
 ---
 
-## Deployment
+### Secure Authentication
 
-| Service | Platform | URL |
-|---|---|---|
-| Frontend | Netlify | [studymuseai.netlify.app](https://studymuseai.netlify.app) |
-| Backend API | Render | [studymuse.onrender.com](https://studymuse.onrender.com) |
-| Database | Neon.tech | PostgreSQL (serverless) |
+Authentication uses multiple layers:
+
+- JWT
+- bcrypt
+- OTP Verification
+- Google OAuth
+- Route Protection
+- Axios Interceptors
 
 ---
 
-## Author
+### Streaming AI
 
-**Rohit Kumar**  
-Fresher Backend Developer — Node.js, Express, PostgreSQL  
-📍 Himachal Pradesh, India  
-🔗 [GitHub](https://github.com/Rohitkumarsimar)
+The chatbot streams responses using Server-Sent Events (SSE), providing a real-time conversational experience instead of waiting for the complete response.
+
+---
+
+### Validation
+
+Every request passes through Zod schemas before reaching business logic, ensuring consistent validation and predictable API responses.
+
+---
+
+### Error Handling
+
+A centralized error middleware handles all application errors through a custom `ApiError` class, keeping controllers clean and maintainable.
+
+---
+
+# Roadmap
+
+- [ ] AI Study Planner
+- [ ] PDF Workspace
+- [ ] PDF Chat
+- [ ] AI Notes Generator
+- [ ] Flashcards
+- [ ] Quiz Generator
+- [ ] Pomodoro Timer
+- [ ] Calendar Integration
+- [ ] Analytics Dashboard
+- [ ] Study Heatmaps
+- [ ] Email Reminders
+- [ ] Mobile Responsive Improvements
+- [ ] Dark Mode
+- [ ] Collaborative Study Rooms
+
+---
+
+# Deployment
+
+| Service | Platform |
+|---|---|
+| Frontend | Netlify |
+| Backend | Render |
+| Database | Neon PostgreSQL |
+
+Frontend: https://studymuseai.netlify.app
+
+Backend: https://studymuse.onrender.com
+
+---
+
+# Author
+
+**Rohit Kumar**
+
+Backend Developer | Node.js • Express • PostgreSQL • Prisma • React
+
+📍 Himachal Pradesh, India
+
+GitHub: https://github.com/Rohitkumarsimar

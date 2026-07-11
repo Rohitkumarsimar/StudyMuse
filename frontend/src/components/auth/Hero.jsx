@@ -120,7 +120,7 @@ duration-300"
               <p className="text-sm text-gray-200">
                 Organize tasks and study schedules
               </p>
-              <p className="text-sm text-gray-200">that actuall works.</p>
+              <p className="text-sm text-gray-200">that actually works.</p>
             </div>
           </motion.div>
           <motion.div
