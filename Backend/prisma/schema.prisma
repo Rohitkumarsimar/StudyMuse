@@ -70,3 +70,47 @@ enum Role {
   user
   assistant
 }
+
+model board {
+  id              String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name            String          @unique @db.VarChar(255)
+  created_at      DateTime        @default(now()) @db.Timestamp(6)
+  updated_at      DateTime        @updatedAt() @db.Timestamp()
+  academicClasses academicClass[]
+}
+
+model academicClass {
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  board_id   String    @db.Uuid
+  name       String    @db.VarChar(255)
+  created_at DateTime  @default(now()) @db.Timestamp(6)
+  updated_at DateTime  @updatedAt() @db.Timestamp()
+  board      board     @relation(fields: [board_id], references: [id], onDelete: Cascade)
+  subjects   subject[]
+
+  @@unique([board_id, name])
+}
+
+model subject {
+  id               String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  academicClass_id String        @db.Uuid
+  name             String        @db.VarChar(255)
+  created_at       DateTime      @default(now()) @db.Timestamp(6)
+  updated_at       DateTime      @updatedAt() @db.Timestamp()
+  academicClass    academicClass @relation(fields: [academicClass_id], references: [id], onDelete: Cascade)
+  chapters         chapter[]
+
+  @@unique([academicClass_id, name])
+}
+
+model chapter {
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  subject_id     String   @db.Uuid
+  name           String   @db.VarChar(255)
+  syllabus_order Int      @unique
+  created_at     DateTime @default(now()) @db.Timestamp(6)
+  updated_at     DateTime @updatedAt() @db.Timestamp()
+  subject        subject  @relation(fields: [subject_id], references: [id], onDelete: Cascade)
+
+  @@unique([subject_id, name])
+}
