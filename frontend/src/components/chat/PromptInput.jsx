@@ -33,7 +33,7 @@ export default function PromptInput({ sendMessage, activeConversationId }) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="Message Muse AI..."
+        placeholder="Message Muse..."
         rows={1}
         className="max-h-40 min-h-12 flex-1 resize-none bg-transparent px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 outline-none"
       />
@@ -48,7 +48,7 @@ export default function PromptInput({ sendMessage, activeConversationId }) {
     </div>
 
     <p className="mt-2 text-center text-[10px] md:text-xs text-gray-400">
-      StudyMuse AI can make mistakes. Verify important information.
+      Muse AI can make mistakes. Verify important information.
     </p>
   </form>
 );
