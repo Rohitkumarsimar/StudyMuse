@@ -6,7 +6,6 @@ export async function insertTask(user_id, title, subject, due_date) {
     data: {
       user_id: user_id,
       title: title,
-      subject: subject,
       due_date: due_date,
     },
   });

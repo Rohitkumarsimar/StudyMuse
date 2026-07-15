@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button.jsx";
 export function TaskForm({ onSubmit }) {
   const [formData, setFormData] = useState({
     title: "",
-    subject: "",
     due_date: "",
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +20,7 @@ export function TaskForm({ onSubmit }) {
     };
 
     await onSubmit(payload);
-    setFormData({ title: "", subject: "", due_date: "" });
+    setFormData({ title: "", due_date: "" });
     setIsLoading(false);
   }
 
@@ -50,17 +49,6 @@ export function TaskForm({ onSubmit }) {
           }
         />
 
-        <Input
-          type="text"
-          label="Subject"
-          value={formData.subject}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              subject: e.target.value,
-            })
-          }
-        />
 
         <Input
           type="date"
