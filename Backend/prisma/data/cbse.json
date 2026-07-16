@@ -1,0 +1,259 @@
+{
+  "board": "CBSE",
+  "classes": [
+    {
+      "name": "Class 10",
+      "subjects": [
+        {
+          "name": "Mathematics",
+          "books": [
+            {
+              "name": "Mathematics",
+              "chapters": [
+                { "name": "Real Numbers", "chapter_order": 1 },
+                { "name": "Polynomials", "chapter_order": 2 },
+                {
+                  "name": "Pair of Linear Equations in Two Variables",
+                  "chapter_order": 3
+                },
+                { "name": "Quadratic Equations", "chapter_order": 4 },
+                { "name": "Arithmetic Progressions", "chapter_order": 5 },
+                { "name": "Triangles", "chapter_order": 6 },
+                { "name": "Coordinate Geometry", "chapter_order": 7 },
+                { "name": "Introduction to Trigonometry", "chapter_order": 8 },
+                {
+                  "name": "Some Applications of Trigonometry",
+                  "chapter_order": 9
+                },
+                { "name": "Circles", "chapter_order": 10 },
+                { "name": "Constructions", "chapter_order": 11 },
+                { "name": "Areas Related to Circles", "chapter_order": 12 },
+                { "name": "Surface Areas and Volumes", "chapter_order": 13 },
+                { "name": "Statistics", "chapter_order": 14 },
+                { "name": "Probability", "chapter_order": 15 }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Science",
+          "books": [
+            {
+              "name": "Science",
+              "chapters": [
+                {
+                  "name": "Chemical Reactions and Equations",
+                  "chapter_order": 1
+                },
+                { "name": "Acids, Bases and Salts", "chapter_order": 2 },
+                { "name": "Metals and Non-metals", "chapter_order": 3 },
+                { "name": "Carbon and Its Compounds", "chapter_order": 4 },
+                {
+                  "name": "Periodic Classification of Elements",
+                  "chapter_order": 5
+                },
+                { "name": "Life Processes", "chapter_order": 6 },
+                { "name": "Control and Coordination", "chapter_order": 7 },
+                { "name": "How Do Organisms Reproduce?", "chapter_order": 8 },
+                { "name": "Heredity and Evolution", "chapter_order": 9 },
+                {
+                  "name": "Light - Reflection and Refraction",
+                  "chapter_order": 10
+                },
+                {
+                  "name": "The Human Eye and the Colourful World",
+                  "chapter_order": 11
+                },
+                { "name": "Electricity", "chapter_order": 12 },
+                {
+                  "name": "Magnetic Effects of Electric Current",
+                  "chapter_order": 13
+                },
+                { "name": "Our Environment", "chapter_order": 14 },
+                {
+                  "name": "Management of Natural Resources",
+                  "chapter_order": 15
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Social Science",
+          "books": [
+            {
+              "name": "History - India and the Contemporary World II",
+              "chapters": [
+                {
+                  "name": "The Rise of Nationalism in Europe",
+                  "chapter_order": 1
+                },
+                { "name": "Nationalism in India", "chapter_order": 2 },
+                { "name": "The Making of a Global World", "chapter_order": 3 },
+                { "name": "The Age of Industrialisation", "chapter_order": 4 },
+                {
+                  "name": "Print Culture and the Modern World",
+                  "chapter_order": 5
+                }
+              ]
+            },
+            {
+              "name": "Geography - Contemporary India II",
+              "chapters": [
+                { "name": "Resources and Development", "chapter_order": 1 },
+                { "name": "Forest and Wildlife Resources", "chapter_order": 2 },
+                { "name": "Water Resources", "chapter_order": 3 },
+                { "name": "Agriculture", "chapter_order": 4 },
+                { "name": "Minerals and Energy Resources", "chapter_order": 5 },
+                { "name": "Manufacturing Industries", "chapter_order": 6 },
+                { "name": "Lifelines of National Economy", "chapter_order": 7 }
+              ]
+            },
+            {
+              "name": "Political Science - Democratic Politics II",
+              "chapters": [
+                { "name": "Power Sharing", "chapter_order": 1 },
+                { "name": "Federalism", "chapter_order": 2 },
+                { "name": "Democracy and Diversity", "chapter_order": 3 },
+                { "name": "Gender, Religion and Caste", "chapter_order": 4 },
+                {
+                  "name": "Popular Struggles and Movements",
+                  "chapter_order": 5
+                },
+                { "name": "Political Parties", "chapter_order": 6 },
+                { "name": "Outcomes of Democracy", "chapter_order": 7 },
+                { "name": "Challenges to Democracy", "chapter_order": 8 }
+              ]
+            },
+            {
+              "name": "Economics - Understanding Economic Development",
+              "chapters": [
+                { "name": "Development", "chapter_order": 1 },
+                { "name": "Sectors of the Indian Economy", "chapter_order": 2 },
+                { "name": "Money and Credit", "chapter_order": 3 },
+                {
+                  "name": "Globalisation and the Indian Economy",
+                  "chapter_order": 4
+                },
+                { "name": "Consumer Rights", "chapter_order": 5 }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "English",
+          "books": [
+            {
+              "name": "First Flight",
+              "chapters": [
+                { "name": "A Letter to God", "chapter_order": 1 },
+                {
+                  "name": "Nelson Mandela: Long Walk to Freedom",
+                  "chapter_order": 2
+                },
+                { "name": "Two Stories About Flying", "chapter_order": 3 },
+                { "name": "From the Diary of Anne Frank", "chapter_order": 4 },
+                { "name": "The Hundred Dresses - I", "chapter_order": 5 },
+                { "name": "The Hundred Dresses - II", "chapter_order": 6 },
+                { "name": "Glimpses of India", "chapter_order": 7 },
+                { "name": "Mijbil the Otter", "chapter_order": 8 },
+                { "name": "Madam Rides the Bus", "chapter_order": 9 },
+                { "name": "The Sermon at Benares", "chapter_order": 10 },
+                { "name": "The Proposal", "chapter_order": 11 }
+              ]
+            },
+            {
+              "name": "Footprints Without Feet",
+              "chapters": [
+                { "name": "A Triumph of Surgery", "chapter_order": 1 },
+                { "name": "The Thief's Story", "chapter_order": 2 },
+                { "name": "The Midnight Visitor", "chapter_order": 3 },
+                { "name": "A Question of Trust", "chapter_order": 4 },
+                { "name": "Footprints Without Feet", "chapter_order": 5 },
+                { "name": "The Making of a Scientist", "chapter_order": 6 },
+                { "name": "The Necklace", "chapter_order": 7 },
+                { "name": "The Hack Driver", "chapter_order": 8 },
+                { "name": "Bholi", "chapter_order": 9 },
+                { "name": "The Book That Saved the Earth", "chapter_order": 10 }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Hindi",
+          "books": [
+            {
+              "name": "क्षितिज भाग 2",
+              "chapters": [
+                { "name": "सूरदास", "chapter_order": 1 },
+                { "name": "राम-लक्ष्मण-परशुराम संवाद", "chapter_order": 2 },
+                { "name": "सवैया और कवित्त", "chapter_order": 3 },
+                { "name": "आत्मकथ्य", "chapter_order": 4 },
+                { "name": "उत्साह", "chapter_order": 5 },
+                { "name": "यह दंतुरहित मुस्कान", "chapter_order": 6 },
+                { "name": "फसल", "chapter_order": 7 },
+                { "name": "संगतकार", "chapter_order": 8 },
+                { "name": "नेताजी का चश्मा", "chapter_order": 9 },
+                { "name": "बालगोबिन भगत", "chapter_order": 10 },
+                { "name": "लखनवी अंदाज़", "chapter_order": 11 },
+                { "name": "मानवीय करुणा की दिव्य चमक", "chapter_order": 12 },
+                { "name": "एक कहानी यह भी", "chapter_order": 13 },
+                {
+                  "name": "स्त्री शिक्षा के विरोधी कुतर्कों का खंडन",
+                  "chapter_order": 14
+                },
+                { "name": "नौबतखाने में इबादत", "chapter_order": 15 },
+                { "name": "संस्कृति", "chapter_order": 16 }
+              ]
+            },
+            {
+              "name": "कृतिका भाग 2",
+              "chapters": [
+                { "name": "माता का अंचल", "chapter_order": 1 },
+                { "name": "जॉर्ज पंचम की नाक", "chapter_order": 2 },
+                { "name": "साना-साना हाथ जोड़ि", "chapter_order": 3 }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Sanskrit",
+          "books": [
+            {
+              "name": "Shemushi",
+              "chapters": [
+                { "name": "शुचिपर्यावरणम्", "chapter_order": 1 },
+                { "name": "बुद्धिर्बलवती सदा", "chapter_order": 2 },
+                { "name": "शिशुलालनम्", "chapter_order": 3 },
+                { "name": "जननी तुल्यवत्सला", "chapter_order": 4 },
+                { "name": "सुभाषितानि", "chapter_order": 5 },
+                { "name": "सौहार्दं प्रकृतेः शोभा", "chapter_order": 6 },
+                { "name": "विचित्रः साक्षी", "chapter_order": 7 },
+                { "name": "सूक्ति-सुधा", "chapter_order": 8 },
+                { "name": "भूकंपविभीषिका", "chapter_order": 9 },
+                { "name": "कर्मवीरः", "chapter_order": 10 },
+                { "name": "तत्त्वमसि", "chapter_order": 11 },
+                { "name": "अन्विष्यामः", "chapter_order": 12 }
+              ]
+            },
+            {
+              "name": "Vyakaran and Composition",
+              "chapters": [
+                { "name": "अपठित-अवबोधनम्", "chapter_order": 1 },
+                { "name": "रचना", "chapter_order": 2 },
+                { "name": "सन्धि", "chapter_order": 3 },
+                { "name": "समास", "chapter_order": 4 },
+                { "name": "प्रत्यय", "chapter_order": 5 },
+                { "name": "अव्यय", "chapter_order": 6 },
+                { "name": "कारक और विभक्ति", "chapter_order": 7 },
+                { "name": "समय लेखन", "chapter_order": 8 },
+                { "name": "पत्र लेखन", "chapter_order": 9 },
+                { "name": "अनुच्छेद लेखन", "chapter_order": 10 }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

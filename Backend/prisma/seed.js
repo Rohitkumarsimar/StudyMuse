@@ -1,22 +1,22 @@
 import { PrismaClient } from "@prisma/client";
+import {readFile} from "node:fs/promises"
+import { seedCatalog } from "./catalogSeeder.js";
 
 const prisma = new PrismaClient()
 
-
 async function main(){
-    await prisma.board.create({
-        data:{
-            name:"CBSE"
-        }
-    })
+    try{
+
+        const data = await readFile("prisma/data/cbse.json","utf-8")
+        const catalog = JSON.parse(data)
+
+        seedCatalog(prisma,catalog)
+        console.log(catalog)
+    }catch(err){
+        console.log("Seeding Failed!" ,err)
+}finally{
+    await prisma.$disconnect()
+}
 }
 
 main()
-.then(async ()=>{
-    await prisma.$disconnect();
-})
-.catch(async (e)=>{
-    console.log(e)
-    await prisma.$disconnect()
-    process.exit(1)
-})

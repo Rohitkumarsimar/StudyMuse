@@ -103,23 +103,37 @@ model subject {
   created_at       DateTime      @default(now()) @db.Timestamp(6)
   updated_at       DateTime      @updatedAt() @db.Timestamp()
   academicClass    academicClass @relation(fields: [academicClass_id], references: [id], onDelete: Cascade)
-  chapters         chapter[]
+  books            book[]
 
   @@unique([academicClass_id, name])
 }
 
-model chapter {
-  id             String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  subject_id     String      @db.Uuid
-  name           String      @db.VarChar(255)
-  syllabus_order Int
-  created_at     DateTime    @default(now()) @db.Timestamp(6)
-  updated_at     DateTime    @updatedAt() @db.Timestamp()
-  subject        subject     @relation(fields: [subject_id], references: [id], onDelete: Cascade)
-  studyPlans     studyPlan[]
+model book {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  subject_id String   @db.Uuid
+  name       String   @db.VarChar(255)
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  updated_at DateTime @updatedAt() @db.Timestamp()
+
+  subject  subject   @relation(fields: [subject_id], references: [id], onDelete: Cascade)
+  chapters chapter[]
 
   @@unique([subject_id, name])
-  @@unique([subject_id, syllabus_order])
+}
+
+model chapter {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  book_id       String   @db.Uuid
+  name          String   @db.VarChar(255)
+  chapter_order Int
+  created_at    DateTime @default(now()) @db.Timestamp(6)
+  updated_at    DateTime @updatedAt() @db.Timestamp()
+
+  book       book        @relation(fields: [book_id], references: [id], onDelete: Cascade)
+  studyPlans studyPlan[]
+
+  @@unique([book_id, name])
+  @@unique([book_id, chapter_order])
 }
 
 model studyPlan {
