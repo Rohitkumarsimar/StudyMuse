@@ -47,7 +47,6 @@ export async function registerUser(name, email, password) {
 //login: finding email and comparing hash password with plain password
 export async function loginUser(email, password) {
   const user = await findByEmail(email);
-  console.log(user);
   if (!user) {
     throw new ApiError(401, "Invalid credential!");
   }
