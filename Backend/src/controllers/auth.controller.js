@@ -21,6 +21,7 @@ export async function register(req, res, next) {
 
 //logging in the user
 export async function login(req, res, next) {
+ console.log("IP: ", req.ip)
   const { email, password } = req.body;
   const normalizedEmail = email.trim().toLowerCase();
   const result = await loginUser(normalizedEmail, password);

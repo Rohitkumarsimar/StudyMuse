@@ -1,8 +1,5 @@
+import "./src/utils/env.js"
 import express from "express";
-
-import dotenv from "dotenv";
-dotenv.config();
-
 import cors from 'cors'
 import helmet from "helmet";
 import morgan from "morgan";
