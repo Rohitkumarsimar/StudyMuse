@@ -2,7 +2,7 @@ import * as z from 'zod'
 
 export const createTaskSchema = z.object({
     title : z.string().min(3),
-    due_date : z.iso.datetime()
+    due_date : z.iso.datetime().optional()
 }).strict()
 
 export const updateTaskSchema = z.object({
