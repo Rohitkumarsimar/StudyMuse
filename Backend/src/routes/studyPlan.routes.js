@@ -1,14 +1,14 @@
 // studyPlan crud
 import express from "express";
-import { authMiddleware } from "../middleware/auth.middleware";
-import { asyncWrap } from "../utils/asyncWrapper";
+import { authMiddleware } from "../middleware/auth.middleware.js";
+import { asyncWrap } from "../utils/asyncWrapper.js";
 import {
   getAllStudyPlansController,
   getOneStudyPlanController,
   createStudyPlanController,
   updateStudyPlanController,
   deleteStudyPlanController,
-} from "../controllers/studyPlan.controller";
+} from "../controllers/studyPlan.controller.js";
 
 export const studyPlanRouter = express.Router();
 
