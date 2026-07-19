@@ -3,8 +3,8 @@ import { ApiError } from "../utils/AppError.js"
 import { response } from "../utils/apiResponse.js"
 
 //Create new task
-export async function createNewTask(user_id, title, subject, due_date){
-    return insertTask(user_id,title,subject,due_date)
+export async function createNewTask(user_id, title, due_date){
+    return insertTask(user_id,title,due_date)
 }
 
 // get all tasks

@@ -4,7 +4,7 @@ import { createNewTask, readAllTask, updateTaskService, deleteTaskService} from 
 export async function createTask(req,res,next){
     const {title, subject, due_date}= req.body
     const user_id = req.user.id
-    const result = await createNewTask(user_id, title, subject, due_date)
+    const result = await createNewTask(user_id, title, due_date)
     return response(res,201,result,"Created a new task.")
 }
 
@@ -15,8 +15,8 @@ export async function readTask(req, res, next){
 }
 
 export async function updateTask(req,res,next){
-    const {title, subject, due_date, is_completed} = req.body
-    const allowedFields = {title, subject, due_date, is_completed}
+    const {title, due_date, is_completed} = req.body
+    const allowedFields = {title, due_date, is_completed}
     const task_id = req.params.id
     const user_id = req.user.id
     const result = await updateTaskService(task_id, user_id, allowedFields)

@@ -1,7 +1,7 @@
 import { prisma } from "../config/prisma.js";
 
 //create task query
-export async function insertTask(user_id, title, subject, due_date) {
+export async function insertTask(user_id, title, due_date) {
   const result = await prisma.tasks.create({
     data: {
       user_id: user_id,
