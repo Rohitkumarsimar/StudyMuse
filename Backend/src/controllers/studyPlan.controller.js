@@ -1,22 +1,23 @@
 //studPlan controller
-import { createStudyPlanService } from "../services/studyPlan.service.js"
+import { createStudyPlanService, getAllStudyPlansService, getOneStudyPlansService, updateStudyPlanService, deleteStudyPlanService } from "../services/studyPlan.service.js"
 import { response } from "../utils/apiResponse.js"
 
 //Get all study Plans
 export async function getAllStudyPlansController(req, res, next){
     const user_id = req.user.id
     const result = await getAllStudyPlansService(user_id)
-
+    console.log(result)
     response(res, 200, result, "Study Plans fetched successfully")
 }
 
 //Get one study Plan
 export async function getOneStudyPlanController(req, res, next){
-    const plan_id = req.params.id
-    const user_id = req.user.id
-    const result = await getOneStudyPlanService(user_id, plan_id)
 
-    response(res, 200, result, "Study Plan fetched successfully")
+    try{const plan_id = req.params.id
+    const user_id = req.user.id
+    const result = await getOneStudyPlansService(user_id, plan_id)
+
+    response(res, 200, result, "Study Plan fetched successfully")}catch(e){console.log(e)}
 }
 
 //Create study plan
@@ -31,13 +32,14 @@ export async function createStudyPlanController(req,res,next){
 
 //update study Plan
 export async function updateStudyPlanController(req,res,next){
-    const user_id = req.uesr.id
-    const plan_id = req.param.id
-    const {studyPlan_type, chapter_id, title, description, completed_at} = req.body
-    const studyPlanUpdateData = {studyPlan_type, chapter_id, title, description, completed_at}
+    try{  
+      const plan_id = req.params.id
+    const user_id = req.user.id
+    const { title, description, completed_at} = req.body
+    const studyPlanUpdateData = {title, description, completed_at}
     const result = await updateStudyPlanService(user_id, plan_id, studyPlanUpdateData)
 
-    response(res, 200, result, "Created study plan successfully")
+    response(res, 200, result, "Created study plan successfully")}catch(e){console.log(e)}
 }
 
 //delete study plan

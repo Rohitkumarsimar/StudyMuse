@@ -9,15 +9,39 @@ import {
   updateStudyPlanController,
   deleteStudyPlanController,
 } from "../controllers/studyPlan.controller.js";
+import {
+  createStudyPlanSchema,
+  updateStudyPlanSchema,
+} from "../schemas/studyPlan.schema.js";
+
+import { validate } from "../middleware/validate.middleware.js";
 
 export const studyPlanRouter = express.Router();
 
 studyPlanRouter.get("/", authMiddleware, asyncWrap(getAllStudyPlansController));
 
-studyPlanRouter.get("/:id", authMiddleware, asyncWrap(getOneStudyPlanController));
+studyPlanRouter.get(
+  "/:id",
+  authMiddleware,
+  asyncWrap(getOneStudyPlanController),
+);
 
-studyPlanRouter.post("/", authMiddleware, asyncWrap(createStudyPlanController));
+studyPlanRouter.post(
+  "/",
+  validate(createStudyPlanSchema),
+  authMiddleware,
+  asyncWrap(createStudyPlanController),
+);
 
-studyPlanRouter.patch("/:id", authMiddleware, asyncWrap(updateStudyPlanController));
+studyPlanRouter.patch(
+  "/:id",
+  validate(updateStudyPlanSchema),
+  authMiddleware,
+  asyncWrap(updateStudyPlanController),
+);
 
-studyPlanRouter.delete("/:id", authMiddleware, asyncWrap(deleteStudyPlanController));
+studyPlanRouter.delete(
+  "/:id",
+  authMiddleware,
+  asyncWrap(deleteStudyPlanController),
+);

@@ -1,4 +1,13 @@
 import { ApiError } from "../utils/AppError.js";
+import {
+  getAllStudyPlanQuery,
+  getOneStudyPlanQuery,
+  createStudyPlanQuery,
+  updateStudyPlanQuery,
+  deleteStudyPlanQuery,
+  findByPlanId,
+  findByChapterId,
+} from "../db/studyPlan.query.js";
 
 // get all study plan
 export async function getAllStudyPlansService(user_id) {
@@ -30,15 +39,27 @@ export async function createStudyPlanService(user_id, studyPlanCreateData) {
   }
 
   if (studyPlanCreateData.studyPlan_type === "ACADEMIC") {
-    const chapter = await findByChapterId(studyPlanCreateData.chapter_id)
+    if(studyPlanCreateData.title){
+      throw new ApiError(400, "Please enter valid data!")
+    }
+    const chapter = await findByChapterId(studyPlanCreateData.chapter_id);
     if (!chapter) {
       throw new ApiError(400, "Chapter does not exists!");
     }
+    const createAcademicPlanData = {
+      studyPlan_type: studyPlanCreateData.studyPlan_type,
+      chapter_id: studyPlanCreateData.chapter_id,
+      title: chapter.name,
+      description: studyPlanCreateData.description
+    }
+
+     const result = await createStudyPlanQuery(user_id, createAcademicPlanData);
+  return result;
   }
 
   if (studyPlanCreateData.studyPlan_type === "CUSTOM") {
-    if (studyPlanCreateData.chapter_id) {
-      throw new ApiError(400, "Invalid Data!");
+    if (studyPlanCreateData.chapter_id || !studyPlanCreateData.title) {
+      throw new ApiError(400, "Please enter a valid Data!");
     }
   }
 
@@ -52,16 +73,17 @@ export async function updateStudyPlanService(
   plan_id,
   studyPlanUpdateData,
 ) {
-
-  const plan = await findByPlanId(plan_id)
-  if(!plan){
-    throw new ApiError (404, "study plan does not exist!")
+  const plan = await findByPlanId(plan_id);
+  if (!plan) {
+    throw new ApiError(404, "study plan does not exist!");
   }
 
+  // ACADEMIC study plan update:
   if (plan.studyPlan_type === "ACADEMIC") {
-    if (studyPlanUpdateData.chapter_id || studyPlanUpdateData.title) {
+    if (studyPlanUpdateData.title) {
       throw new ApiError(400, "Enter valid data!");
     }
+
     const academicPlanUpdateData = {
       description: studyPlanUpdateData.description,
       completed_at: studyPlanUpdateData.completed_at,
@@ -78,6 +100,7 @@ export async function updateStudyPlanService(
     return result;
   }
 
+  // custom study plan update
   const customStudyPlanUpdateData = {
     title: studyPlanUpdateData.title,
     description: studyPlanUpdateData.description,
