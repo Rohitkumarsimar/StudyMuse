@@ -12,7 +12,7 @@ import {
 // get all study plan
 export async function getAllStudyPlansService(user_id) {
   const result = await getAllStudyPlanQuery(user_id);
-  if (result === []) {
+  if (result.length === 0) {
     throw new ApiError(404, "No Study plans exist!");
   }
   return result;
@@ -29,8 +29,6 @@ export async function getOneStudyPlansService(user_id, plan_id) {
 
 // create study plan service
 export async function createStudyPlanService(user_id, studyPlanCreateData) {
-  //studyPlan_type, chapter_id, title, description
-
   if (
     studyPlanCreateData.studyPlan_type !== "ACADEMIC" &&
     studyPlanCreateData.studyPlan_type !== "CUSTOM"
