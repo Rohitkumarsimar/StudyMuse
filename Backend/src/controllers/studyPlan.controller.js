@@ -22,7 +22,7 @@ export async function getOneStudyPlanController(req, res, next){
 //Create study plan
 export async function createStudyPlanController(req,res,next){
   const user_id = req.user.id
-    const {studyPlan_type, chapter_id, title, description} = req.body
+    const {studyPlan_type, chapter_id, title, description} = req.body.data
     const studyPlanCreateData = {studyPlan_type, chapter_id, title, description}
     const result = await createStudyPlanService(user_id, studyPlanCreateData)
 

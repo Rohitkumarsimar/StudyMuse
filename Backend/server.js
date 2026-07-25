@@ -10,6 +10,7 @@ import { dashboardRouter } from "./src/routes/dashboard.routes.js";
 import { taskRouter } from "./src/routes/task.routes.js";
 import { chatRouter } from "./src/routes/chat.routes.js";
 import { studyPlanRouter } from "./src/routes/studyPlan.routes.js";
+import { academicCatalogRouter } from "./src/routes/academicCatalog.routes.js";
 
 const app = express();
 app.set("trust proxy", 1);
@@ -30,6 +31,7 @@ app.use("/dashboard",dashboardRouter);
 app.use("/tasks",taskRouter);
 app.use("/chat", chatRouter);
 app.use("/studyPlan", studyPlanRouter);
+app.use("/academic-catalog",academicCatalogRouter);
 app.use(errorMiddleware);
 
 app.listen(PORT || 3000, '0.0.0.0', () => {
