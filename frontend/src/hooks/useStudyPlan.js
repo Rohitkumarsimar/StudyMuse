@@ -100,6 +100,9 @@ export function useStudyPlan() {
    
    studyPlans: filteredStudyPlans,
     searchQuery,
-    setSearchQuery
+    setSearchQuery,
+
+    error,
+    isLoading
   };
 }
