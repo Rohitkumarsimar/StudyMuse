@@ -21,12 +21,13 @@ export async function getOneStudyPlanController(req, res, next){
 
 //Create study plan
 export async function createStudyPlanController(req,res,next){
-  const user_id = req.user.id
-    const {studyPlan_type, chapter_id, title, description} = req.body.data
+ try{ const user_id = req.user.id
+    console.log(req.body)
+    const {studyPlan_type, chapter_id, title, description} = req.body
     const studyPlanCreateData = {studyPlan_type, chapter_id, title, description}
     const result = await createStudyPlanService(user_id, studyPlanCreateData)
 
-    response(res, 201, result, "Created study plan successfully")
+    response(res, 201, result, "Created study plan successfully")}catch(err){console.log(err)}
 }
 
 //update study Plan
