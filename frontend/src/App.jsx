@@ -17,6 +17,7 @@ import ForgotPassword from "#pages/ForgotPassword.jsx";
 import ResetPassword from "#pages/ResetPassword.jsx";
 import { useLocation } from "react-router-dom";
 import VerifyEmail from "#pages/VerifyEmail.jsx";
+import { StudyPlan } from "#pages/StudyPlan.jsx";
 
 function ProtectedLayout() {
   const location = useLocation();
@@ -53,7 +54,8 @@ export default function App() {
 
         <Route element={<ProtectedLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/tasks/:studyPlan_id" element={<Tasks />} />
+          <Route path="/studyplan" element={<StudyPlan />} />
           <Route path="/chat/:conv_id?" element={<Chat />} />
           <Route path="/profile" element={<Profile />} />
         </Route>

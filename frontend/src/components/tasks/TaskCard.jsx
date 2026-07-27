@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 
 export default function TaskCard({ task, onDelete, onToggle }) {
+
   return (
     <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 hover:shadow-md">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -32,12 +33,13 @@ export default function TaskCard({ task, onDelete, onToggle }) {
         <Button
           variant="default"
           size="lg"
-          onClick={() => onToggle(task.id, task.is_completed)}
+          onClick={() => onToggle(task.id, task.studyPlan_id, task.is_completed)}
+          className={"cursor-pointer"}
         >
           {task.is_completed ? "Mark Pending" : "Mark Complete"}
         </Button>
 
-        <Button variant="destructive" size="lg" onClick={() => onDelete(task.id)}>
+        <Button variant="destructive" size="lg" onClick={() => onDelete(task.id, task.studyPlan_id)}>
           Delete
         </Button>
       </div>

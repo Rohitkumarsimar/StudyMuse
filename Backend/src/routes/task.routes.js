@@ -8,8 +8,8 @@ export const taskRouter = express.Router()
 
 taskRouter.post('/',validate(createTaskSchema), authMiddleware, asyncWrap(createTask))
 
-taskRouter.get('/',authMiddleware, asyncWrap(readTask))
+taskRouter.get('/:studyPlan_id',authMiddleware, asyncWrap(readTask))
 
 taskRouter.patch('/:id',validate(updateTaskSchema),authMiddleware,asyncWrap(updateTask))
 
-taskRouter.delete('/:id',authMiddleware, asyncWrap(deleteTask))
+taskRouter.delete('/:id/:studyPlan_id',authMiddleware, asyncWrap(deleteTask))

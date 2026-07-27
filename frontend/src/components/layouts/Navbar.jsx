@@ -27,7 +27,7 @@ export default function Navbar({ compact = false }) {
       <div
         className={`mx-auto flex max-w-7xl items-center justify-between px-4 lg:px-6 h-12`}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 cursor-pointer" onClick={()=>navigate('/dashboard')}>
           <GraduationCap className={`h-7 w-7 text-indigo-600`} />
 
           <div>
