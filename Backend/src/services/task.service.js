@@ -3,13 +3,8 @@ import { ApiError } from "../utils/AppError.js"
 import { response } from "../utils/apiResponse.js"
 
 //Create new task
-<<<<<<< HEAD
-export async function createNewTask(user_id, title, due_date){
-    return insertTask(user_id,title,due_date)
-=======
 export async function createNewTask(createNewTaskData){
     return insertTask(createNewTaskData)
->>>>>>> feature/studyPlan
 }
 
 // get all tasks
