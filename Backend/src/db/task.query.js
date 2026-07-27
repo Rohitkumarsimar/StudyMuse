@@ -1,32 +1,32 @@
 import { prisma } from "../config/prisma.js";
 
 //create task query
-export async function insertTask(user_id, title, subject, due_date) {
+export async function insertTask(createNewTaskData) {
   const result = await prisma.tasks.create({
     data: {
-      user_id: user_id,
-      title: title,
-      due_date: due_date,
+      studyPlan_id:createNewTaskData.studyPlan_id,
+      title: createNewTaskData.title,
+      description: createNewTaskData.description
     },
   });
   return result;
 }
 
 // get tasks query
-export async function fetchTasks(user_id) {
+export async function fetchTasks(studyPlan_id) {
   const result = await prisma.tasks.findMany({
-    where: { user_id: user_id },
+    where: { studyPlan_id: studyPlan_id },
   });
   return result;
 }
 
 // update task query
-export async function updateTaskQuery(task_id, user_id, allowedFields) {
+export async function updateTaskQuery(task_id,  allowedFields) {
   const checkTask = await prisma.tasks.findUnique({
     where: { id: task_id },
   });
   if (!checkTask) return null;
-  if (checkTask.user_id !== user_id) return null;
+  if (checkTask.studyPlan_id !== allowedFields.studyPlan_id) return null;
 
   const result = await prisma.tasks.update({
     where: {
@@ -34,8 +34,7 @@ export async function updateTaskQuery(task_id, user_id, allowedFields) {
     },
     data: {
       title: allowedFields.title,
-      subject: allowedFields.subject,
-      due_date: allowedFields.due_date,
+    description: allowedFields.description,
       is_completed: allowedFields.is_completed,
 
       ...(allowedFields.is_completed !== undefined
@@ -48,12 +47,12 @@ export async function updateTaskQuery(task_id, user_id, allowedFields) {
 }
 
 //delete task query
-export async function deleteTaskQuery(task_id, user_id) {
+export async function deleteTaskQuery(task_id, studPlan_id) {
   const checkTask = await prisma.tasks.findUnique({
     where: { id: task_id },
   });
   if (!checkTask) return null;
-  if (checkTask.user_id !== user_id) return null;
+  if (checkTask.studyPlan_id !== studPlan_id) return null;
   const result = await prisma.tasks.delete({
     where: {
       id: task_id
