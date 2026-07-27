@@ -1,26 +1,28 @@
 import { useState } from "react";
 import {Input} from "../ui/input";
 import { Button } from "@/components/ui/button.jsx";
+import { useLocation } from "react-router-dom";
+import { Pencil } from "lucide-react";
 
+// const {studyPlan_id, title, description, is_completed}= req.body
 export function TaskForm({ onSubmit }) {
+const location = useLocation()
+const studyPlan_id = location?.state.studyPlan_id
+
   const [formData, setFormData] = useState({
+    studyPlan_id: studyPlan_id,
     title: "",
-    due_date: "",
+    description: "",
   });
+
+  console.log(formData)
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    const payload = {
-      ...formData,
-      due_date: formData.due_date
-        ? new Date(formData.due_date).toISOString()
-        : null,
-    };
-
-    await onSubmit(payload);
-    setFormData({ title: "", due_date: "" });
+    await onSubmit(formData);
+    setFormData({ title: "", description: "" });
     setIsLoading(false);
   }
 
@@ -51,23 +53,30 @@ export function TaskForm({ onSubmit }) {
 
 
         <Input
-          type="date"
-          label="Due Date"
-          value={formData.due_date}
+          type="text"
+          label="Description"
+          value={formData.description}
           onChange={(e) =>
             setFormData({
               ...formData,
-              due_date: e.target.value,
+              description: e.target.value,
             })
           }
         />
 
         <div className="pt-1">
-          <Button type="submit" size="lg" isLoading={isLoading}>
+          <Button type="submit" size="lg" isLoading={isLoading} className={"w-full mt-2"}>
             Create Task
           </Button>
         </div>
       </form>
+      <div className="flex mt-5">
+         <div className="p-5 rounded-full bg-gray-200"> <Pencil className="h-10 w-10 text-gray-800"/>
+         </div>
+          <p className="font-medium text-sm text-gray-700">
+            Focus on one step right now. Action creates momentum, so ignore the big picture and just conquer this single task.
+          </p>
+      </div>
     </div>
   );
 }

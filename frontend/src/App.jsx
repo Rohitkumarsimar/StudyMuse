@@ -54,7 +54,7 @@ export default function App() {
 
         <Route element={<ProtectedLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/tasks/:studyPlan_id" element={<Tasks />} />
           <Route path="/studyplan" element={<StudyPlan />} />
           <Route path="/chat/:conv_id?" element={<Chat />} />
           <Route path="/profile" element={<Profile />} />

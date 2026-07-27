@@ -1,6 +1,8 @@
 import { BookOpen, CalendarDays, MoreVertical } from "lucide-react";
-
+import { useNavigate } from "react-router-dom";
 export function StudyPlanItems({ studyPlan }) {
+  const navigate = useNavigate();
+
   const createdAt = new Date(studyPlan.created_at).toLocaleDateString("en-IN", {
     day: "numeric",
     month: "short",
@@ -13,6 +15,16 @@ export function StudyPlanItems({ studyPlan }) {
     year: "numeric",
   });
 
+  console.log("studyplan: : ",studyPlan.id)
+
+  function handleTaskNav(){
+    try{
+    navigate(`/tasks/${studyPlan.id}/`, {
+                state: { studyPlan_id: studyPlan.id }},)
+    }catch(err){
+      console.log(err)
+    }
+  }
   return (
     <div className="group mb-3 w-full cursor-pointer rounded-xl border border-gray-200 bg-white p-4 transition-all duration-200 hover:border-violet-300 hover:shadow-md">
       <div className="flex items-start justify-between gap-4">
@@ -38,9 +50,18 @@ export function StudyPlanItems({ studyPlan }) {
         </div>
 
         {/* Menu */}
-        <button className="rounded-lg p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-700">
-          <MoreVertical size={18} />
-        </button>
+        <div className="flex flex-col items-end gap-3">
+          <button className="rounded-lg p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-700">
+            <MoreVertical size={18} />
+          </button>
+          {/* tasks button */}
+          <button
+            className="rounded-lg text-white py-2 px-3 bg-indigo-600 hover:bg-indigo-700 cursor-pointer"
+            onClick={handleTaskNav}
+          >
+            View Tasks
+          </button>
+        </div>
       </div>
 
       {/* Footer */}
