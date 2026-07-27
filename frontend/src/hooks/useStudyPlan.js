@@ -79,7 +79,7 @@ export function useStudyPlan() {
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
     const fuse = useMemo(() => {
       return new Fuse(studyPlans, {
-        keys: ["title", "description"],
+        keys: ["title", "description","studyPlan_type"],
       });
     }, [studyPlans]);
 
