@@ -1,38 +1,27 @@
-export function TaskFilters({activeFilter, onFilterChange}){
-    return (
-  <div className="my-1 flex gap-6 border-b border-gray-200">
-    <button
-      onClick={() => onFilterChange("all")}
-      className={` text-sm font-medium transition-colors ${
-        activeFilter === "all"
-          ? "border-b-2 border-indigo-600 text-indigo-600"
-          : "text-gray-500 hover:text-indigo-600"
-      }`}
-    >
-      All
-    </button>
+export function TaskFilters({ activeFilter, onFilterChange }) {
+  const filters = [
+    { id: "all", label: "All" },
+    { id: "completed", label: "Completed" },
+    { id: "pending", label: "Pending" },
+  ];
 
-    <button
-      onClick={() => onFilterChange("completed")}
-      className={`text-sm font-medium transition-colors ${
-        activeFilter === "completed"
-          ? "border-b-2 border-indigo-600 text-indigo-600"
-          : "text-gray-500 hover:text-indigo-600"
-      }`}
-    >
-      Completed
-    </button>
-
-    <button
-      onClick={() => onFilterChange("pending")}
-      className={` text-sm font-medium transition-colors ${
-        activeFilter === "pending"
-          ? "border-b-2 border-indigo-600 text-indigo-600"
-          : "text-gray-500 hover:text-indigo-600"
-      }`}
-    >
-      Pending
-    </button>
-  </div>
-);
+  return (
+    <div className="flex justify-center">
+      <div className="grid grid-col-3 grid-flow-col rounded-xl  border w-full border-gray-200 bg-gray-100 p-1 shadow-sm">
+        {filters.map((filter) => (
+          <button
+            key={filter.id}
+            onClick={() => onFilterChange(filter.id)}
+            className={`rounded-lg px-5 py-2 text-sm font-medium transition-all duration-200 ${
+              activeFilter === filter.id
+                ? "bg-indigo-600 text-white shadow-sm"
+                : "text-gray-600 hover:bg-gray-200 hover:text-gray-900"
+            }`}
+          >
+            {filter.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 }

@@ -179,20 +179,6 @@ export function AcademicPlanForm() {
           </select>
         </div>
 
-        {/* Selected Chapter Preview */}
-        {currentChapter && (
-          <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
-            <p className="text-xs font-medium uppercase tracking-wide text-gray-500">
-              Selected Chapter
-            </p>
-            <h3 className="mt-1 font-semibold text-gray-900">
-              {currentChapter.name}
-            </h3>
-            <p className="mt-1 text-sm text-gray-500">
-              {currentSubject?.name} • {currentBook?.name}
-            </p>
-          </div>
-        )}
 
 </div>
        <div className="space-y-2">

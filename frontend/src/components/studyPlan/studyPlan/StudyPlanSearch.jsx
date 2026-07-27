@@ -3,7 +3,7 @@ import { Input } from "#components/ui/input.jsx";
 
 export function StudyPlanSearch({ searchQuery, setSearchQuery }) {
   return (
-    <div className="mb-8 flex justify-center">
+    <div className=" flex justify-center">
       <div className="relative w-full max-w-lg">
         <Search
           size={18}

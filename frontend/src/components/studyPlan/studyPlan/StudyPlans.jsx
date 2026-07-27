@@ -1,15 +1,12 @@
 import { StudyPlanItems } from "./StudyPlanItems";
 import { useStudyPlan } from "#hooks/useStudyPlan.js";
-import { StudyPlanSearch } from "./StudyPlanSearch";
 export function StudyPlans() {
-  const { studyPlans,searchQuery, setSearchQuery, loading } = useStudyPlan();
+  const { studyPlans } = useStudyPlan();
 
   return (
-    <div className="p-8 border border-gray-200 bg-white rounded-2xl h-full w-full ">
-        <StudyPlanSearch searchQuery={searchQuery}
-  setSearchQuery={setSearchQuery}/>
+    <div className="p-7  border border-gray-200 bg-gray-50 rounded-2xl h-full w-full overflow-y-scroll ">
       {studyPlans.map((plans) => (
-        <StudyPlanItems key={plans.id} studyPlan={plans}/>
+        <StudyPlanItems key={plans.id} studyPlan={plans} />
       ))}
     </div>
   );

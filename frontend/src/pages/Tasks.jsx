@@ -35,8 +35,8 @@ export default function Tasks() {
         <TaskForm onSubmit={createTask} />
       </aside>
 
-      <div className="flex flex-1 flex-col">
-        <div className="sticky top-0 z-10  bg-gray-100 backdrop-blur-lg p-1">
+      <div className="flex flex-1  flex-col">
+        <div className="sticky top-0 z-10   bg-gray-100 backdrop-blur-lg p-1">
           <TaskFilters
             activeFilter={activeFilter}
             onFilterChange={setActiveFilter}
