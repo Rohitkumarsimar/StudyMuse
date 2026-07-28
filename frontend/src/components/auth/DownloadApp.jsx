@@ -17,7 +17,7 @@ export function DownloadApp() {
           </div>
         </div>
         <a
-          href="/Download/StudyMuse-v1.0.0.apk"
+          href="/download/StudyMuse-v1.0.0.apk"
           download
           className="group flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition-all duration-200 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/30 active:scale-95"
         >
