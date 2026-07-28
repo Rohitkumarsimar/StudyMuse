@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.rohit.studymuse",
+      "sha256_cert_fingerprints": [
+        "A9:94:8B:22:08:2A:CC:42:4A:88:BF:7F:55:48:51:B5:11:0A:0C:50:F3:40:85:11:F1:57:0A:D3:D8:49:5E:C0"
+      ]
+    }
+  }
+]
