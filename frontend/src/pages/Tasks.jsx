@@ -5,6 +5,7 @@ import TaskCard from "../components/tasks/TaskCard.jsx";
 import { TaskForm } from "../components/tasks/TaskForm.jsx";
 import { Spinner } from "../components/ui/spinner.jsx";
 import { useParams } from "react-router-dom";
+import { CompanionMessage } from "#components/tasks/CompanionMessage.jsx";
 
 export default function Tasks() {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -30,12 +31,13 @@ export default function Tasks() {
   });
 
   return (
-    <div className="mx-auto max-w-full px-6 py-8 lg:flex lg:h-[calc(100vh-80px)] lg:gap-8">
-      <aside className="mb-6 w-full sticky lg:top-8 lg:mb-0 lg:w-96 lg:self-start">
+    <div className="lg:mx-auto max-w-full lg:flex-row px-6 py-8 lg:flex lg:h-[calc(100vh-80px)] lg:gap-8">
+      <aside className=" w-full space-y-2 lg:space-y-0 sticky lg:top-8 lg:flex lg:flex-col lg:gap-5 lg:w-96 lg:self-start">
         <TaskForm onSubmit={createTask} />
+        <CompanionMessage />
       </aside>
 
-      <div className="flex flex-1  flex-col">
+      <div className="flex flex-1  flex-col mt-3">
         <div className="sticky top-0 z-10   bg-gray-100 backdrop-blur-lg p-1">
           <TaskFilters
             activeFilter={activeFilter}

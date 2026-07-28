@@ -27,7 +27,7 @@ export function TaskForm({ onSubmit }) {
   }
 
   return (
-    <div className="w-full rounded-2xl border border-gray-200  bg-white p-4 shadow-2xl sm:p-5 lg:p-6">
+    <div className="w-full rounded-2xl border border-gray-200  bg-white p-4 shadow-sm lg:shadow-2xl sm:p-5 lg:p-6">
       <div className="mb-5">
         <h2 className="text-lg font-bold text-gray-900 sm:text-xl">
           Create Task
@@ -76,7 +76,7 @@ export function TaskForm({ onSubmit }) {
           </Button>
         </div>
       </form>
-      <div className="flex mt-5 gap-3 border shadow-sm border-gray-100  rounded-lg  text-gray-900  p-4">
+      <div className="hidden lg:flex mt-5 gap-3 border shadow-sm border-gray-100  rounded-lg  text-gray-900  p-4">
         <div className="p-5 flex items-center rounded-full border border-gray-100 bg-gray-100 hover:scale-105 duration-300 transition-al">
           <Pencil className="h-9 w-9 text-gray-700" />
         </div>
