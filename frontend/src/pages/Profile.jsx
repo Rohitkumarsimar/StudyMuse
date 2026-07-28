@@ -108,7 +108,7 @@ export default function Profile() {
             </p>
           </div>
 
-          <Button
+          {/* <Button
             variant={isEdit ? "ghost" : "default"}
             size="lg"
             onClick={() => {
@@ -175,7 +175,7 @@ export default function Profile() {
                 </Button>
               </div>
             </form>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
