@@ -11,6 +11,7 @@ export function StudyPlan() {
     createStudyPlan,
     updateStudyPlan,
     deleteStudyPlan,
+    isLoading
   } = useStudyPlan();
 
   return (
@@ -27,6 +28,7 @@ export function StudyPlan() {
 
         <StudyPlans
           studyPlans={studyPlans}
+          isLoading={isLoading}
           updateStudyPlan={updateStudyPlan}
           deleteStudyPlan={deleteStudyPlan}
         />

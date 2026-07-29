@@ -1,5 +1,6 @@
 import { BookOpen, CalendarDays, MoreVertical } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Spinner } from "#components/ui/spinner.jsx";
 
 export function StudyPlanItems({ studyPlan }) {
   const navigate = useNavigate();
