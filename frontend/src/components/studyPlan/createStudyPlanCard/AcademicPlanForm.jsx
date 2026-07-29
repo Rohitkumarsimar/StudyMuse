@@ -3,7 +3,6 @@ import { useAcademicCatalog } from "#hooks/useAcademicCatalog.js";
 import { useStudyPlan } from "../../../hooks/useStudyPlan.js";
 import { Button } from "#components/ui/button.jsx";
 import { Spinner } from "#components/ui/spinner.jsx";
-import FormInput from "#components/login-signup/FormInput.jsx";
 
 export function AcademicPlanForm() {
   const [selectedBoard, setSelectedBoard] = useState("");
@@ -13,8 +12,9 @@ export function AcademicPlanForm() {
   const [selectedChapter, setSelectedChapter] = useState("");
 
   const [description, setDescription] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { createStudyPlan, isLoading } = useStudyPlan();
+  const { createStudyPlan } = useStudyPlan();
   const { getAcademicCatalog, academicCatalog } = useAcademicCatalog();
 
   useEffect(() => {
@@ -43,14 +43,20 @@ export function AcademicPlanForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
 
-    const academicData = {
-      studyPlan_type: "ACADEMIC",
-      chapter_id: selectedChapter,
-      description,
-    };
-
-    await createStudyPlan(academicData);
+    try {
+      const academicData = {
+        studyPlan_type: "ACADEMIC",
+        chapter_id: selectedChapter,
+        description,
+      };
+      await createStudyPlan(academicData);
+    }catch(err){
+      console.log(err)
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -178,21 +184,15 @@ export function AcademicPlanForm() {
             ))}
           </select>
         </div>
-
-
-</div>
-       <div className="space-y-2">
-        <label className="text-sm font-medium text-gray-700">
-          Description
-        </label>
+      </div>
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-gray-700">Description</label>
 
         <textarea
           rows={5}
           placeholder="Describe your study plan, goals, schedule or anything you'd like to remember..."
           value={description}
-          onChange={(e) =>
-            setDescription(e.target.value)
-          }
+          onChange={(e) => setDescription(e.target.value)}
           className="w-full resize-none text-gray-600 rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none transition-all focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10"
         />
       </div>

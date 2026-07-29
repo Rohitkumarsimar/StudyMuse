@@ -9,25 +9,29 @@ export function CustomPlanForm() {
     title: "",
     description: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { createStudyPlan, isLoading } = useStudyPlan();
+  const { createStudyPlan } = useStudyPlan();
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
+    try {
+      const customPlan = {
+        studyPlan_type: "CUSTOM",
+        ...formData,
+      };
 
-    const customPlan = {
-      studyPlan_type: "CUSTOM",
-      ...formData,
-    };
-
-    await createStudyPlan(customPlan);
+      await createStudyPlan(customPlan);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="mt-2 flex flex-col gap-6"
-    >
+    <form onSubmit={handleSubmit} className="mt-2 flex flex-col gap-6">
       {/* Header */}
       <div>
         <h2 className="text-xl font-semibold text-gray-900">
@@ -55,9 +59,7 @@ export function CustomPlanForm() {
 
       {/* Description */}
       <div className="space-y-2">
-        <label className="text-sm font-medium text-gray-700">
-          Description
-        </label>
+        <label className="text-sm font-medium text-gray-700">Description</label>
 
         <textarea
           rows={5}
@@ -74,15 +76,8 @@ export function CustomPlanForm() {
       </div>
 
       {/* Button */}
-      <Button
-        type="submit"
-        disabled={isLoading}
-        size="lg"
-        className="w-full"
-      >
-        {isLoading && (
-          <Spinner className="mr-2 text-white" />
-        )}
+      <Button type="submit" disabled={isLoading} size="lg" className="w-full">
+        {isLoading && <Spinner className="mr-2 text-white" />}
 
         {isLoading ? "Creating Plan..." : "Create Custom Plan"}
       </Button>

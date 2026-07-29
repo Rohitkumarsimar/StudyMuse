@@ -95,39 +95,41 @@ export default function Dashboard() {
         <div className="absolute -bottom-20 left-1/3 -z-10 h-32 w-32 rounded-full bg-sky-400/20 blur-3xl" />
 
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-linear-to-r from-indigo-500/10 to-purple-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-indigo-700 border border-indigo-500/10">
+          <div >
+            <span className=" inline-flex items-center gap-1.5 rounded-full bg-linear-to-r from-indigo-500/10 to-purple-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-indigo-700 border border-indigo-500/10">
               <span className="inline-block animate-pulse">✨</span> StudyMuse
             </span>
 
-            <h1 className="mt-3 text-3xl font-black tracking-tight text-gray-700 sm:text-4xl">
+            <h1 className="mt-3 text-3xl font-black tracking-tight text-gray-700 sm:text-4xl flex justify-between lg:justify-normal">
               Welcome Back <span className="inline-block ">👋</span>
             </h1>
+              <div className=" mt-1 flex max-w-xl gap-1 items-center ">
 
-            <p className="mt-2 max-w-xl flex gap-1 text-sm font-medium leading-relaxed text-gray-500">
+            <p className=" text-sm font-medium leading-relaxed text-gray-500">
               Track your study progress and stay consistent
-              <span className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text font-bold text-transparent">
-                every single day.
-              </span>
             </p>
+              <p className="hidden lg:block bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text font-bold text-transparent">
+                every single day.
+              </p>
+              </div>
           </div>
 
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
             <button
               onClick={() => navigate("/chat")}
-              className="flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-indigo-700 hover:shadow-lg"
+              className="flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-indigo-700 hover:shadow-lg cursor-pointer"
             >
               <PenSquare className="w-5 h-5" />
               Chat Muse AI
             </button>
 
             <button
-              onClick={() => navigate("/tasks")}
-              className="flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-indigo-700 hover:shadow-lg"
+              onClick={() => navigate("/studyplan")}
+              className="flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-indigo-700 hover:shadow-lg cursor-pointer"
             >
               <Plus className="w-5 h-5" />
-              Create Task
+              Create Study Plan
             </button>
           </div>
         </div>
