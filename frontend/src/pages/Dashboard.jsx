@@ -15,6 +15,7 @@ import {
 export default function Dashboard() {
   const [stat, setStat] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [completionRate, setCompletionRate] = useState()
 
   const navigate = useNavigate();
 
@@ -23,6 +24,8 @@ export default function Dashboard() {
       try {
         const result = await api.get("/dashboard");
         setStat(result.data.data);
+         const rate = result.data.data.totalTasks === 0?0:Math.round((result.data.data.completedTasks/result.data.data.totalTasks)*100)
+        setCompletionRate(rate)
       } catch (err) {
         console.log(err);
       } finally {
@@ -32,9 +35,11 @@ export default function Dashboard() {
     fetchStats();
   }, []);
 
+  
+
   if (isLoading) {
     return (
-      <div className="animate-pulse">
+      <div className="animate-pulse max-w-7xl mx-auto px-6 py-1">
       
         <div className="mb-10 rounded-3xl border border-gray-200 bg-white p-8">
           <div className="h-4 w-28 rounded bg-gray-200"></div>
@@ -78,7 +83,10 @@ export default function Dashboard() {
       </div>
     );
   }
-  if (!stat) return <div>no data found</div>;
+  if (!stat) return <div className="w-full h-full  flex flex-col justify-center items-center">
+    <p className="text-3xl font-bold text-red-500 ">no data found!</p>
+    <p className="text-md font-semibold text-red-500 ">Please try again later.</p>
+    </div>;
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-1">
@@ -96,8 +104,8 @@ export default function Dashboard() {
               Welcome Back <span className="inline-block ">👋</span>
             </h1>
 
-            <p className="mt-2 max-w-xl text-sm font-medium leading-relaxed text-gray-500">
-              Track your study progress and stay consistent{" "}
+            <p className="mt-2 max-w-xl flex gap-1 text-sm font-medium leading-relaxed text-gray-500">
+              Track your study progress and stay consistent
               <span className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text font-bold text-transparent">
                 every single day.
               </span>
@@ -151,6 +159,22 @@ export default function Dashboard() {
         </h1>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+        {/* total studyplans */}
+          <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="flex flex-col gap-3">
+              <p className="text-lg font-medium text-gray-500">Total Study Plans</p>
+
+              <div className="flex items-end justify-between">
+                <p className="text-4xl font-bold text-gray-900">
+                  {stat.totalStudyPlans}
+                </p>
+
+                <CalendarCheck className="w-9 h-9  text-gray-700" />
+              </div>
+            </div>
+          </div>
+
           {/* total tasks */}
           <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200">
             <div className="flex flex-col gap-3">
@@ -158,7 +182,7 @@ export default function Dashboard() {
 
               <div className="flex items-end justify-between">
                 <p className="text-4xl font-bold text-gray-900">
-                  {stat.total_tasks}
+                  {stat.totalTasks}
                 </p>
 
                 <CalendarCheck className="w-9 h-9  text-gray-700" />
@@ -173,7 +197,7 @@ export default function Dashboard() {
 
               <div className="flex items-end justify-between">
                 <p className="text-4xl font-bold text-emerald-500">
-                  {stat.completed_tasks}
+                  {stat.completedTasks}
                 </p>
 
                 <CircleCheckBig className="w-9 h-9  text-gray-700" />
@@ -187,7 +211,7 @@ export default function Dashboard() {
 
               <div className="flex items-end justify-between">
                 <p className="text-4xl font-bold text-amber-500">
-                  {stat.pending_tasks}
+                  {stat.pendingTasks}
                 </p>
 
                 <ClockFading className="w-9 h-9  text-gray-700" />
@@ -204,7 +228,7 @@ export default function Dashboard() {
 
               <div className="flex items-end justify-between">
                 <p className="text-4xl font-bold text-indigo-600">
-                  {stat.completion_rate}
+                  {completionRate}
                 </p>
 
                 <Percent className="w-9 h-9  text-gray-700" />

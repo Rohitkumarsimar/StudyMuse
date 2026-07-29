@@ -3,7 +3,7 @@ import { AuthLogo } from "./AuthLogo";
 
 export function DownloadApp() {
   return (
-    <section className="w-[90%] rounded-2xl border bg-linear-to-r from-[#010930] to-indigo-900 p-4 text-white shadow-lg">
+    <section className="w-[90%] rounded-2xl lg:hidden border bg-linear-to-r from-[#010930] to-indigo-900 p-4 text-white shadow-lg">
       <AuthLogo />
 
       <div className="flex mt-2 flex-col gap-5 md:flex-row md:items-center md:justify-between">
