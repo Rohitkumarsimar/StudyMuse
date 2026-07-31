@@ -33,8 +33,13 @@ export default function Tasks() {
   return (
     <div className="lg:mx-auto max-w-full lg:flex-row px-6 py-8 lg:flex lg:h-[calc(100vh-80px)] lg:gap-8">
       <aside className=" w-full space-y-2 lg:space-y-0 sticky lg:top-8 lg:flex lg:flex-col lg:gap-5 lg:w-96 lg:self-start">
+        <div className=" lg:hidden">
+          <CompanionMessage />
+          </div>
         <TaskForm onSubmit={createTask} />
-        <CompanionMessage />
+        <div className="hidden lg:block">
+          <CompanionMessage />
+          </div>
       </aside>
 
       <div className="flex flex-1  flex-col mt-3">
