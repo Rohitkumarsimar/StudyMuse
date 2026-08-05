@@ -35,8 +35,8 @@ export default function Profile() {
 
   if (isLoading)
     return (
-      <div className="flex align-middle justify-center">
-        <Spinner className="h-15 w-15" />
+      <div className="flex items-center justify-center h-full">
+        <Spinner className="h-15 w-15 text-white" />
       </div>
     );
   if (!profile) return <div>Profile not found!</div>;
@@ -71,8 +71,8 @@ export default function Profile() {
   }
 
   return (
-    <div className="flex justify-center py-10">
-      <div className="w-full max-w-lg overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
+    <div className="flex justify-center h-full items-center">
+      <div className="w-[90%] lg:w-full max-w-lg overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
         <div className="border-b border-gray-200 bg-linear-to-r from-indigo-600 to-violet-600 px-8 py-8">
           <div className="flex flex-col items-center">
             <div className="flex h-24 w-24 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">

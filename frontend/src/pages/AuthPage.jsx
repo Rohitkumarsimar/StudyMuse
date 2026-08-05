@@ -8,7 +8,7 @@ export default function AuthPage() {
   const [isReg, setIsReg] = useState(false);
 
   return (
-    <div className="min-h-screen bg-linear-to-b lg:bg-linear-to-r from-indigo-950 via-indigo-700 to-violet-600 lg:to-purple-600 flex lg:flex-row flex-col items-center lg:justify-between gap-5 py-10">
+    <div className="min-h-screen bg-linear-to-b lg:bg-linear-to-r from-indigo-950 via-indigo-700 to-violet-600 lg:to-purple-600 flex lg:flex-row flex-col items-center lg:justify-between gap-5 py-10 lg:py-0">
       <Hero />
       {/* <AuthLogo/> */}
       <DownloadApp/>

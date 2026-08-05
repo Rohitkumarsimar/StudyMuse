@@ -17,10 +17,11 @@ export function StudyPlanItems({ studyPlan }) {
     year: "numeric",
   });
 
+
   function handleTaskNav() {
     try {
       navigate(`/tasks/${studyPlan.id}/`, {
-        state: { studyPlan_id: studyPlan.id },
+        state: { studyPlan_id: studyPlan.id , studyPlan_title: studyPlan.title},
       });
     } catch (err) {
       console.log(err);

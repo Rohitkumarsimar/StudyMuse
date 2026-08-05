@@ -7,7 +7,7 @@ export function DashboardSkeleton(){
 
           <div className="mt-4 h-10 w-72 rounded bg-gray-300"></div>
 
-          <div className="mt-3 h-4 w-96 rounded bg-gray-200"></div>
+          <div className="mt-3 h-4 w-[90%] rounded bg-gray-200"></div>
         </div>
 
         <div className="mb-8 rounded-2xl bg-gray-200 p-8">
@@ -19,7 +19,7 @@ export function DashboardSkeleton(){
               <div className="mt-3 h-4 w-64 rounded bg-gray-300"></div>
             </div>
 
-            <div className="h-20 w-20 rounded-full bg-gray-300"></div>
+            <div className="h-15 w-15 rounded-full bg-gray-300"></div>
           </div>
         </div>
 

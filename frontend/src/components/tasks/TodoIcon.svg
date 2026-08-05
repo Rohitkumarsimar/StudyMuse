@@ -1,0 +1,116 @@
+
+    <svg
+       width="330"
+  height="200"
+  viewBox="15 0 420 240"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#7C5CFF" />
+          <stop offset="100%" stop-color="#5B3DF5" />
+        </linearGradient>
+
+        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+    <feDropShadow dx="0" dy="6" stdDeviation="6" flood-opacity=".12"/>
+</filter>
+      </defs>
+
+      <path
+        d="M127 110C127 62 163 40 214 40C272 40 332 72 332 129C332 182 283 212 233 212C173 212 127 178 127 110Z"
+        fill="#F3F0FF"
+      />
+
+      <g filter="url(#shadow)">
+        <rect
+          x="170"
+          y="70"
+          width="80"
+          height="110"
+          rx="10"
+          stroke="url(#purple)"
+          stroke-width="3"
+          fill="white"
+        />
+        <rect
+          x="194"
+          y="58"
+          width="32"
+          height="22"
+          rx="10"
+          fill="white"
+          stroke="url(#purple)"
+          stroke-width="3"
+        />
+
+        <circle cx="210" cy="69" r="4" fill="url(#purple)" />
+      </g>
+
+      <circle cx="188" cy="98" r="7" fill="#EFEAFF" />
+
+      <path
+        d="M185 98L188 101L193 95"
+        stroke="#6C4BFF"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+
+      <rect x="200" y="94" width="30" height="4" rx="2" fill="#B8AAFF" />
+
+      <rect x="200" y="102" width="20" height="3" rx="2" fill="#DDD5FF" />
+
+      <circle cx="188" cy="122" r="7" fill="#EFEAFF" />
+
+      <path
+        d="M185 122L188 125L193 119"
+        stroke="#6C4BFF"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+
+      <rect x="200" y="118" width="30" height="4" rx="2" fill="#B8AAFF" />
+
+      <rect x="200" y="126" width="20" height="3" rx="2" fill="#DDD5FF" />
+
+      <circle cx="188" cy="146" r="7" fill="#EFEAFF" />
+
+      <path
+        d="M185 146L188 149L193 143"
+        stroke="#6C4BFF"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+
+      <rect x="200" y="142" width="30" height="4" rx="2" fill="#B8AAFF" />
+
+      <rect x="200" y="150" width="20" height="3" rx="2" fill="#DDD5FF" />
+
+      <rect
+        x="145"
+        y="78"
+        width="8"
+        height="8"
+        rx="2"
+        transform="rotate(45 145 78)"
+        fill="#CDBFFF"
+      />
+      <g stroke="#7C5CFF" stroke-width="2" stroke-linecap="round">
+        <line x1="282" y1="72" x2="290" y2="72" />
+        <line x1="286" y1="68" x2="286" y2="76" />
+      </g>
+      <g stroke="#2F3654" stroke-width="2" stroke-linecap="round">
+        <line x1="118" y1="58" x2="124" y2="64" />
+        <line x1="124" y1="58" x2="118" y2="64" />
+      </g>
+
+      <circle cx="278" cy="122" r="4" stroke="#6C4BFF" stroke-width="2" />
+
+      <g stroke="#2F3654" stroke-width="2" stroke-linecap="round">
+        <line x1="154" y1="208" x2="164" y2="208" />
+        <line x1="159" y1="203" x2="159" y2="213" />
+      </g>
+    </svg>

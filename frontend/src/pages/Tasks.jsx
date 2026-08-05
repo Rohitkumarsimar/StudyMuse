@@ -6,6 +6,7 @@ import { TaskForm } from "../components/tasks/TaskForm.jsx";
 import { Spinner } from "../components/ui/spinner.jsx";
 import { useParams } from "react-router-dom";
 import { CompanionMessage } from "#components/tasks/CompanionMessage.jsx";
+import TodoIcon from "../components/tasks/TodoIcon.svg"
 
 export default function Tasks() {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -31,7 +32,7 @@ export default function Tasks() {
   });
 
   return (
-    <div className="lg:mx-auto max-w-full lg:flex-row px-6 py-8 lg:flex lg:h-[calc(100vh-80px)] lg:gap-8">
+    <div className="lg:mx-auto max-w-full lg:flex-row px-6 py-8 lg:flex lg:h-[calc(100vh-80px)] lg:gap-8 ">
       <aside className=" w-full space-y-2 lg:space-y-0 sticky lg:top-8 lg:flex lg:flex-col lg:gap-5 lg:w-96 lg:self-start">
         <div className=" lg:hidden">
           <CompanionMessage />
@@ -43,7 +44,7 @@ export default function Tasks() {
       </aside>
 
       <div className="flex flex-1  flex-col mt-3">
-        <div className="sticky top-0 z-10   bg-gray-100 backdrop-blur-lg p-1">
+        <div className="sticky top-0 z-10   bg-none backdrop-blur-lg p-1">
           <TaskFilters
             activeFilter={activeFilter}
             onFilterChange={setActiveFilter}
@@ -56,8 +57,11 @@ export default function Tasks() {
               <Spinner size="h-12 w-12" />
             </div>
           ) : tasks.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-10 text-center text-gray-500">
-              No tasks yet. Create your first task.
+            <div className="rounded-2xl border-dashed border h-75 lg:h-full border-gray-300 bg-gray-50 p-10 flex flex-col items-center ">
+              <img src={TodoIcon} className="lg:h-[70%]"/>
+              <h1 className="text-lg font-bold text-gray-900">No Tasks</h1>
+              <p className="text-sm text-center text-gray-700">Looks like you haven't added any tasks to this study plan.</p>
+              <p className="hidden lg:block text-sm text-center text-gray-700">Create your first task and start making progress! 🚀</p>
             </div>
           ) : (
             filteredTasks.map((task) => (

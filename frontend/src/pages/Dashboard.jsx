@@ -11,6 +11,7 @@ import {
   Plus,
   PenSquare
 } from "lucide-react";
+import Footer from "#components/layouts/Footer.jsx";
 
 export default function Dashboard() {
   const [stat, setStat] = useState(null);
@@ -39,7 +40,10 @@ export default function Dashboard() {
 
   if (isLoading) {
    return (
+    <div className="mt-5">
     <DashboardSkeleton/>
+    <Footer/>
+    </div>
    )
   }
   if (!stat) return <div className="w-full h-full  flex flex-col justify-center items-center">
@@ -48,8 +52,9 @@ export default function Dashboard() {
     </div>;
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-1">
-      <header className="relative mb-10 overflow-hidden rounded-3xl border border-gray-200/60 bg-white/70 p-8 shadow-xl shadow-gray-100/50 backdrop-blur-md">
+    <div className=" w-full">
+    <div className="max-w-7xl mx-auto px-6 py-1 mt-5">
+      <header className="relative mb-10 overflow-hidden rounded-3xl  bg-white p-8 shadow-xl shadow-gray-100/30 backdrop-blur-md">
         <div className="absolute -right-10 -top-20 -z-10 h-40 w-40 rounded-full bg-indigo-400/20 blur-3xl" />
         <div className="absolute -bottom-20 left-1/3 -z-10 h-32 w-32 rounded-full bg-sky-400/20 blur-3xl" />
 
@@ -109,20 +114,20 @@ export default function Dashboard() {
               </p>
             </div>
 
-            <Flame className="h-20 w-20 text-white" />
+            <Flame className="h-20 w-20 text-amber-200" />
           </div>
         </div>
       </section>
 
-      <section>
-        <h1 className="text-2xl font-extrabold uppercase tracking-widest text-gray-700 mb-4">
+      <section className="lg:mt-15">
+        <h1 className="text-3xl lg:text-5xl font-extrabold uppercase tracking-widest text-gray-100 text-center mb-1">
           Overview
         </h1>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="w-full h-1 bg-linear-to-r from-transparent via-white mb-5"></div>
+        <div className="grid grid-cols-2 gap-4">
 
         {/* total studyplans */}
-          <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200">
+          <div className="bg-white  border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200">
             <div className="flex flex-col gap-3">
               <p className="text-lg font-medium text-gray-500">Total Study Plans</p>
 
@@ -137,7 +142,7 @@ export default function Dashboard() {
           </div>
 
           {/* total tasks */}
-          <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200">
+          <div className="bg-white  border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200">
             <div className="flex flex-col gap-3">
               <p className="text-lg font-medium text-gray-500">Total Tasks</p>
 
@@ -152,7 +157,7 @@ export default function Dashboard() {
           </div>
 
           {/* completed tasks */}
-          <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200">
+          <div className="bg-white  border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200">
             <div className="flex flex-col gap-3">
               <p className="text-lg font-medium text-gray-500">Completed</p>
 
@@ -166,7 +171,7 @@ export default function Dashboard() {
             </div>
           </div>
           {/* pending tasks */}
-          <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200">
+          <div className="bg-white  border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200">
             <div className="flex flex-col gap-3">
               <p className="text-lg font-medium text-gray-500">Pending</p>
 
@@ -181,7 +186,7 @@ export default function Dashboard() {
           </div>
 
           {/* completion rate */}
-          <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200">
+          <div className="bg-white  border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200">
             <div className="flex flex-col gap-3">
               <p className="text-lg font-medium text-gray-700">
                 Completion Rate
@@ -198,6 +203,9 @@ export default function Dashboard() {
           </div>
         </div>
       </section>
+      
+    </div>
+    <Footer/>
     </div>
   );
 }

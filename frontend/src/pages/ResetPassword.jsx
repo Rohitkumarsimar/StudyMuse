@@ -51,8 +51,8 @@ async function handleSubmit(e){
 }
 
 return(
-   <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 w-full max-w-md">
+   <div className="min-h-screen bg-linear-to-b lg:bg-linear-to-r from-indigo-950 via-indigo-700 to-violet-600 lg:to-purple-600 flex items-center justify-center">
+      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 w-[90%] max-w-md">
             <h1 className="text-2xl font-bold text-gray-900 mb-1">
               Reset Password
             </h1>

@@ -1,10 +1,11 @@
 import { api } from "#api/axios.js";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "#components/login-signup/FormInput.jsx";
 import { Button } from "#components/ui/button.jsx";
 import { Spinner } from "#components/ui/spinner.jsx";
 import OtpInput from "#components/login-signup/OtpInput.jsx";
+import { DownloadApp } from "#components/auth/DownloadApp.jsx";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -84,8 +85,9 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 w-full max-w-md">
+    <div className="min-h-screen bg-linear-to-b lg:bg-linear-to-r from-indigo-950 via-indigo-700 to-violet-600 lg:to-purple-600 flex items-center justify-center">
+     
+      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 w-[90%] max-w-md">
         {!otpSent ? (
           <div>
             <h1 className="text-2xl font-bold text-gray-900 mb-1">

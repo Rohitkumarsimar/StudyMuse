@@ -26,7 +26,7 @@ function ProtectedLayout() {
   return (
     <ProtectedRoutes>
       <div
-        className={isChatPage ? "h-dvh" : "h-screen bg-gray-100 flex flex-col"}
+        className={isChatPage ? "h-dvh" : "h-screen  bg-linear-to-t bg-indigo-950 via-violet-700 to-indigo-700  flex flex-col"}
       >
         <header className="sticky top-0 z-50 border-b border-indigo-100 bg-white/80 backdrop-blur-xl">
           <div className={isChatPage ? "hidden lg:block" : ""}>

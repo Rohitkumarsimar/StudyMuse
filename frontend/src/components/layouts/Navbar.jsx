@@ -22,7 +22,7 @@ export default function Navbar({ compact = false }) {
   }
   return (
     <nav
-      className={`sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-xl p-2`}
+      className={`sticky top-0 z-50 lg:border-b border-gray-200  bg-white backdrop-blur-xl p-2`}
     >
       <div
         className={`mx-auto flex max-w-7xl items-center justify-between px-4 lg:px-6 h-12`}
