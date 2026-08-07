@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import ProtectedRoutes from "./components/layouts/ProtectedRoutes.jsx";
 import Navbar from "./components/layouts/Navbar.jsx";
+import MobileNav from "#components/layouts/MobileNav.jsx";
 
 import AuthPage from "./pages/AuthPage.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
@@ -18,11 +19,13 @@ import ResetPassword from "#pages/ResetPassword.jsx";
 import { useLocation } from "react-router-dom";
 import VerifyEmail from "#pages/VerifyEmail.jsx";
 import { StudyPlan } from "#pages/StudyPlan.jsx";
+import useMediaQuery from "#hooks/useMediaQuery.js";
 
 function ProtectedLayout() {
   const location = useLocation();
 
   const isChatPage = location.pathname === "/chat";
+  const isDesktop = useMediaQuery("(min-width: 1024px)")
   return (
     <ProtectedRoutes>
       <div
@@ -30,13 +33,15 @@ function ProtectedLayout() {
       >
         <header className="sticky top-0 z-50 border-b border-indigo-100 bg-white/80 backdrop-blur-xl">
           <div className={isChatPage ? "hidden lg:block" : ""}>
-            {/* <Navbar /> */}
+            {isDesktop?<Navbar/>:""}
+            
           </div>
         </header>
 
         <main className="flex-1 overflow-y-auto">
           <Outlet />
         </main>
+        {isDesktop?"":<MobileNav/>}
       </div>
     </ProtectedRoutes>
   );

@@ -4,10 +4,11 @@ import {
   streakQuery,
 } from "../db/dashboard.query.js";
 
+import { findByEmail } from "../db/user.query.js";
+
 // streak count logic
 async function streakCount(user_id) {
   const completedTaskDates = await streakQuery(user_id);
-
   const dates = [
     ...new Set(
       completedTaskDates.map(
@@ -53,10 +54,13 @@ async function streakCount(user_id) {
 
 
 
+
 // final data
-export async function dashboardService(user_id) {
+export async function dashboardService(user_id, email) {
+  const user = await findByEmail(email)
+  const userName = user.name
   const totalStudyPlans = await studyPlanCount(user_id);
   const tasksCount = await dashboardQuery(user_id);
   const streak = await streakCount(user_id);
-  return { totalStudyPlans, ...tasksCount, streak };
+  return { totalStudyPlans, ...tasksCount, streak, userName };
 }
