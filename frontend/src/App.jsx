@@ -30,7 +30,7 @@ function ProtectedLayout() {
       >
         <header className="sticky top-0 z-50 border-b border-indigo-100 bg-white/80 backdrop-blur-xl">
           <div className={isChatPage ? "hidden lg:block" : ""}>
-            <Navbar />
+            {/* <Navbar /> */}
           </div>
         </header>
 
