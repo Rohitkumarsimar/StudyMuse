@@ -16,10 +16,10 @@ export default function Footer() {
 
   const isAuthPage = location.pathname === "/auth-page";
   return (
-    <footer className="mt-24 border-t bg-gray-400/10 text-white">
-      <div className="mx-auto max-w-7xl px-6 py-12">
+    <footer className="mt-5 lg:mt-24 border-t bg-gray-400/10 text-white">
+      <div className="mx-auto max-w-7xl py-6 px-6 lg:py-12">
 
-        <div className="grid gap-10 md:grid-cols-3">
+        <div className="grid gap-5 lg:gap-10 md:grid-cols-3">
 
           {/* Left */}
           <div>
@@ -27,11 +27,11 @@ export default function Footer() {
               StudyMuse
             </h2>
 
-            <p className="mt-2 text-gray-300">
+            <p className="lg:mt-2 text-sm text-gray-300">
               Learn. Track. Improve.
             </p>
 
-            <p className="mt-5 text-sm leading-7 text-gray-300">
+            <p className="mt-2 lg:mt-5 leading-tight  text-xs lg:text-sm lg:leading-7 text-gray-300">
               Built to help students stay consistent, organize study plans,
               and learn with AI.
             </p>
@@ -43,7 +43,7 @@ export default function Footer() {
               Quick Links
             </h3>
 
-            <div className="mt-4 flex flex-col gap-3 text-sm">
+            <div className=" lg:mt-4 mt-2 flex flex-col gap-1 lg:gap-3 text-sm">
 
               <Link
                 to="/dashboard"
@@ -74,13 +74,13 @@ export default function Footer() {
 
           {/* Right */}
           <div>
-            <h3 className="font-semibold">
+            <h3 className="hidden lg:block font-semibold">
               System
             </h3>
 
-            <div className="mt-4 space-y-4 text-sm">
+            <div className="lg:mt-4 lg:space-y-4 text-sm">
 
-              <div className="flex items-center gap-3">
+              <div className="hidden lg:flex items-center gap-3">
                 <Activity
                   size={18}
                   className="text-emerald-500"

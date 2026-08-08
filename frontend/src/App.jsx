@@ -8,6 +8,7 @@ import {
 import ProtectedRoutes from "./components/layouts/ProtectedRoutes.jsx";
 import Navbar from "./components/layouts/Navbar.jsx";
 import MobileNav from "#components/layouts/MobileNav.jsx";
+import Header from "#components/layouts/Header.jsx";
 
 import AuthPage from "./pages/AuthPage.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
@@ -31,9 +32,9 @@ function ProtectedLayout() {
       <div
         className={isChatPage ? "h-dvh" : "h-screen  bg-linear-to-t bg-indigo-950 via-violet-700 to-indigo-700  flex flex-col"}
       >
-        <header className="sticky top-0 z-50 border-b border-indigo-100 bg-white/80 backdrop-blur-xl">
+        <header className="sticky top-0 z-50">
           <div className={isChatPage ? "hidden lg:block" : ""}>
-            {isDesktop?<Navbar/>:""}
+            {isDesktop?<Navbar/>:<Header/>}
             
           </div>
         </header>

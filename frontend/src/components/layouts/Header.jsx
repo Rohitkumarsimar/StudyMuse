@@ -1,4 +1,4 @@
-import { Menu, Bell, BellDot, GraduationCap } from "lucide-react";
+import { Menu,  BellDot, GraduationCap } from "lucide-react";
 
 export default function Header() {
   return (

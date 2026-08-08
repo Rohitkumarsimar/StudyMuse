@@ -5,7 +5,7 @@ export function HeroCard({userName}) {
     
     const navigate = useNavigate()
   return (
-    <div className="m-3 bg-white rounded-lg py-4 px-5 flex flex-col gap-3 justify-center">
+    <div className="mx-2 bg-white rounded-lg py-4 px-5 flex flex-col gap-3 justify-center">
       <div className="flex w-full justify-between">
         <div className="w-[180%] ">
 
@@ -31,7 +31,7 @@ export function HeroCard({userName}) {
       <div className="grid grid-cols-2  text-xs  w-full gap-2">
         <button
           onClick={() => navigate("/chat")}
-          className="flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-2 font-semibold text-white shadow-md transition-all duration-200 hover:bg-indigo-700 hover:shadow-lg cursor-pointer"
+          className="flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-indigo-700 hover:shadow-lg cursor-pointer"
         >
           <PenSquare className="w-4 h-4" />
           Chat Muse AI
@@ -39,7 +39,7 @@ export function HeroCard({userName}) {
 
         <button
           onClick={() => navigate("/studyplan")}
-          className="flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-2 font-semibold text-white shadow-md transition-all duration-200 hover:bg-indigo-700 hover:shadow-lg cursor-pointer"
+          className="flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-indigo-700 hover:shadow-lg cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           Create Study Plan

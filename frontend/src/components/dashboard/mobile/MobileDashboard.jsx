@@ -1,4 +1,4 @@
-import Header from "./Header";
+import Header from "../../layouts/Header";
 import { HeroCard } from "./HeroCard";
 import Stat from "./Stat";
 import { Streak } from "./Streak";
@@ -9,9 +9,8 @@ export default function MobileDashboard({stat}) {
   
 const userName = stat.userName
   return (
-    <div >
-<Header/>
-<main > 
+    <div className="my-2" >
+<main className="space-y-4"> 
     <div className="w-full flex justify-center">
 <HeroCard userName={userName} />
     </div>
