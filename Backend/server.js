@@ -19,7 +19,7 @@ app.use(morgan('dev'))
 const PORT = process.env.PORT;
 
 app.use(cors({
-  origin: ['http://localhost:5173','https://studymuseai.netlify.app', 'http://10.159.251.206:5173']
+  origin: ['http://localhost:5173','https://studymuseai.netlify.app', 'http://10.76.168.206:5173']
 }))
 
 app.use(logMethod);
