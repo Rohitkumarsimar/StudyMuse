@@ -39,7 +39,7 @@ export default function Chat() {
   }
 
   return (
-    <div className="relative flex h-dvh overflow-hidden bg-linear-to-br from-indigo-50 via-white to-white">
+    <div className="relative flex h-dvh overflow-hidden bg-linear-to-t from-gray-700 lg:bg-linear-to-br lg:from-indigo-50 lg:via-white lg:to-white">
       {sidebarOpen && (
         <div
           className="fixed inset-0 z-30 bg-black/30 lg:hidden"
@@ -72,7 +72,7 @@ export default function Chat() {
         />
       </aside>
 
-      <main className="flex min-h-0 min-w-0 flex-1 flex-col">
+      <main className="flex min-h-0 min-w-0 flex-1 flex-col pb-16 lg:pb-0">
         <div className="flex h-14 items-center justify-between border-b border-indigo-100 bg-white px-4 lg:hidden">
           {/* Conversations */}
           <button

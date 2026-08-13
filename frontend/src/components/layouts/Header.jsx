@@ -1,8 +1,11 @@
 import { Menu,  BellDot, GraduationCap } from "lucide-react";
-
+import { useLocation } from "react-router-dom";
 export default function Header() {
+  const location = useLocation();
+
+  const isChatPage = location.pathname === "/chat";
   return (
-    <div className="flex justify-between items-center p-2 text-white">
+    <div className={isChatPage?"hidden":"flex justify-between items-center p-2 text-white"}>
       <div className="flex justify-around w-[60%] items-center">
 
       <div>

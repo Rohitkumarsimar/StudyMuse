@@ -5,6 +5,7 @@ import { DashboardSkeleton } from "#components/dashboard/DashboardSkeleton.jsx";
 import DesktopDashboard from "#components/dashboard/desktop/DesktopDashboard.jsx";
 import MobileDashboard from "#components/dashboard/mobile/MobileDashboard.jsx";
 import Footer from "#components/layouts/Footer.jsx";
+import MobileDashboardSkeleton from "#components/dashboard/mobile/MobileDashboardSkeleton.jsx";
 
 export default function Dashboard() {
   const [stat, setStat] = useState(null);
@@ -29,7 +30,10 @@ export default function Dashboard() {
   if (isLoading) {
    return (
     <div className="mt-5">
-    <DashboardSkeleton/>
+    {
+      isDesktop?<DashboardSkeleton/>:<MobileDashboardSkeleton/>
+    }
+    
     <Footer/>
     </div>
    )

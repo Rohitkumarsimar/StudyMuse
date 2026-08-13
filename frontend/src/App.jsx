@@ -24,19 +24,25 @@ import useMediaQuery from "#hooks/useMediaQuery.js";
 
 function ProtectedLayout() {
   const location = useLocation();
-
-  const isChatPage = location.pathname === "/chat";
+  const isChatPage = location.pathname.includes("/chat") ;
   const isDesktop = useMediaQuery("(min-width: 1024px)")
+  console.log(
+  location.pathname.includes("/chat")
+);
+  console.log({
+  pathname: location.pathname,
+  isChatPage,
+  isDesktop,
+});
   return (
     <ProtectedRoutes>
       <div
-        className={isChatPage ? "h-dvh" : "h-screen  bg-linear-to-t bg-indigo-950 via-violet-700 to-indigo-700  flex flex-col"}
+        className={isChatPage  ? "h-dvh" : "h-screen  bg-linear-to-t bg-indigo-950 via-violet-700 to-indigo-700  flex flex-col"}
       >
-        <header className="sticky top-0 z-50">
-          <div className={isChatPage ? "hidden lg:block" : ""}>
+        <header className={isChatPage && !isDesktop ? "hidden" : "sticky top-0 z-50"}>
+          
             {isDesktop?<Navbar/>:<Header/>}
             
-          </div>
         </header>
 
         <main className="flex-1 overflow-y-auto">
