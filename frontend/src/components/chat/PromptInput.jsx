@@ -11,12 +11,12 @@ export default function PromptInput({ sendMessage, activeConversationId }) {
       if (!value.trim()) {
         return;
       }
-      await sendMessage(activeConversationId, value);
+      const messageInput = value;
+      setValue("");
+      await sendMessage(activeConversationId, messageInput);
     } catch (err) {
       console.log(err);
-    } finally {
-      setValue("");
-    }
+    } 
   }
 
   function handleKeyDown(e) {
