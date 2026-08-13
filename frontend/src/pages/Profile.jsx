@@ -93,7 +93,7 @@ export default function Profile() {
               Username
             </p>
 
-            <p className="mt-2 text-lg font-semibold text-gray-900">
+            <p className="mt-2 text-sm lg:text-lg font-semibold text-gray-900">
               {profile.name}
             </p>
           </div>
@@ -103,7 +103,7 @@ export default function Profile() {
               Email Address
             </p>
 
-            <p className="mt-2 break-all text-lg font-semibold text-gray-900">
+            <p className="mt-2 break-all text-sm lg:text-lg font-semibold text-gray-900">
               {profile.email}
             </p>
           </div>
