@@ -9,6 +9,7 @@ import {
   passwordResetController,
   resendOtpController,
   googleAuthController,
+  deleteUserController
 } from "../controllers/auth.controller.js";
 import { validate } from "../middleware/validate.middleware.js";
 import {
@@ -71,3 +72,7 @@ authRouter.post(
 );
 
 authRouter.post("/googleAuth", asyncWrap(googleAuthController));
+
+
+// delete user: 
+authRouter.delete("/deleteUser", authMiddleware, asyncWrap(deleteUserController))

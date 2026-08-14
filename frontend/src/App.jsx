@@ -25,15 +25,9 @@ import useMediaQuery from "#hooks/useMediaQuery.js";
 function ProtectedLayout() {
   const location = useLocation();
   const isChatPage = location.pathname.includes("/chat") ;
-  const isDesktop = useMediaQuery("(min-width: 1024px)")
-  console.log(
-  location.pathname.includes("/chat")
-);
-  console.log({
-  pathname: location.pathname,
-  isChatPage,
-  isDesktop,
-});
+  const isDesktop = useMediaQuery("(min-width: 824px)")
+ 
+  
   return (
     <ProtectedRoutes>
       <div
