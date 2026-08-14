@@ -41,7 +41,7 @@ export default function PromptInput({ sendMessage, activeConversationId }) {
       <button
         type="submit"
         disabled={!value.trim()}
-        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-white transition-colors hover:bg-indigo-700 disabled:bg-gray-200 disabled:text-gray-400"
+        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-linear-to-t from-indigo-600 to-violet-600 text-white transition-colors hover:bg-indigo-700 disabled:bg-gray-200 disabled:text-gray-400"
       >
         <ArrowUp className="h-4 w-4" />
       </button>

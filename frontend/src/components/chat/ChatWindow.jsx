@@ -48,7 +48,7 @@ export default function ChatWindow({
                         <MessageContent>
                           <Bubble
                             variant={
-                              msg.role === "assistant" ? "outline" : "default"
+                              msg.role === "assistant" ? "outline" : "tinted"
                             }
                             align={msg.role === "user" ? "end" : "start"}
                             className={
