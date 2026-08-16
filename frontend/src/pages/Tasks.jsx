@@ -51,7 +51,7 @@ export default function Tasks() {
           />
         </div>
 
-        <div className="mt-4 space-y-4 lg:mt-6 lg:flex-1 lg:overflow-y-auto lg:pr-2">
+        <div className="mt-4 space-y-4 lg:mt-6 lg:flex-1 lg:overflow-y-auto scrollbar-none lg:pr-2">
           {isLoading ? (
             <div className="flex justify-center py-12">
               <Spinner size="h-12 w-12" />

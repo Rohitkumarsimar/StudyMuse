@@ -7,8 +7,9 @@ import { Pencil } from "lucide-react";
 // const {studyPlan_id, title, description, is_completed}= req.body
 export function TaskForm({ onSubmit }) {
   const location = useLocation();
-  const studyPlan_id = location?.state.studyPlan_id;
-  const studyPlan_name = location?.state.studyPlan_title;
+    const studyPlan_id= location?.state.studyPlan_id;
+    const studyPlan_name= location?.state.studyPlan_title;
+
 
   const [formData, setFormData] = useState({
     studyPlan_id: studyPlan_id,
@@ -28,10 +29,10 @@ export function TaskForm({ onSubmit }) {
 
   return (
     <div className="w-full  rounded-2xl border border-gray-200 bg-white   p-4 shadow-sm lg:shadow-2xl sm:p-5 lg:p-6">
-        <h2 className="text-lg font-bold text-gray-700 sm:text-xl mb-1  ">
-         StudyPlan: {studyPlan_name}
-        </h2>
-        <div  className="w-full h-0.5 bg-linear-to-r from-transparent via-indigo-600"></div>
+      <h2 className="text-lg font-bold text-gray-700 sm:text-xl mb-1  ">
+        StudyPlan: {studyPlan_name}
+      </h2>
+      <div className="w-full h-0.5 bg-linear-to-r from-transparent via-indigo-600"></div>
       <div className="mb-3 mt-2">
         <h2 className="text-md font-bold text-gray-900 sm:text-xl">
           Create Task

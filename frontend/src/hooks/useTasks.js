@@ -3,6 +3,7 @@ import { api } from "../api/axios.js";
 export function useTasks(){
     const [tasks, setTasks] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [err, setErr] = useState("")
 
     
         async function fetchTasks(studyPlan_id){
@@ -49,5 +50,18 @@ export function useTasks(){
         }
     }
 
-    return {tasks, isLoading, fetchTasks, createTask, deleteTask, toggleComplete}
+    async function editTask(id, studyPlan_id, formData){
+        try{
+            console.log("Task id:: ",id)
+            console.log(formData)
+            console.log(studyPlan_id)
+            await api.patch(`/tasks/${id}`,{studyPlan_id,formData})
+            // fetchTasks(studyPlan_id)
+        }catch(err){
+            console.log(err)
+            setErr(err)
+        }
+    }
+
+    return {tasks,err, isLoading, fetchTasks, createTask, deleteTask, toggleComplete, editTask}
 }

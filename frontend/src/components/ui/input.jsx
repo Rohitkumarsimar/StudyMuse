@@ -6,10 +6,11 @@ function Input({
   className,
   type,
   label,
+  labelClassName,
   ...props
 }) {
   return (
-    <label className="font-semibold text-gray-700 text-sm">{label}
+    <label className={("font-semibold text-gray-700 text-sm",labelClassName)}>{label}
     <input
       type={type}
       data-slot="input"
