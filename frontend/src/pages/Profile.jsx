@@ -1,24 +1,14 @@
 import { useState, useEffect } from "react";
 import { api } from "../api/axios";
-import {Input} from "../components/ui/input";
-import { CircleUserRound } from "lucide-react";
+import { CircleUserRound, LogOut, Trash2 } from "lucide-react";
 import {Spinner} from "../components/ui/spinner.jsx";
-import { Button } from "@/components/ui/button";
+import { useAuth } from "#hooks/useAuth.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  const [formError, setFormError] = useState("");
-
-  const [editProfileData, setEditProfileData] = useState({
-    name: "",
-    email: "",
-  });
-
-  const [isEdit, setIsEdit] = useState(false);
-  const [isEditLoading, setIsEditLoading] = useState(false);
-
+const navigate = useNavigate()
   useEffect(() => {
     async function fetchProfile() {
       try {
@@ -33,6 +23,29 @@ export default function Profile() {
     fetchProfile();
   }, []);
 
+
+ const { logout } = useAuth();
+  function handleLogout() {
+    logout();
+    navigate("/auth-page");
+  }
+
+  const [isOpen, setIsOpen] = useState(false)
+  const openDialog = ()=> setIsOpen(true)
+  const closeDialog = ()=> setIsOpen(false)
+
+  async function handleDelete(){
+    try{ 
+      setIsLoading(true)
+      await api.delete("/auth/deleteUser")
+      navigate("/auth-page")
+    }catch(err){
+      console.log(err)
+    }finally{
+      setIsLoading(false)
+    }
+  }
+
   if (isLoading)
     return (
       <div className="flex items-center justify-center h-full">
@@ -41,34 +54,7 @@ export default function Profile() {
     );
   if (!profile) return <div>Profile not found!</div>;
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setIsEditLoading(true);
-    try {
-      if (!editProfileData.name.trim() && !editProfileData.email.trim()) {
-        setFormError("Please enter a new name or email.");
-
-        return;
-      }
-
-      setFormError("");
-      const payload = {};
-      if (editProfileData.name) {
-        payload.name = editProfileData.name;
-      }
-      if (editProfileData.email) {
-        payload.email = editProfileData.email;
-      }
-      const result = await api.patch(`/auth/edit-profile`, payload);
-      setProfile(result.data.data);
-      setEditProfileData({ name: "", email: "" });
-    } catch (err) {
-      console.log(err);
-      setFormError(err.response?.data?.message || "Something went wrong!");
-    } finally {
-      setIsEditLoading(false);
-    }
-  }
+  
 
   return (
     <div className="flex justify-center h-full items-center">
@@ -93,7 +79,7 @@ export default function Profile() {
               Username
             </p>
 
-            <p className="mt-2 text-lg font-semibold text-gray-900">
+            <p className="mt-2 text-sm lg:text-lg font-semibold text-gray-900">
               {profile.name}
             </p>
           </div>
@@ -103,79 +89,74 @@ export default function Profile() {
               Email Address
             </p>
 
-            <p className="mt-2 break-all text-lg font-semibold text-gray-900">
+            <p className="mt-2 break-all text-sm lg:text-lg font-semibold text-gray-900">
               {profile.email}
             </p>
           </div>
 
-          {/* <Button
-            variant={isEdit ? "ghost" : "default"}
-            size="lg"
-            onClick={() => {
-              setIsEdit(!isEdit);
-            }}
+ 
+
+ <button onClick={handleLogout} className="w-full cursor-pointer bg-indigo-100 flex items-center justify-center text-indigo-700 gap-2 px-2 py-1 border border-indigo-400 rounded-lg">
+  Logout 
+ <LogOut size={15}/> 
+ </button>
+
+ <button onClick={openDialog}  className="cursor-pointer w-full bg-red-200 flex items-center justify-center text-red-700 gap-2 px-2 py-1 border border-red-400 rounded-lg"> 
+  Delete account
+ <Trash2 size={15}/> 
+ </button>
+
+ {isOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+        >
+          {/* Dark Backdrop Overlay */}
+          <div 
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity" 
+            onClick={closeDialog} 
+          />
+
+          {/* Dialog Content Box */}
+          <div 
+            className="relative w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all z-10"
+            onClick={(e) => e.stopPropagation()} // Prevents closing when clicking inside the box
           >
-            {isEdit ? "Close Editor" : "Edit Profile"}
-          </Button>
+            {/* Header */}
+            <h3 className="text-lg font-bold leading-6 text-gray-900">
+              Confirm Action
+            </h3>
 
-          <div
-            className={`overflow-hidden transition-all duration-300 ease-in-out ${
-              isEdit ? "max-h-125 opacity-100 mt-5" : "max-h-0 opacity-0"
-            }`}
-          >
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Input
-                type="text"
-                label="Name"
-                value={editProfileData.name}
-                onChange={(e) =>
-                  setEditProfileData({
-                    ...editProfileData,
-                    name: e.target.value,
-                  })
-                }
-              />
+            {/* Body */}
+            <div className="mt-2">
+              <p className="text-sm text-gray-500">
+                Are you sure you want to perform this action? This step cannot be undone.
+              </p>
+            </div>
 
-              <Input
-                type="email"
-                label="Email"
-                value={editProfileData.email}
-                onChange={(e) =>
-                  setEditProfileData({
-                    ...editProfileData,
-                    email: e.target.value,
-                  })
-                }
-              />
-              {formError && <p className="text-sm text-red-500">{formError}</p>}
+            {/* Footer Action Buttons */}
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                type="button"
+                onClick={closeDialog}
+                className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 cusros-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleDelete}
+                className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer"
+              >
+                Delete account
+              </button>
+            </div>
+          </div>
 
-              <div className="flex gap-3">
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  type="button"
-                  onClick={() => {
-                    setIsEdit(false);
-                    setEditProfileData({
-                      name: profile.name,
-                      email: profile.email,
-                    });
-                  }}
-                >
-                  Cancel
-                </Button>
-
-                <Button
-                  variant="default"
-                  size="lg"
-                  isLoading={isEditLoading}
-                  type="submit"
-                >
-                  Update Profile
-                </Button>
-              </div>
-            </form>
-          </div> */}
+        </div>
+      )}
+      
         </div>
       </div>
     </div>

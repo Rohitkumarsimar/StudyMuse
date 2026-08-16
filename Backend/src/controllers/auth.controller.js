@@ -7,7 +7,8 @@ import {
   passwrodResetOtpService,
   passwrodResetService,
   resendOtpService,
-  googleAuthService
+  googleAuthService,
+  deleteUserService
 } from "../services/auth.service.js";
 import { response } from "../utils/apiResponse.js";
 
@@ -86,11 +87,15 @@ export async function resendOtpController(req, res, next) {
 export async function googleAuthController(req, res, next){
 
   const idToken = req.body.idToken
-  try{
  const result = await googleAuthService(idToken)
  response(res, 200, result, "Google login successful")
-  }catch(err){
-    console.log(err)
-    next(err)
-  }
+  
+}
+
+//delete user: 
+export async function deleteUserController(req, res, next){
+  const user_id = req.user.id
+  const result = await deleteUserService(user_id)
+
+  response(res, 200, result, "Deleted user successfully.")
 }

@@ -10,8 +10,8 @@ export default function Sidebar({
   createConversation,
 }) {
   return (
-    <aside className="flex h-full flex-col bg-white">
-      <div className="border-b border-indigo-100 p-4">
+    <aside className="flex h-full flex-col bg-black/5">
+      <div className="border-b border-gray-500 p-4">
         <div className="mb-4 flex items-center justify-between lg:hidden">
           <div>
             <h2 className="text-lg font-semibold text-gray-900">
@@ -24,7 +24,7 @@ export default function Sidebar({
             onClick={closeSidebar}
             className="rounded-lg p-2 hover:bg-indigo-50"
           >
-            <X className="h-5 w-5" />
+            <X className="h-5 w-5 text-black" />
           </button>
         </div>
 
@@ -33,7 +33,7 @@ export default function Sidebar({
             createConversation();
             closeSidebar?.();
           }}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-700"
+          className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-black to-gray-500 px-4 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-700"
         >
           <PenSquare className="h-4 w-4" />
           New Chat
@@ -41,7 +41,7 @@ export default function Sidebar({
       </div>
 
      {/* conversation list:  */}
-      <div className="flex-1 overflow-y-auto p-3">
+      <div className="flex-1 overflow-y-auto p-3 scrollbar-none">
         {isLoading ? (
           <div className="space-y-3">
             {Array.from({ length: 7 }).map((_, index) => (
@@ -53,7 +53,7 @@ export default function Sidebar({
           </div>
         ) : conversation.length === 0 ? (
           <div className="mt-16 flex flex-col items-center text-center">
-            <MessageSquare className="mb-3 h-10 w-10 text-indigo-300" />
+            <MessageSquare className="mb-3 h-10 w-10 text-white" />
             <p className="text-sm font-medium text-gray-700">
               No conversations
             </p>
@@ -72,7 +72,7 @@ export default function Sidebar({
                 }}
                 className={`group flex w-full items-center rounded-xl px-3 py-3 text-left transition-all duration-200 ${
                   conv.id === activeConversationId
-                    ? "border border-indigo-200 bg-indigo-100 text-indigo-700 shadow-sm"
+                    ? "border border-indigo-200 bg-gray-600 text-white shadow-sm"
                     : "text-gray-700 hover:bg-indigo-50"
                 }`}
               >
@@ -80,7 +80,7 @@ export default function Sidebar({
                   className={`mr-3 h-4 w-4 shrink-0 ${
                     conv.id === activeConversationId
                       ? "text-white"
-                      : "text-indigo-500"
+                      : "text-black"
                   }`}
                 />
 

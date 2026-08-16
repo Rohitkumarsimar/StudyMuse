@@ -37,9 +37,9 @@ export default function Chat() {
     navigate("/login");
     setNavOpen(false);
   }
-
+// lg:bg-linear-to-br lg:from-indigo-50 lg:via-white lg:to-white
   return (
-    <div className="relative flex h-dvh overflow-hidden bg-linear-to-t from-gray-700 lg:bg-linear-to-br lg:from-indigo-50 lg:via-white lg:to-white">
+    <div className="relative flex h-dvh overflow-hidden bg-linear-to-t from-black ">
       {sidebarOpen && (
         <div
           className="fixed inset-0 z-30 bg-black/30 lg:hidden"
@@ -51,7 +51,7 @@ export default function Chat() {
         className={`
           fixed inset-y-0 left-0 z-40
           flex w-72 flex-col
-          border-r border-indigo-100 bg-white
+          border-r border-gray-400 bg-white
           transform transition-transform duration-300 ease-in-out
 
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
@@ -72,14 +72,14 @@ export default function Chat() {
         />
       </aside>
 
-      <main className="flex min-h-0 min-w-0 flex-1 flex-col pb-16 lg:pb-0">
+      <main className="flex min-h-0 min-w-0 flex-1 flex-col pb-11 lg:pb-0">
         <div className="flex h-14 items-center justify-between border-b border-indigo-100 bg-white px-4 lg:hidden">
           {/* Conversations */}
           <button
             onClick={() => setSidebarOpen(true)}
             className="rounded-lg p-2 transition hover:bg-indigo-50"
           >
-            <Menu className="h-5 w-5 text-indigo-600" />
+            <Menu className="h-5 w-5 text-black" />
           </button>
 
           <h2 className="text-lg font-semibold text-gray-900">StudyMuse AI</h2>
@@ -87,13 +87,13 @@ export default function Chat() {
           <Sheet open={navOpen} onOpenChange={setNavOpen}>
             <SheetTrigger asChild>
               <button className="rounded-lg p-2 transition hover:bg-indigo-50">
-                <EllipsisVertical className="h-5 w-5 text-indigo-600" />
+                <EllipsisVertical className="h-5 w-5 text-gray-950" />
               </button>
             </SheetTrigger>
 
             <SheetContent side="right" className="w-72">
               <div className="flex gap-2 mt-4 ml-5">
-                <GraduationCap className={`h-7 w-7 text-indigo-600`} />
+                <GraduationCap className={`h-7 w-7 text-gray-800`} />
 
                 <h1 className="text-xl  font-bold tracking-tight text-gray-900">
                   StudyMuse

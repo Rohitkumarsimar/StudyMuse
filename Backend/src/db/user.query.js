@@ -56,3 +56,12 @@ export async function editProfileQuery(user_id, editFields,) {
   });
   return result;
 }
+
+//delete profile: 
+export async function deleteProfile(user_id){
+  return await prisma.users.delete({
+    where:{
+      id: user_id
+    }
+  })
+}

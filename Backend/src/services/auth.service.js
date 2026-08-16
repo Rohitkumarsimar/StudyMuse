@@ -5,6 +5,7 @@ import {
   findByGoogleId,
   profileQuery,
   editProfileQuery,
+  deleteProfile
 } from "../db/user.query.js";
 import { generateToken } from "../utils/generateToken.js";
 import { ApiError } from "../utils/AppError.js";
@@ -238,4 +239,14 @@ export async function googleAuthService(idToken) {
     });
     return generateToken(register);
   }
+}
+
+
+//delete user: 
+export async function deleteUserService(user_id){
+  const result = deleteProfile(user_id)
+  if(!result){
+    throw new ApiError (400, "Bad request!!")
+  }
+  return result
 }
