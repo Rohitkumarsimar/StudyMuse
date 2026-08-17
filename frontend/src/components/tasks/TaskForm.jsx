@@ -47,6 +47,7 @@ export function TaskForm({ onSubmit }) {
         <Input
           type="text"
           label="Task Title"
+          labelClassName={"text-gray-700 font-semibold"}
           value={formData.title}
           onChange={(e) =>
             setFormData({
@@ -60,6 +61,7 @@ export function TaskForm({ onSubmit }) {
         <Input
           type="text"
           label="Description"
+          labelClassName={"text-gray-700 font-semibold"}
           value={formData.description}
           onChange={(e) =>
             setFormData({

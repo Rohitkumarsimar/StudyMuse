@@ -16,8 +16,8 @@ export async function readTask(req, res, next){
 }
 
 export async function updateTask(req,res,next){
-    console.log(req.params)
- try{   const {studyPlan_id, formData, is_completed} = req.body
+    console.log(req.body)
+ try{   const {studyPlan_id, title, description, is_completed} = req.body
     const allowedFields = {studyPlan_id, title, description, is_completed}
     const task_id = req.params.id
     const result = await updateTaskService(task_id, allowedFields)

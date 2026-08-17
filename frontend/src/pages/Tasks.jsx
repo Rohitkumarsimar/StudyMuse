@@ -17,6 +17,8 @@ export default function Tasks() {
     createTask,
     deleteTask,
     toggleComplete,
+    editTask,
+    err
   } = useTasks();
 
   const { studyPlan_id } = useParams();
@@ -70,6 +72,8 @@ export default function Tasks() {
                 task={task}
                 onDelete={deleteTask}
                 onToggle={toggleComplete}
+                editTask = {editTask}
+                err = {err}
               />
             ))
           )}
