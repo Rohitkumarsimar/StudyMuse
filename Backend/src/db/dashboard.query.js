@@ -1,5 +1,4 @@
 import { prisma } from "../config/prisma.js";
-import { Prisma } from "@prisma/client";
 
 export async function dashboardQuery(user_id) {
   const [totalTasks, completedTasks, pendingTasks ] =

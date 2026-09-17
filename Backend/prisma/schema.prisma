@@ -9,12 +9,12 @@ datasource db {
 
 model tasks {
   id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  studyPlan_id String    @db.Uuid
   title        String    @db.VarChar(255)
-  description  String?   @db.VarChar(500)
   is_completed Boolean?  @default(false)
   created_at   DateTime? @default(now()) @db.Timestamp(6)
   completed_at DateTime? @db.Timestamptz(6)
+  studyPlan_id String    @db.Uuid
+  description  String?   @db.VarChar(500)
   studyPlan    studyPlan @relation(fields: [studyPlan_id], references: [id], onDelete: Cascade)
 
   @@index([studyPlan_id])
@@ -25,37 +25,31 @@ model users {
   name             String          @db.VarChar(100)
   email            String          @unique @db.VarChar(255)
   password         String?         @db.VarChar(255)
+  created_at       DateTime?       @default(now()) @db.Timestamp(6)
   googleId         String?         @unique @db.VarChar(255)
   isVerified       Boolean         @default(false)
   otp              String?         @db.VarChar(255)
-  otpType          OtpType?
   otpExpiresAt     DateTime?
+  otpType          OtpType?
+  updated_at       DateTime?       @updatedAt @db.Timestamp(6)
   canResetPassword Boolean         @default(false)
-  created_at       DateTime?       @default(now()) @db.Timestamp(6)
-  updated_at       DateTime?       @updatedAt() @db.Timestamp()
   conversations    conversations[]
   studyPlans       studyPlan[]
 
   @@index([email], map: "idx_users_email")
 }
 
-enum OtpType {
-  VERIFY_EMAIL
-  PASSWORD_RESET
-}
-
 model conversations {
   id           String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id      String     @db.Uuid
-  studyPlan_id String?    @db.Uuid
   title        String     @db.VarChar(255)
   created_at   DateTime   @default(now()) @db.Timestamp(6)
-  updated_at   DateTime   @updatedAt() @db.Timestamp()
-  users        users      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  studyPlan    studyPlan? @relation(fields: [studyPlan_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  updated_at   DateTime   @updatedAt @db.Timestamp(6)
+  studyPlan_id String?    @unique @db.Uuid
   chats        chats[]
+  studyPlan    studyPlan? @relation(fields: [studyPlan_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users        users      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-  @@unique([studyPlan_id])
   @@index([user_id], map: "idx_conversations_user_id")
 }
 
@@ -63,21 +57,16 @@ model chats {
   id            String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   conv_id       String        @db.Uuid
   role          Role          @default(user)
-  content       String        @db.Text
+  content       String
   created_at    DateTime      @default(now()) @db.Timestamp(6)
   conversations conversations @relation(fields: [conv_id], references: [id], onDelete: Cascade)
-}
-
-enum Role {
-  user
-  assistant
 }
 
 model board {
   id              String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name            String          @unique @db.VarChar(255)
   created_at      DateTime        @default(now()) @db.Timestamp(6)
-  updated_at      DateTime        @updatedAt() @db.Timestamp()
+  updated_at      DateTime        @updatedAt @db.Timestamp(6)
   academicClasses academicClass[]
 }
 
@@ -86,7 +75,7 @@ model academicClass {
   board_id   String    @db.Uuid
   name       String    @db.VarChar(255)
   created_at DateTime  @default(now()) @db.Timestamp(6)
-  updated_at DateTime  @updatedAt() @db.Timestamp()
+  updated_at DateTime  @updatedAt @db.Timestamp(6)
   board      board     @relation(fields: [board_id], references: [id], onDelete: Cascade)
   subjects   subject[]
 
@@ -98,61 +87,99 @@ model subject {
   academicClass_id String        @db.Uuid
   name             String        @db.VarChar(255)
   created_at       DateTime      @default(now()) @db.Timestamp(6)
-  updated_at       DateTime      @updatedAt() @db.Timestamp()
-  academicClass    academicClass @relation(fields: [academicClass_id], references: [id], onDelete: Cascade)
+  updated_at       DateTime      @updatedAt @db.Timestamp(6)
   books            book[]
+  academicClass    academicClass @relation(fields: [academicClass_id], references: [id], onDelete: Cascade)
 
   @@unique([academicClass_id, name])
 }
 
 model book {
-  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  subject_id String   @db.Uuid
-  name       String   @db.VarChar(255)
-  created_at DateTime @default(now()) @db.Timestamp(6)
-  updated_at DateTime @updatedAt() @db.Timestamp()
-
-  subject  subject   @relation(fields: [subject_id], references: [id], onDelete: Cascade)
-  chapters chapter[]
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  subject_id String    @db.Uuid
+  name       String    @db.VarChar(255)
+  created_at DateTime  @default(now()) @db.Timestamp(6)
+  updated_at DateTime  @updatedAt @db.Timestamp(6)
+  subject    subject   @relation(fields: [subject_id], references: [id], onDelete: Cascade)
+  chapters   chapter[]
 
   @@unique([subject_id, name])
 }
 
 model chapter {
-  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  book_id       String   @db.Uuid
-  name          String   @db.VarChar(255)
+  id            String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String      @db.VarChar(255)
+  created_at    DateTime    @default(now()) @db.Timestamp(6)
+  updated_at    DateTime    @updatedAt @db.Timestamp(6)
+  book_id       String      @db.Uuid
   chapter_order Int
-  created_at    DateTime @default(now()) @db.Timestamp(6)
-  updated_at    DateTime @updatedAt() @db.Timestamp()
-
-  book       book        @relation(fields: [book_id], references: [id], onDelete: Cascade)
-  studyPlans studyPlan[]
+  book          book        @relation(fields: [book_id], references: [id], onDelete: Cascade)
+  studyPlans    studyPlan[]
 
   @@unique([book_id, name])
   @@unique([book_id, chapter_order])
 }
 
 model studyPlan {
-  id             String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  user_id        String          @db.Uuid
+  id             String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id        String         @db.Uuid
   studyPlan_type Plan_type
-  chapter_id     String?         @db.Uuid
-  title          String?         @db.VarChar(255)
-  description    String?         @db.VarChar(500)
-  created_at     DateTime        @default(now()) @db.Timestamp(6)
-  updated_at     DateTime        @updatedAt() @db.Timestamp()
-  completed_at   DateTime?       @db.Timestamptz(6)
-  user           users           @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  chapter        chapter?        @relation(fields: [chapter_id], references: [id], onDelete: Cascade)
+  chapter_id     String?        @db.Uuid
+  title          String?        @db.VarChar(255)
+  description    String?        @db.VarChar(500)
+  created_at     DateTime       @default(now()) @db.Timestamp(6)
+  updated_at     DateTime       @updatedAt @db.Timestamp(6)
+  completed_at   DateTime?      @db.Timestamptz(6)
+  conversations  conversations?
+  chapter        chapter?       @relation(fields: [chapter_id], references: [id], onDelete: Cascade)
+  user           users          @relation(fields: [user_id], references: [id], onDelete: Cascade)
   tasks          tasks[]
-  conversations  conversations[]
+  notes          notes[]
 
   @@index([chapter_id])
   @@index([user_id])
 }
 
+enum OtpType {
+  VERIFY_EMAIL
+  PASSWORD_RESET
+}
+
+enum Role {
+  user
+  assistant
+}
+
 enum Plan_type {
   ACADEMIC
   CUSTOM
+}
+
+model notes {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  studyPlan_id String   @db.Uuid
+  text         String   @db.Text
+  created_at   DateTime @default(now()) @db.Timestamp(6)
+  updated_at   DateTime @updatedAt() @db.Timestamp()
+
+  studyPlan studyPlan @relation(fields: [studyPlan_id], references: [id], onDelete: Cascade)
+  noteAttachments noteAttachment[]
+}
+
+model noteAttachment {
+  id         String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  note_id    String         @db.Uuid
+  key        String         @db.VarChar(255)
+  url        String         @db.VarChar(255)
+  type       AttachmentType
+  created_at DateTime       @default(now()) @db.Timestamp(6)
+  updated_at DateTime       @updatedAt() @db.Timestamp()
+
+  note notes @relation(fields: [note_id], references: [id], onDelete: Cascade)
+}
+
+enum AttachmentType {
+  IMAGE
+  PDF
+  DOCUMENT
 }
