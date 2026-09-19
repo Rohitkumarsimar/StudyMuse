@@ -1,5 +1,5 @@
-import { notesQuery } from "../db/notes.query.js";
-import { getNotesByStudyPlanIdQuery} from "../db/notes.query.js";
+import { notesQuery, getNotesByStudyPlanIdQuery, getNotesByNoteIdQuery} from "../db/notes.query.js";
+
 
 // Service function to create a new note
 export async function notesService(studyPlan_id, text) {
@@ -10,5 +10,11 @@ export async function notesService(studyPlan_id, text) {
 // Service function to get all notes for a specific study plan
 export async function getNotesByStudyPlanIdService(studyPlan_id) {
     const result = await getNotesByStudyPlanIdQuery(studyPlan_id);
+    return result;
+}
+
+// Service function to get a specific note by its ID for a specific study plan
+export async function getNotesByNoteIdService(studyPlan_id, noteId) {
+    const result = await getNotesByNoteIdQuery(studyPlan_id, noteId);
     return result;
 }

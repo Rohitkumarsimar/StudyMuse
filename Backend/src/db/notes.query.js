@@ -20,3 +20,15 @@ export async function getNotesByStudyPlanIdQuery(studyPlan_id) {
   });
   return result;
 } 
+
+// Get a specific note by its ID for a specific study plan
+export async function getNotesByNoteIdQuery(studyPlan_id, noteId) {
+  const result = await prisma.notes.findFirst({
+    where:{
+      studyPlan_id,
+      id: noteId
+    }
+
+  });
+  return result;
+}
