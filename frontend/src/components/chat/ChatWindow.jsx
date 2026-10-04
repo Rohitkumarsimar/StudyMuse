@@ -15,6 +15,7 @@ import {
 
 import PromptInput from "./PromptInput";
 
+// ChatWindow component is used to display the chat messages and the prompt input field. it also handles the loading state of the messages and the sending of new messages.
 export default function ChatWindow({
   messages,
   isLoadingMessages,
@@ -33,6 +34,7 @@ export default function ChatWindow({
             <Skeleton className="h-25 w-3/5 rounded-2xl bg-indigo-100" />
           </div>
         ) : (
+          //message scroller is used to display the chat messages in a scrollable container. it also includes a button to scroll to the bottom of the chat messages.
           <MessageScrollerProvider>
             <MessageScroller className="h-full">
               <MessageScrollerViewport className="h-full overflow-y-auto">
@@ -46,6 +48,7 @@ export default function ChatWindow({
                     >
                       <Message align={msg.role === "user" ? "end" : "start"}>
                         <MessageContent>
+                          // Bubble component is used to display the chat messages in a bubble format. it also includes a content component to display the message content. the bubble is aligned to the left for assistant messages and to the right for user messages. the bubble has different styles for assistant and user messages.
                           <Bubble
                             variant={
                               msg.role === "assistant" ? "outline" : "tinted"

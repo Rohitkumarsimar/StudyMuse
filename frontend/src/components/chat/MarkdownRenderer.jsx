@@ -2,6 +2,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 
+// MarkdownRenderer component is used to render markdown content in the chat messages. it uses react-markdown, remark-gfm, and rehype-highlight to render the markdown content with syntax highlighting for code blocks.
 export default function MarkdownRenderer({ content }) {
   return (
     <div className="max-w-none text-[15px] leading-7 text-gray-800">

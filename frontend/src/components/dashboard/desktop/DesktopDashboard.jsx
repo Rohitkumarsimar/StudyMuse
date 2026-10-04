@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Footer from "#components/layouts/Footer.jsx";
 
+// DesktopDashboard component is used to display the desktop version of the dashboard. it includes the header, current streak, overview, and footer. it is not modularized into smaller components because it is a single page and does not have any complex logic. it is a simple component that displays the dashboard data in a visually appealing way.
 export default function DesktopDashboard({stat}) {
   const completionRate = stat.totalTasks === 0?0: Math.floor((stat.completedTasks/stat.totalTasks)*100)
 

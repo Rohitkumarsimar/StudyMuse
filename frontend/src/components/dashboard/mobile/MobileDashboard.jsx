@@ -5,6 +5,7 @@ import { Streak } from "./Streak";
 import Footer from "#components/layouts/Footer.jsx";
 import Overview from "./Overview";
 
+// MobileDashboard component is used to display the mobile version of the dashboard. it includes the header, hero card, stats, streak, overview, and footer. it is the first modularized component in the project.
 export default function MobileDashboard({stat}) {
   
 const userName = stat.userName

@@ -1,3 +1,4 @@
+// DashboardSkeleton component is used to display a skeleton loading state for the dashboard page. it includes placeholders for the header, current streak, overview, and tasks. it is used when the dashboard data is being fetched from the server and is not yet available.
 export function DashboardSkeleton(){
      return (
       <div className="animate-pulse max-w-7xl mx-auto px-6 py-1">

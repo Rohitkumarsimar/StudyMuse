@@ -1,5 +1,6 @@
 import MyLogo from "../../assets/StudyMuseLogo.png";
 
+//logo for the auth pages, it is hidden on large screens and shown on small screens
 export function AuthLogo() {
   return (
       <div className="lg:hidden  flex gap-2 items-center bg-linear-to-r from-[#010930] rounded-l-full pr-1">

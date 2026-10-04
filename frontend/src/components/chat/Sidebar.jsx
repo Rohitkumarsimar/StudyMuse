@@ -1,6 +1,7 @@
 import { PenSquare, MessageSquare, X } from "lucide-react";
 import { Skeleton } from "#components/ui/skeleton.jsx";
 
+// Sidebar component is used to display the sidebar on the chat page. it includes a close button, a new chat button, and a list of conversations.
 export default function Sidebar({
   closeSidebar,
   conversation,

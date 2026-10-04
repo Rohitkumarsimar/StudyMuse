@@ -1,6 +1,7 @@
 import { Download, Smartphone } from "lucide-react";
 import { AuthLogo } from "./AuthLogo";
 
+// DownloadApp component is used to show the download app section on the auth pages, it is hidden on large screens and shown on small screens
 export function DownloadApp() {
   return (
     <section className="w-[90%] rounded-2xl lg:hidden border bg-linear-to-r from-[#010930] to-indigo-900 p-4 text-white shadow-lg">

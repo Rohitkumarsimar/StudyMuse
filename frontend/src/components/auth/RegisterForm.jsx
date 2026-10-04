@@ -8,6 +8,7 @@ import { Spinner } from "#components/ui/spinner.jsx";
 import { GoogleLogin } from "@react-oauth/google";
 import { motion } from "framer-motion";
 
+// RegisterForm component is used to display the registration form on the auth pages. it includes the name, email, and password fields, a submit button, and a link to the login page. it also includes a google login button.
 export default function RegisterForm({ setIsReg }) {
       const navigate = useNavigate();
   const { login } = useAuth();

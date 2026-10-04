@@ -8,6 +8,7 @@ import { Spinner } from "#components/ui/spinner.jsx";
 import { GoogleLogin } from "@react-oauth/google";
 import { motion } from "framer-motion";
 
+// LoginForm component is used to display the login form on the auth pages. it includes the email and password fields, a submit button, and a link to the registration page. it also includes a google login button.
 export default function LoginForm({ setIsReg }) {
      const navigate = useNavigate();
   const { login } = useAuth();

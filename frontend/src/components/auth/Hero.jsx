@@ -3,6 +3,7 @@ import bgImg from "../../assets/StudyMuseBgauth.png";
 import { Target, Brain, Flame } from "lucide-react";
 import { motion } from "framer-motion";
 
+// Hero component is used to display the main hero section on the auth pages. it includes the logo, tagline, and a background image. it is hidden on small screens and shown on large screens
 export default function Hero() {
   return (
     <div className="hidden h-dvh lg:flex items-end pt-2 pl-5 w-[55%]">

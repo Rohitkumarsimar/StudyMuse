@@ -1,3 +1,5 @@
+// used axios to make api calls to the backend instead of fetch api because axios has more features and is easier to use.
+
 import axios from "axios"
 
 export const api = axios.create({

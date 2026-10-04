@@ -2,6 +2,7 @@ import LoginForm from "./LoginForm.jsx";
 import RegisterForm from "./RegisterForm.jsx";
 import { AnimatePresence} from "framer-motion";
 
+// Login component is used to display the login and registration forms on the auth pages.
 export default function Login({ isReg, setIsReg }) {
   return (
     <div

@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { ArrowUp } from "lucide-react";
 
+// PromptInput component is used to display the input field for the user to enter their message. it includes a textarea for the message input and a button to submit the message.
 export default function PromptInput({ sendMessage, activeConversationId }) {
   const [value, setValue] = useState("");
 
